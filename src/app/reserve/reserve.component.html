@@ -1,0 +1,375 @@
+<div class="centerIcon">
+	<span class="glyphicon glyphicon-calendar"></span>
+</div>
+
+<br>
+
+<div class="row forms">
+	<div class="col-xs-12">
+		<form 
+			class="form-horizontal form-group"
+			#f="ngForm"
+			(ngSubmit)="onSubmit()">
+			<div>
+				<tabset>
+					<br>
+					<tab heading="Dados Principais" id="tab1">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="div-form form-group">
+									<label class="control-label col-xs-12 col-md-2">Cliente:</label>
+									<div class="col-xs-11 col-md-9">
+										<input 
+											#clientPicked
+											name="client"
+											class="form-control btnTriumphi" 
+											placeholder="Insira o nome do cliente"
+											type="text"
+											[(ngModel)]="clientName">		
+									</div>
+									<div class="col-xs-1">
+										<button 
+											type="button" 
+											class="btn btnTriumphi glyphicon glyphicon-search"
+											(click)="getClients()">
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+			
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="div-form form-group">
+									<label class="control-label col-xs-12 col-md-2">Aniversariante:</label>
+									<div class="col-xs-12 col-md-6">
+										<input 
+											class="form-control btnTriumphi" 
+											name="aniversariante" 
+											placeholder="Insira o nome do aniversariante"
+											type="text"
+											[(ngModel)]="reserve.aniversariante">
+									</div>
+			
+									<label class="control-label col-xs-12 col-md-2">Idade:</label>
+									<div class="col-xs-11 col-md-2">
+										<input 
+											class="form-control btnTriumphi" 
+											name="aniversariante" 
+											placeholder="Insira idade"
+											type="number"
+											[(ngModel)]="reserve.idadeAniver">
+									</div>
+								</div>
+							</div>
+						</div>
+			
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<div class="div-form form-group">
+									<label class="control-label col-xs-12 col-md-4">Situação Reserva</label>
+									<div class="col-xs-12 col-md-8">	
+										<select 
+											class="form-control btnTriumphi"
+											name="reserveType"
+											[(ngModel)]="reserve.tipoReserva">
+											<option [ngValue]="reservada">Reservada
+											<option [ngValue]="prereservada">Pré-Reservada
+											<option [ngValue]="cancelada">Cancelada
+											<option [ngValue]="finalizada">Finalizada
+										</select>
+									</div>			
+								</div>
+							</div>
+			
+							<div class="col-xs-12 col-md-6">
+								<div class="div-form form-group">
+									<label class="control-label col-xs-12 col-md-4">Kit Festa</label>
+									<div class="col-xs-12 col-md-8">	
+										<select 
+											class="form-control btnTriumphi"
+											name="reserveType"
+											(click)="onTotalAmount"
+											[(ngModel)]="kitSelected">
+												<option
+													*ngFor="let kit of kitList, let i = index"
+													[ngValue]="kit"
+													[selected]="(reserve.kitFesta && kit.idKit == reserve.kitFesta.idKit)">
+														{{ kit.descricao }} / R${{ kit.preco}},00 
+											</option>
+										</select>
+									</div>			
+									
+								</div>
+							</div>
+						</div>
+			
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<div class="div-form form-group">
+									<label class="control-label col-xs-12 col-md-4">Data da Reserva:</label>
+									<div class="col-xs-12 col-md-8">
+										<input 
+											class="form-control btnTriumphi"
+											name="reserveDate" 
+											type="datetime-local"
+											[(ngModel)]="reserve.dataReserva">
+									</div>
+								</div>
+							</div>
+			
+							<div class="col-xs-12 col-md-6">
+								<div class="div-form form-group">
+									<label class="control-label col-xs-4">Desconto:</label>
+									<div class="col-xs-8">
+										<input 
+											class="form-control btnTriumphi"
+											name="discount" 
+											type="number"
+											[(ngModel)]="reserve.desconto">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-xs-12 col-md-6">
+								<div class="div-form form-group">
+									<label class="control-label col-xs-4">Valor Total:</label>
+									<div class="col-xs-8">
+										<div class="form-control">R${{ cardValue + addsValue + ((kitSelected) ? kitSelected.preco : 0) - reserve.desconto || 0 }}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</tab>
+
+					<tab heading="Cardápio" >
+						<a (click)="getProducts()"></a>
+						<div class="row">
+							<table class="table table-striped tableDisplay">
+
+								<tr class="tableHeader">
+									<th>Produto</th>
+									<th>Valor</th>
+									<th>Quantidade</th>
+									<th>Subtotal</th>
+								</tr>
+				
+								<tr *ngFor="let product of productList, let i = index">
+									<td>
+										{{ product.nome }}
+									</td>
+									<td>
+										<input 
+											class="form-control btnTriumphi"
+											type="number"
+											[name]="product.nome" 
+											(change)="onChangeProductValue(productList)"
+											[(ngModel)]="product.valor">
+									</td>
+									<td>
+										<input 
+											class="form-control btnTriumphi"
+											name="entryValue" 
+											type="number"
+											(change)="onChangeProductValue(productList)"
+											[(ngModel)]="product.quantidade">
+									</td>
+									<td>
+										<div>
+											<span>{{ product.quantidade * product.valor || 0}}</span>
+										</div>
+									</td>
+								</tr>
+									<div class="form-control">Valor Total: R${{ cardValue || 0 }},00</div>
+							</table>
+						</div>						
+					</tab>
+
+					<tab heading="Adicionais">
+						<div class="row">
+								<table class="table table-striped tableDisplay">
+	
+									<tr class="tableHeader">
+										<th>Descrição</th>
+										<th>Valor</th>
+										<th>Quantidade</th>
+										<th>Subtotal</th>
+										<th>
+											<button 
+												type="button" 
+												class="btn btnTriumphi glyphicon glyphicon-plus"
+												(click)="onIncludesNewAdd()">
+											</button>
+										</th>
+									</tr>
+					
+									<ng-container
+										*ngIf="addsList && addsList.length > 0; then haveAdds; else noHaveAdds">
+									</ng-container>
+				
+									<ng-template #haveAdds>
+										<tr *ngFor="let add of addsList, let i = index">
+											<td>
+												{{addsList[i].idAdicional}}
+												<input 
+												class="form-control btnTriumphi"
+												type="text"
+												[name]="count"
+												[(ngModel)]="add.descricao">
+											</td>
+											<td>
+												<input 
+													class="form-control btnTriumphi"
+													type="number"
+													[name]="count" 
+													(change)="onChangeAdditionalValue(addsList)"
+													[(ngModel)]="add.valor">
+											</td>
+											<td>
+												<input 
+												class="form-control btnTriumphi"
+												type="number"
+												[name]="count" 
+												(change)="onChangeAdditionalValue(addsList)"
+												[(ngModel)]="add.quantidade">
+											</td>
+											<td>
+												<div>
+													<span>{{ add.quantidade * add.valor || 0}}</span>
+												</div>
+											</td>
+											<td>
+												<button 
+													type="button" 
+													class="btn btnTriumphi glyphicon glyphicon-minus"
+													(click)="onRemoveAdd([i])">
+												</button>
+											</td>
+										</tr>
+									</ng-template>
+
+									<div class="form-control">Valor Total: R${{ addsValue || 0 }},00</div>
+								
+								</table>
+					
+								<ng-template #noHaveAdds>
+									<div class="noData">
+										Não há adicionais para esta reserva.
+									</div>
+								</ng-template>
+							</div>
+					</tab>
+
+				</tabset>
+			</div>
+			
+
+			<div class="row">				
+				<div class="footerFormSubmit">		
+					<button 
+						type="button" 
+						class="btn glyphicon glyphicon-remove btnSecondary"
+						(click)="resetForm()">
+					</button>
+					<button 
+						type="submit" 
+						class="btn glyphicon glyphicon-ok btnPrimary">
+					</button>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>
+
+<br>
+
+<div class="row forms">
+	<div class="col-xs-6 col-xs-offset-3">
+		<div class="input-group inputGroup">
+			<input 
+				class="form-control btnTriumphi" 
+				type="text" 
+				placeholder="Buscar Reserva"
+				[(ngModel)]="reserveSearchValue">
+			<span class="input-group-btn">
+				<button 
+					class="btn glyphicon glyphicon-search btnSearch" 
+					name="btnBuscar" 
+					type="button" 
+					value="Buscar" 
+					(click)="searchReserve()">
+				</button>
+			</span>
+		</div>
+	</div>
+
+	<br>
+	
+	<div class="row">
+		<div>
+			<table class="table table-striped tableDisplay">
+
+				<tr class="tableHeader">
+					<th>NOME</th>
+					<th>DATA</th>
+					<th>TIPO</th>
+					<th class="tableEditColumn">AÇÕES</th>
+				</tr>
+
+				<ng-container
+					*ngIf="reserveist; then searchSuccess; else searchFail">
+				</ng-container>
+				
+				<ng-template #searchSuccess>
+					<tr *ngFor="let client of reserveist, let i = index">
+						<td>{{ reserveList[i].nome }}</td>
+						<td>{{ reserveist[i].dataReserva }}</td>
+						<td>{{ reserveist[i].tipoReserva }}</td>
+						<td class="tableEditColumn tableEditColumnIcon">
+							<a class="tableEditColumnIcon" (click)="deleteClient(reserveist[i].idReserva)">
+								<span class="glyphicon glyphicon-trash"></span>
+							</a>
+							<a class="tableEditColumnIcon" (click)="editClient(reserveist[i])">
+								<span class="glyphicon glyphicon-edit"></span>
+							</a>
+						</td>
+					</tr>
+				</ng-template>
+
+			</table>
+
+			<ng-template #searchFail>
+				<div class="noData">
+					Desculpe, nenhum resultado encontrado.
+				</div>
+			</ng-template>
+		</div>
+	</div>	
+</div>
+
+<modal-component 
+	#modal 
+	title="Clientes"
+	[secondary-action]="secondaryAction"
+	[primary-action]="primaryAction">
+		<div class="app-modal-body">
+			<tr *ngFor="let client of clientList, let i = index">
+				<td>
+					<input
+						#clienteChecked
+						type="radio" 
+						name="clienteChecked"
+						[value]="clientList[i].idCliente"
+						(change)="onClientChange(clientList[i])">
+						<!-- [ngModel]="clientSelected = clientList[i].idCliente" -->
+				</td>
+				<td>{{ clientList[i].nome }}</td>
+			</tr>
+		</div>
+</modal-component>
+
+	

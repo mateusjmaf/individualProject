@@ -1,0 +1,290 @@
+<div class="centerIcon">
+	<span class="glyphicon glyphicon-user"></span>
+	<span class="glyphicon glyphicon-star"></span>
+</div>
+
+<div class="row forms">
+	<div class="col-xs-12">
+		<form 
+			class="form-horizontal form-group" 
+			name="cadastrarCliente"
+			#f="ngForm"
+			(ngSubmit)="onSubmit()">
+		
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-2">Nome:</label>
+						<div class="col-xs-12 col-md-10">
+							<input
+								class="form-control btnTriumphi" 
+								name="clientName" 
+								placeholder="Insira seu nome"
+								type="text"
+								[(ngModel)]="client.nome">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="div-form form-group">
+						<label class="control-label col-xs-12 col-md-2">E-mail: </label>
+						<div class="col-xs-12 col-md-10">
+							<input 
+								class="form-control btnTriumphi" 
+								name="mail" 
+								placeholder="Insira seu e-mail"
+								type="email"
+								[(ngModel)]="client.email">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Celular: </label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"
+								name="cellphone" 
+								placeholder="Insira seu número de celular"
+								type="number"
+								[(ngModel)]="client.cell">
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Telefone: </label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi" 
+								name="tellphone" 
+								placeholder="Insira seu número de telefone"
+								type="number"
+								[(ngModel)]="client.tell">
+						</div>
+
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">CPF:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"
+								name="cpf" 
+								placeholder="Insira seu CPF"
+								type="number"
+								[(ngModel)]="client.cpf">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">RG:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"
+								name="rg" 
+								placeholder="Insira seu RG"
+								type="number"
+								[(ngModel)]="client.rg">
+						</div>
+					</div>
+				</div>	
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="div-form form-group">
+						<label class="control-label col-xs-12 col-md-4">Sexo:</label>
+						<div class="col-xs-12 col-md-8">
+							<select 
+								class="form-control btnTriumphi" 
+								name="genre"
+								[(ngModel)]="client.sexo">
+									<option>Masculino
+									<option>Feminino
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-6">
+					<div class="div-form form-group">
+						<label class="control-label col-xs-12 col-md-4">Nascimento:</label>
+						<div class="col-xs-12 col-md-8"> 
+							<input 
+								class="form-control btnTriumphi"
+								name="birthday" 
+								type="date"
+								[(ngModel)]="client.datNasc">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-8">
+					<div class="div-form form-group">
+						<label class="control-label col-xs-12 col-md-3">Endereço:</label>
+						<div class="col-xs-12 col-md-9">
+							<input 
+								class="form-control btnTriumphi"
+								name="street"
+								placeholder="Insira seu endereço"
+								type="text"
+								[(ngModel)]="client.endereco">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-4">	
+					<div class="div-form form-group">
+						<label class="control-label  col-xs-12 col-md-4">CEP:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"
+								name="cep" 
+								placeholder="Insira seu CEP"
+								type="number"
+								[(ngModel)]="client.cep">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-4">
+					<div class="div-form form-group">
+						<label class="control-label col-xs-6">Bairro: </label>
+						<div class="col-xs-6">
+							<input 
+								class="form-control btnTriumphi" 
+								name="district" 
+								type="text"
+								placeholder="Insira seu bairro"
+								[(ngModel)]="client.bairro">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-4">
+					<div class="div-form form-group">
+						<label class="control-label col-xs-6">Cidade:</label>
+						<div class="col-xs-6">
+							<input 
+								class="form-control btnTriumphi"
+								name="city" 
+								placeholder="Insira sua cidade"
+								type="text"
+								[(ngModel)]="client.cidade">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-4">
+					<div class="div-form form-group">
+						<label class="control-label col-xs-6">Estado:</label>
+						<div class="col-xs-6">
+							<input 
+								class="form-control btnTriumphi"
+								name="state" 
+								maxlength="2"
+								placeholder="Insira seu estado"
+								type="text"
+								[(ngModel)]="client.estado">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="footerFormSubmit">		
+					<button 
+						type="button" 
+						class="btn btn-default glyphicon glyphicon-remove btnSecondary"
+						(click)="resetForm()">
+					</button>
+					<button 
+						type="submit" 
+						class="btn btn-default glyphicon glyphicon-ok btnPrimary">
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<br>
+
+<div class="row forms">
+	<div class="col-xs-6 col-xs-offset-3">
+		<div class="input-group inputGroup">
+			<input 
+				class="form-control btnTriumphi" 
+				type="text" 
+				placeholder="Buscar Cliente" 
+				[(ngModel)]="clientSearchValue">
+			<span class="input-group-btn">
+				<button 
+					class="btn glyphicon glyphicon-search btnSearch" 
+					name="btnBuscar" 
+					type="button" 
+					value="Buscar" 
+					(click)="searchClient()">
+				</button>
+			</span>
+		</div>
+	</div>
+
+	<br>
+	
+	<div class="row">
+		<div>
+			<table class="table table-striped tableDisplay">
+
+				<tr class="tableHeader">
+					<th>NOME</th>
+					<th>CONTATO</th>
+					<th class="tableEditColumn">AÇÕES</th>
+				</tr>
+
+				<ng-container
+					*ngIf="clientList; then searchSuccess; else searchFail">
+				</ng-container>
+
+				<ng-template #searchSuccess>
+					<tr *ngFor="let client of clientList, let i = index">
+						<td>{{ clientList[i].nome }}</td>
+						<td>{{ clientList[i].cell }}</td>
+						<td class="tableEditColumn tableEditColumnIcon">
+							<a class="tableEditColumnIcon" (click)="deleteClient(clientList[i].idCliente)">
+								<span class="glyphicon glyphicon-trash"></span>
+							</a>
+							<a class="tableEditColumnIcon" (click)="editClient(clientList[i])">
+								<span class="glyphicon glyphicon-edit"></span>
+							</a>
+						</td>
+					</tr>
+				</ng-template>
+
+				<ng-template #searchFail>
+					<div class="noData">
+						Desculpe, nenhum resultado encontrado.
+					</div>
+				</ng-template>
+				
+
+			</table>
+		</div>
+	</div>	
+</div>

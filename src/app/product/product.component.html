@@ -1,0 +1,156 @@
+<div class="centerIcon">
+	<span class="glyphicon glyphicon-glass"></span>
+</div>
+
+<div class="row forms">
+	<div class="col-xs-12">
+		<form 
+			class="form-horizontal form-group" 
+			name="cadastrarProduto"
+			#f="ngForm"
+			(ngSubmit)="onSubmit()">
+		
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Nome:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"
+								name="nome" 
+								type="text"
+								placeholder="Insira o nome"
+								[(ngModel)]="product.nome">					
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-3">Descrição:</label>
+						<div class="col-xs-12 col-md-9">
+							<input 
+								class="form-control btnTriumphi"
+								name="descricao" 
+								type="text"
+								placeholder="Insira a descrição"
+								[(ngModel)]="product.descricao">
+						</div>			
+					</div>
+				</div>
+
+				
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Código:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"
+								name="codigo"
+								placeholder="Insira o código"
+								[(ngModel)]="product.codigo">
+						</div>			
+					</div>
+				</div>
+			
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Valor:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi" 
+								name="valor" 
+								type="number"
+								placeholder="Insira o valor"
+								[(ngModel)]="product.valor">
+						</div>			
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="footerFormSubmit">		
+					<button 
+						type="button" 
+						class="btn btn-default glyphicon glyphicon-remove btnSecondary" 
+						(click)="resetForm()">
+					</button>
+					<button 
+						type="submit" 
+						class="btn btn-default glyphicon glyphicon-ok btnPrimary">
+					</button>
+				</div>
+			</div>
+			
+		</form>
+	</div>
+</div>
+
+<br>
+
+<div class="row forms">
+	<div class="col-xs-6 col-xs-offset-3">
+		<div class="input-group inputGroup">
+			<input 
+				class="form-control btnTriumphi" 
+				type="text" 
+				placeholder="Buscar Produto" 
+				[(ngModel)]="productSearchValue">
+			<span class="input-group-btn">
+				<button 
+					class="btn glyphicon glyphicon-search btnSearch" 
+					name="btnBuscar" 
+					type="button" 
+					value="Buscar" 
+					(click)="searchProduct()">
+				</button>
+			</span>
+		</div>
+	</div>
+	
+	<br>
+
+	<div class="row">
+		<div>
+			<table class="table table-striped tableDisplay">
+
+				<tr class="tableHeader">
+					<th>NOME</th>
+					<th>DESCRIÇÃO</th>
+					<th>VALOR</th>
+					<th class="tableEditColumn">AÇÕES</th>
+				</tr>
+
+				<ng-container
+					*ngIf="productList; then searchSuccess; else searchFail">
+				</ng-container>
+				
+				<ng-template #searchSuccess>
+					<tr *ngFor="let product of productList, let i = index">
+						<td>{{ productList[i].nome }}</td>
+						<td>{{ productList[i].descricao }}</td>
+						<td>R$ {{ productList[i].valor }}</td>
+						<td class="tableEditColumn tableEditColumnIcon">
+							<a class="tableEditColumnIcon" (click)="deleteProduct(productList[i].idProduto)">
+								<span class="glyphicon glyphicon-trash"></span>
+							</a>
+							<a class="tableEditColumnIcon" (click)="editProduct(productList[i])">
+								<span class="glyphicon glyphicon-edit"></span>
+							</a>
+						</td>
+					</tr>
+				</ng-template>
+
+				<ng-template #searchFail>
+					<div class="noData">
+						Desculpe, nenhum resultado encontrado.
+					</div>
+				</ng-template>
+				
+			</table>
+		</div>
+	</div>
+</div>

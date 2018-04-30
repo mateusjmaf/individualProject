@@ -1,0 +1,265 @@
+<div class="centerIcon">
+	<span class="glyphicon glyphicon-gift"></span>
+</div>
+
+<br>
+
+<div class="row forms">
+	<div class="col-xs-12">
+
+		<form 
+		class="form-horizontal form-group" 
+		name="cadastrarProduto"
+		#formKit="ngForm"
+		(ngSubmit)="onSubmit()">
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+				
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="form-group">
+								<label class="col-xs-12 col-md-4 control-label">Descrição:</label>
+								<div class="col-xs-12 col-md-8">
+									<input 
+										class="form-control btnTriumphi" 
+										name="descricao" 
+										required="required"
+										[(ngModel)]="kit.descricao">
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="form-group ">
+								<label class="col-xs-4 control-label">Disponibilidade:</label>
+								<div class="form-check form-check-inline col-xs-12 col-md-8">
+									<label class="form-check-label">Dm <br>
+										<input 
+											type="checkbox"
+											name="dom"
+											[(ngModel)]="kit.dom">
+									</label> 
+									<label class="form-check-label">Sg <br>
+										<input 
+											type="checkbox"
+											name="seg"
+											[(ngModel)]="kit.seg">
+									</label>
+									<label class="form-check-label">Tr <br>
+										<input 
+											type="checkbox"
+											name="ter"
+											[(ngModel)]="kit.ter">
+									</label>
+									<label class="form-check-label">Qa <br>
+										<input 
+											type="checkbox"
+											name="qua"
+											[(ngModel)]="kit.qua">
+									</label>
+									<label class="form-check-label">Qi <br>
+										<input 
+											type="checkbox"
+											name="qui"
+											[(ngModel)]="kit.qui">	
+									</label>
+									<label class="form-check-label">Sx <br>
+										<input 
+											type="checkbox"
+											name="sex"
+											[(ngModel)]="kit.sex">
+									</label>
+									<label class="form-check-label">Sb <br>
+										<input 
+											type="checkbox"
+											name="sab"
+											[(ngModel)]="kit.sab">
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="form-group">
+								<label class="col-xs-4 control-label">
+									Decoração Básica:
+								</label>
+								<div class="col-xs-12 col-md-8">
+									<label class="switch">
+										<input 
+											type="checkbox"
+											name="decorBasic"
+											[(ngModel)]="kit.decorBasic">
+										<span class="slider round"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="form-group">
+								<label class="control-label col-xs-12 col-md-4">
+									Preço:
+								</label>
+								<div class="col-xs-12 col-md-8">
+									<input 
+										class="form-control btnTriumphi"
+										name="preco" 
+										type="number" 
+										required="required"
+										[(ngModel)]="kit.preco">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="col-xs-12 col-md-6">
+					<div class="row">
+
+						<div class="col-xs-12">
+							<h4 class="col-xs-12">Grupo de Staff:</h4>
+
+							<div class="form-group">
+								<label class="control-label col-xs-11 col-md-4 col-xs-offset-1">
+									Garçom:
+								</label>
+								<div class="col-xs-12 col-md-7">
+									<input 
+										class="form-control btnTriumphi"
+										name="garcom" 
+										type="number"
+										[(ngModel)]="kit.garcom">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-xs-11 col-md-4 col-xs-offset-1">
+									Recepcionista: 
+								</label>
+								<div class="col-xs-12 col-md-7">	
+									<input 
+										class="form-control btnTriumphi"
+										name="recepcionista" 
+										type="number"
+										[(ngModel)]="kit.recep">
+								</div>
+							</div>	
+
+							<div class="form-group">
+								<label class="control-label col-xs-11 col-md-4 col-xs-offset-1">
+									Copeiro: 
+								</label>
+								<div class="col-xs-12 col-md-7">
+									<input 
+										class="form-control btnTriumphi"
+										name="copeiro" 
+										type="number"
+										[(ngModel)]="kit.copeiro">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label col-xs-11 col-md-4 col-xs-offset-1">
+									Monitor: 
+								</label>
+								<div class="col-xs-12 col-md-7">	
+									<input 
+										class="form-control btnTriumphi"
+										name="monitor" 
+										type="number"
+										[(ngModel)]="kit.monitor">
+								</div>
+							</div>
+
+						</div>	
+					</div>
+				</div>
+			
+				<div class="footerFormSubmit">		
+					<button 
+						type="button" 
+						class="btn glyphicon glyphicon-remove btnSecondary"
+						(click)="resetForm()">
+					</button>
+					<button 
+						type="submit" 
+						class="btn glyphicon glyphicon-ok btnPrimary">
+					</button>
+				</div>
+
+			</div>
+		</form>
+	</div>
+</div>
+
+<br>
+
+<div class="row forms">
+	<div class="col-xs-6 col-xs-offset-3">
+		<div class="input-group inputGroup">
+			<input 
+				class="form-control btnTriumphi" 
+				type="text" 
+				placeholder="Buscar Kit-Festa" 
+				[(ngModel)]="kitSearchValue">
+			<span class="input-group-btn">
+				<button 
+					class="btn glyphicon glyphicon-search btnSearch" 
+					name="btnBuscar" 
+					type="button" 
+					value="Buscar" 
+					(click)="searchKit()">
+				</button>
+			</span>
+		</div>
+	</div>
+	
+	<br>
+
+	<div class="row">
+		<div>
+			<table class="table table-striped tableDisplay">
+
+				<tr class="tableHeader">
+					<th>KIT</th>
+					<th>VALOR</th>
+					<th class="tableEditColumn">AÇÕES</th>
+				</tr>
+
+				<ng-container
+					*ngIf="kitList; then searchSuccess; else searchFail">
+				</ng-container>
+				
+				<ng-template #searchSuccess>
+					<tr *ngFor="let kit of kitList, let i = index">
+						<td>{{ kitList[i].descricao }}</td>
+						<td>R$ {{ kitList[i].preco }}</td>
+						<td class="tableEditColumn tableEditColumnIcon">
+							<a class="tableEditColumnIcon" (click)="deleteKit(kitList[i].idKit)">
+								<span class="glyphicon glyphicon-trash"></span>
+							</a>
+							<a class="tableEditColumnIcon" (click)="editKit(kitList[i])">
+								<span class="glyphicon glyphicon-edit"></span>
+							</a>
+						</td>
+					</tr>
+				</ng-template>
+
+				<ng-template #searchFail>
+					<div class="noData">
+						Desculpe, nenhum resultado encontrado.
+					</div>
+				</ng-template>
+
+			</table>
+		</div>
+	</div>
+</div>

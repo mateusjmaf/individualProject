@@ -1,0 +1,293 @@
+<div class="centerIcon">
+	<span class="glyphicon glyphicon-user"></span>
+</div>
+
+<div class="row forms">
+	<div class="col-xs-12">
+		<form 
+			class="form-horizontal form-group" 
+			name="cadastrarStaff"
+			#f="ngForm"
+			(ngSubmit)="onSubmit()">
+
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label class="control-label col-xs12 col-md-2">Nome:</label>
+						<div class="col-xs-12 col-md-10">
+							<input 
+								class="form-control btnTriumphi"
+								name="nomeStaff" 
+								placeholder="Inserir nome"
+								type="text"
+								[(ngModel)]="staff.nome">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Celular:</label>
+						<div class="col-xs-12 col-md-8">
+							<input
+								class="form-control btnTriumphi"
+								name="cellStaff" 
+								placeholder="Inserir n° de celular"
+								type="text"
+								[(ngModel)]="staff.cell">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Telefone:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"  
+								name="tellStaff"
+								placeholder="Inserir n° de telefone"
+								type="text"
+								[(ngModel)]="staff.tell">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">CPF:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"  
+								name="cpfStaff" 
+								placeholder="Inserir CPF"
+								type="number"
+								[(ngModel)]="staff.cpf">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">RG:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"  
+								name="rgStaff" 
+								placeholder="Inserir RG"
+								type="number"
+								[(ngModel)]="staff.rg">
+						</div>
+					</div>
+				</div>
+			</div>	
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Sexo:</label>
+						<div class="col-xs-12 col-md-8">
+							<select 
+								class="form-control btnTriumphi" 
+								name="sexoStaff"
+								[(ngModel)]="staff.sexo">
+								<option>Masculino
+								<option>Feminino
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Nascimento:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"
+								name="dataNascimentoStaff"
+								type="date" 
+								[(ngModel)]="staff.dataNasc">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Cargo:</label>
+						<div class="col-xs-12 col-md-8">
+							<select 
+								class="form-control btnTriumphi"
+								name="funcaoStaff" 
+								[(ngModel)]="staff.cargo">
+									<option value="copeiro">Copeiro
+									<option value="garcom">Garçom
+									<option value="monitor">Monitor
+									<option value="recepcionista">Recepcionista
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">CEP:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"
+								name="cepStaff"
+								placeholder="Inserir CEP"
+								type="number" 
+								[(ngModel)]="staff.cep">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Bairro:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"
+								name="bairroStaff"
+								placeholder="Inserir bairro"
+								type="text" 
+								[(ngModel)]="staff.bairro">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-6">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Cidade:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"
+								name="cidadeStaff"
+								placeholder="Inserir cidade"
+								type="text" 
+								[(ngModel)]="staff.cidade">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-8">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-3">Endereço:</label>
+						<div class="col-xs-12 col-md-9">
+							<input 
+								class="form-control btnTriumphi"
+								name="enderecoStaff"
+								placeholder="Inserir endereço"
+								type="text" 
+								[(ngModel)]="staff.endereco">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-4">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-md-4">Estado:</label>
+						<div class="col-xs-12 col-md-8">
+							<input 
+								class="form-control btnTriumphi"
+								name="estadoStaff"
+								placeholder="Inserir estado"
+								type="text" 
+								[(ngModel)]="staff.estado">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="footerFormSubmit">		
+					<button 
+						type="button" 
+						class="btn btn-default glyphicon glyphicon-remove btnSecondary"
+						(click)="alert(response)">
+					</button>
+					<button 
+						type="submit" 
+						class="btn btn-default glyphicon glyphicon-ok btnPrimary">
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<br>
+
+<div class="row forms">
+	<div class="col-xs-6 col-xs-offset-3">
+		<div class="input-group inputGroup">
+			<input 
+				class="form-control btnTriumphi" 
+				type="text" 
+				placeholder="Buscar Staff" 
+				[(ngModel)]="staffSerachValue">
+			<span class="input-group-btn">
+				<button 
+					class="btn glyphicon glyphicon-search btnSearch" 
+					name="btnBuscar" 
+					type="button" 
+					value="Buscar" 
+					(click)="searchStaff()">
+				</button>
+			</span>
+		</div>
+	</div>
+	
+	<br>
+
+	<div class="row">
+		<div>
+			<table class="table table-striped tableDisplay">
+
+				<tr class="tableHeader">
+					<th>NOME</th>
+					<th>CONTATO</th>
+					<th>CARGO</th>
+					<th class="tableEditColumn">AÇÕES</th>
+				</tr>
+
+				<ng-container
+					*ngIf="staffList; then searchSuccess; else searchFail">
+				</ng-container>
+				
+				<ng-template #searchSuccess>
+					<tr *ngFor="let staff of staffList, let i = index">
+						<td>{{ staffList[i].nome }}</td>
+						<td>{{ staffList[i].cell }}</td>
+						<td>{{ staffList[i].cargo }}</td>
+						<td class="tableEditColumn tableEditColumnIcon">
+							<a class="tableEditColumnIcon" (click)="deleteStaff(staffList[i].idStaff)">
+								<span class="glyphicon glyphicon-trash"></span>
+							</a>
+							<a class="tableEditColumnIcon" (click)="editStaff(staffList[i])">
+								<span class="glyphicon glyphicon-edit"></span>
+							</a>
+						</td>
+					</tr>
+				</ng-template>
+
+				<ng-template #searchFail>
+					<div class="noData">
+						Desculpe, nenhum resultado encontrado.
+					</div>
+				</ng-template>
+
+			</table>
+		</div>
+	</div>
+</div>
