@@ -55,8 +55,8 @@ fieldset {
 
 .btnPrimary {
 	background-color: #ffffff;
-	border-color: #ac7b58c7;
-	color:#ac7b58c7;
+	border-color: #ac7b58;
+	color:#ac7b58;
 }
 
 .btnPrimary:hover {
@@ -66,8 +66,8 @@ fieldset {
 }
 
 .btnSecondary {
-	background-color: #ac7b58c7;
-	border-color: #ac7b58c7;
+	background-color: #ac7b58;
+	border-color: #ac7b58;
 	color:#ffffff;
 	margin-right: 7px;
 }
@@ -81,8 +81,8 @@ fieldset {
 .btnTriumphi,
 .btnSearch {
 	background: #ffffff;
-	color: #ac7b58c7;
-	border-color: #ac7b58c7;
+	color: #ac7b58;
+	border-color: #ac7b58;
 }
 
 .btnTriumphi:hover,
@@ -94,8 +94,8 @@ fieldset {
 
 .btnTriumphi:focus,
 .btnSearch:focus {
-	border-color: #ac7b58c7;
-	box-shadow: 0 0 15px 1px #ac7b58c7;
+	border-color: #ac7b58;
+	box-shadow: 0 0 15px 1px #ac7b58;
 }
 
 .btnSearch {
@@ -104,7 +104,7 @@ fieldset {
 
 .centerIcon {
 	align-items: center;
-	color:#ac7b58c7;
+	color:#ac7b58;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -135,6 +135,10 @@ fieldset {
 	padding-top: 14px;
 }
 
+.forms input, select {
+	font-size: 16px;
+}
+
 .div-form {
 	border: 0;
 }
@@ -160,7 +164,7 @@ fieldset {
 .calendarEvent {
 	color: #000;
 	background-color: #f8ecda;
-	border: 1px solid #ac7b58c7;
+	border: 1px solid #ac7b58;
 } */
 
 .inputGroup {
@@ -203,11 +207,11 @@ fieldset {
 }
 
 input:checked + .slider  {
-	background-color: #ac7b58c7;
+	background-color: #ac7b58;
 }
 
 input:focus + .slider  {
-	box-shadow: 0 0 1px #ac7b58c7;
+	box-shadow: 0 0 1px #ac7b58;
 }
 
 input:checked + .slider:before  {
@@ -240,12 +244,12 @@ input:checked + .slider:before  {
 }
 
 .tableEditColumnIcon  {
-	color: #ac7b58c7;
+	color: #ac7b58;
 	cursor: pointer;
 }
 
 .noData  {
-	color: #ac7b58c7;
+	color: #ac7b58;
 	font-size: 21px;
 	text-align: center;
 	width: 100%;
@@ -259,4 +263,12 @@ input:checked + .slider:before  {
 	color: #777;
 	font-size: 21px;
 	text-align: center;
+}
+
+.groupStaffs {
+	border: 1px solid;
+	border-color: #f8ecda;
+	border-radius: 7px;
+	margin-bottom: 14px;
+	width: 102.5%;
 }
