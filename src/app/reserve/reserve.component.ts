@@ -67,7 +67,7 @@ export class ReserveComponent implements OnInit {
   ngOnInit() {
     this.resetForm();
     this.getKits();
-    this.getProducts();
+    this.getCards(0);
     // this.searchReserve();
   }
   
@@ -150,32 +150,43 @@ export class ReserveComponent implements OnInit {
       this.kitSelected = this.kitList[0];
     })
   }
-  getProducts() {
-    return this.serverHttp.readByName(' ', 'produtoRest'+'/buscarProdutosPorNome').subscribe(response => {
-      this.productList = response;
-      this.generateCard();
-  
+
+  getCards(id) {
+    console.log('id', id)
+    return this.serverHttp.readById(id, 'cardapioRest' +'/buscarCardapioPorIdReserva/').subscribe(response => {
+      // response.length > 0 ? this.cardList = response : this.cardList = undefined;
+      this.cardList = response;
+      console.log('response', response)
+      console.log('cardlist', this.cardList)
     })
   }
 
-  generateCard(){
-    for (let prod of this.productList) {
-      for (let card of this.cardList) {
-        // card.produto.push(prod);
+  // getProducts() {
+  //   return this.serverHttp.readByName(' ', 'produtoRest'+'/buscarProdutosPorNome').subscribe(response => {
+  //     this.productList = response;
+  //     this.generateCard();
+  
+  //   })
+  // }
 
-      }
-      //incluir valor somente se for false
-      // if (!card.product.preco) {
-      //   card.product.preco = product.valor;
-      // }
-    }
+  // generateCard(){
+  //   for (let prod of this.productList) {
+  //     for (let card of this.cardList) {
+  //       // card.produto.push(prod);
 
-    for (let prod of this.productList) {
-      // this.cardd
-      // continua...
-    }
-    // console.log('this.productList', this.productList)
-  }
+  //     }
+  //     //incluir valor somente se for false
+  //     // if (!card.product.preco) {
+  //     //   card.product.preco = product.valor;
+  //     // }
+  //   }
+
+  //   for (let prod of this.productList) {
+  //     // this.cardd
+  //     // continua...
+  //   }
+  //   // console.log('this.productList', this.productList)
+  // }
 
   getClients() {
     return this.serverHttp.readByName(`${this.clientName}`, 'clienteRest'+'/buscarClientesPorNome').subscribe(response => {

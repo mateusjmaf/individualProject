@@ -146,7 +146,7 @@
 					</tab>
 
 					<tab heading="Cardápio" >
-						<a (click)="getProducts()"></a>
+						<a (click)="getcards()"></a>
 						<div class="row">
 							<table class="table table-striped tableDisplay">
 
@@ -157,29 +157,29 @@
 									<th>Subtotal</th>
 								</tr>
 				
-								<tr *ngFor="let product of productList, let i = index">
+								<tr *ngFor="let card of cardList, let i = index">
 									<td>
-										{{ product.nome }}
+										<!-- {{ card.nome }} -->
 									</td>
 									<td>
 										<input 
 											class="form-control btnTriumphi"
 											type="number"
-											[name]="product.nome" 
-											(change)="onChangeProductValue(productList)"
-											[(ngModel)]="product.valor">
+											[name]="card.nome" 
+											(change)="onChangecardValue(cardList)">
+											<!-- [(ngModel)]="card.valor" -->
 									</td>
 									<td>
 										<input 
 											class="form-control btnTriumphi"
 											name="entryValue" 
 											type="number"
-											(change)="onChangeProductValue(productList)"
-											[(ngModel)]="product.quantidade">
+											(change)="onChangecardValue(cardList)">
+											<!-- [(ngModel)]="card.quantidade"> -->
 									</td>
 									<td>
 										<div>
-											<span>{{ product.quantidade * product.valor || 0}}</span>
+											<span>{{ card.quantidade * card.valor || 0}}</span>
 										</div>
 									</td>
 								</tr>
