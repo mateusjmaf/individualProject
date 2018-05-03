@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ServerHttpService } from '../../service/server.http.service';
+import { Observable } from 'rxjs/Observable';
+
+import { Card } from './card.object'
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -7,9 +12,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-  constructor() { }
+  card: Card;
+  cardList: Card[];
+  cardSearchValue: number = 0;
+  restRoute: string = 'cardapioRest';
 
-  ngOnInit() {
+  constructor(private serverHttp: ServerHttpService) { 
+    this.card = new Card();
   }
 
+  ngOnInit() {
+    this.searchcard();
+  }
+
+  onSubmit() { }
+
+  searchcard() {
+    return this.serverHttp.readById(this.cardSearchValue, this.restRoute+'/buscarCardapioPorIdReserva').subscribe(response => {
+      response.length > 0 ? this.cardList = response : this.cardList = undefined;
+    })
+  }
+
+  editcard(Card: Card) {
+    this.card = Card;
+  }
 }
