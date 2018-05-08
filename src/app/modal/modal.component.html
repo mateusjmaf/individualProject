@@ -26,13 +26,13 @@
         <div class="modal-footer">
           <button *ngIf="secondaryAction"
             type="button"
-            class="btn btnSecondary"
+            class="btn glyphicon glyphicon-remove btnSecondary"
             (click)="secondaryAction.action()">
             {{ secondaryAction.label }}
           </button>
           <button
             type="button"
-            class="btn btnPrimary"
+						class="btn glyphicon glyphicon-ok btnPrimary"
             data-dismiss="modal"
             (click)="primaryAction.action()">
               {{ primaryAction.label }}
