@@ -9,8 +9,6 @@ import { ModalAction } from './moda.interface.component';
 })
 export class ModalComponent {
 
-  // @ViewChild('modal-ontent', { read: ElementRef }) modalContent: ElementRef;
-  
   @Input('primary-action') primaryAction?: ModalAction;
   
   @Input('secondary-action') secondaryAction?: ModalAction;
@@ -19,21 +17,10 @@ export class ModalComponent {
 
   showModal: string = "fade";
 
-  // closeModal(): void {
-  //   this.showModal = 'fade';
-  // }
-
-  // openModal(): void {
-  //   this.showModal = 'show';
-  // }
-  
-  // @Output() open: EventEmitter<any> = new EventEmitter<any>();
-
   public visible = false;
   public visibleAnimate = false;
 
   public show(): void {
-    // this.open.emit(this.visible);
     this.visible = true;
     setTimeout(() => this.visibleAnimate = true, 100);
   }
@@ -48,11 +35,5 @@ export class ModalComponent {
       this.hide();
     }
   }
-
-  // onPrimaryAction() {
-  //   this.primaryAction.action();
-
-  //   this.hide();
-  // }
 
 }
