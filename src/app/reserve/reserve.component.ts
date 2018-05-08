@@ -11,6 +11,7 @@ import { ServerHttpService } from '../../service/server.http.service';
 import { ModalComponent } from '../modal/modal.component';
 import { ModalAction } from '../modal/moda.interface.component';
 import { KitPartyComponent } from '../kitParty/kit-party.component';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-reserve',
@@ -19,17 +20,21 @@ import { KitPartyComponent } from '../kitParty/kit-party.component';
 })
 export class ReserveComponent implements OnInit {
 
-  @ViewChild(ModalComponent) modal: ModalComponent;
+  @ViewChild('modalClient') modalClient: ModalComponent;
+
+  @ViewChild('modalCard') modalCard: ModalComponent;
   
   @ViewChild('clientPicked') clientPicked;
 
   @ViewChild('clienteChecked') clienteChecked;
 
+  buttonDisabled: {} = {};
+
   addsValue: number = 0;
   addsList: Additional[];
 
   cardValue: number = 0;
-  cardList: Card[];
+  cardList:  Array<Card>;
   
   count: number = 1;
 
@@ -45,19 +50,19 @@ export class ReserveComponent implements OnInit {
   reserveList: Reserve[];
   reserveSearchValue: string = ' ';
 
-
-  secondaryAction: ModalAction = {
+  titleCard = "Produtos";
+  titleClient = "Clientes";
+  
+  primaryActionClient: ModalAction = {
     action: () => {
-      this.modal.hide();
-    },
-    label: 'Cancelar'
+      this.modalClient.hide();
+    }
   };
   
-  primaryAction: ModalAction = {
+  primaryActionCard: ModalAction = {
     action: () => {
-      this.modal.hide();
-    },
-    label: 'Confirmar'
+      this.modalCard.hide();
+    }
   };
 
   private restRoute: string = 'reservaRest';
@@ -67,7 +72,6 @@ export class ReserveComponent implements OnInit {
   ngOnInit() {
     this.resetForm();
     this.getKits();
-    this.getCards(0);
     // this.searchReserve();
   }
   
@@ -88,6 +92,12 @@ export class ReserveComponent implements OnInit {
   
   editReserve(reserve: Reserve) {
     this.reserve = reserve;
+    this.buttonDisabled = {};
+    
+    // verifica se há determinado produto no cardapio, se sim desabilita botão para adicionar ao cardapio
+    // this.reserve.cardapios.forEach(cardapio =>{
+    //   this.buttonDisabled[cardapio.produto.idProduto] = true;
+    // })
   }
   
   addKitParty() {
@@ -97,12 +107,10 @@ export class ReserveComponent implements OnInit {
   
   onSubmit() {
     this.onTotalAmount();
-    // this.convertProductListToCard();
-    // this.reserve.cardapios = this.cardcardList;
+    // this.reserve.cardapios = this.cardList;
     this.reserve.cliente = this.clientPicked;
     this.reserve.kitFesta = this.kitSelected;
 
-    console.log('terasdfas', this.productList)
     if(this.reserve.idReserva) {
       return this.serverHttp.update(this.reserve, this.restRoute+'/editarReserva').subscribe(response => {
         alert(response);
@@ -118,7 +126,7 @@ export class ReserveComponent implements OnInit {
     }
   }
 
-  // funcao para recalcular o valor total do cardapio de produtos
+  // recalculate total price of card 
   onChangeProductValue(list) {
     this.cardValue = 0;
     let subTotal = 0;
@@ -131,7 +139,7 @@ export class ReserveComponent implements OnInit {
     this.cardValue += subTotal;
   }
 
-  // funcao para recalcular o valor total da lista de itens adicionais
+  // recalculate total price of adds items list
   onChangeAdditionalValue(list) {
     this.addsValue = 0;
     let subTotal = 0;
@@ -152,41 +160,19 @@ export class ReserveComponent implements OnInit {
   }
 
   getCards(id) {
-    console.log('id', id)
     return this.serverHttp.readById(id, 'cardapioRest' +'/buscarCardapioPorIdReserva/').subscribe(response => {
       // response.length > 0 ? this.cardList = response : this.cardList = undefined;
       this.cardList = response;
-      console.log('response', response)
-      console.log('cardlist', this.cardList)
     })
   }
 
-  // getProducts() {
-  //   return this.serverHttp.readByName(' ', 'produtoRest'+'/buscarProdutosPorNome').subscribe(response => {
-  //     this.productList = response;
-  //     this.generateCard();
-  
-  //   })
-  // }
-
-  // generateCard(){
-  //   for (let prod of this.productList) {
-  //     for (let card of this.cardList) {
-  //       // card.produto.push(prod);
-
-  //     }
-  //     //incluir valor somente se for false
-  //     // if (!card.product.preco) {
-  //     //   card.product.preco = product.valor;
-  //     // }
-  //   }
-
-  //   for (let prod of this.productList) {
-  //     // this.cardd
-  //     // continua...
-  //   }
-  //   // console.log('this.productList', this.productList)
-  // }
+  getProducts() {
+    return this.serverHttp.readByName(' ', 'produtoRest'+'/buscarProdutosPorNome').subscribe(response => {
+      this.productList = response;
+      console.log(this.productList);
+      this.modalCard.show();
+    })
+  }
 
   getClients() {
     return this.serverHttp.readByName(`${this.clientName}`, 'clienteRest'+'/buscarClientesPorNome').subscribe(response => {
@@ -197,7 +183,7 @@ export class ReserveComponent implements OnInit {
 
       } else { 
         this.clientList = response;
-        this.modal.show();
+        this.modalClient.show();
 
       }
     })
@@ -207,12 +193,18 @@ export class ReserveComponent implements OnInit {
     this.clientPicked = client;
     this.clientName = this.clientPicked.nome;
   }
-
-  // adiciona novo item a lista de adicionais
+  
+  // add new item for adds list
   onIncludesNewAdd() {
     this.count++;
     var add = new Additional();
     this.addsList.push(add);
+  }
+
+  // add new prod for product list
+  onIncludesNewProd(prod) {
+    this.buttonDisabled[prod.idProduto] = true;
+    this.cardList.push(prod);
   }
 
   // remove determinado item da lista de adicionais
@@ -221,19 +213,10 @@ export class ReserveComponent implements OnInit {
     this.onChangeAdditionalValue(this.addsList);
   }
 
-  // calcula todos os valores envolvidos na tela reserva (cardápio, adicionais, kit) e subtrai valor de desconto
+  // calculate all prices of reserve (card, adds and kit) and subtract discount price
   onTotalAmount() {
     this.reserve.valorReserva = this.cardValue + this.addsValue + this.kitSelected.preco - this.reserve.desconto;
   }
-
-  // convertProductListToCard() {
-  //   for (let product of this.productList){
-  //     if(this.productList){
-        
-  //     }
-  //   }
-    
-  // }
 
   resetForm() {
     this.addsList = new Array<Additional>();

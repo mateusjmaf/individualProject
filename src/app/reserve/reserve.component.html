@@ -13,6 +13,7 @@
 			<div>
 				<tabset>
 					<br>
+
 					<tab heading="Dados Principais" id="tab1">
 						<div class="row">
 							<div class="col-xs-12">
@@ -142,11 +143,10 @@
 								</div>
 							</div>
 						</div>
-
 					</tab>
 
 					<tab heading="Cardápio" >
-						<a (click)="getcards()"></a>
+						<a (click)="getCards()"></a>
 						<div class="row">
 							<table class="table table-striped tableDisplay">
 
@@ -155,35 +155,51 @@
 									<th>Valor</th>
 									<th>Quantidade</th>
 									<th>Subtotal</th>
+									<th>
+										<button 
+											type="button" 
+											class="btn btnTriumphi glyphicon glyphicon-plus"
+											(click)="getProducts()">
+										</button>
+									</th>
 								</tr>
 				
 								<tr *ngFor="let card of cardList, let i = index">
 									<td>
-										<!-- {{ card.nome }} -->
+										{{ card.produto.nome }}
 									</td>
 									<td>
 										<input 
 											class="form-control btnTriumphi"
 											type="number"
-											[name]="card.nome" 
-											(change)="onChangecardValue(cardList)">
-											<!-- [(ngModel)]="card.valor" -->
+											[name]="card.valor" 
+											(change)="onChangecardValue(cardList)"
+											[(ngModel)]="card.valor || card.produto.valor">
 									</td>
 									<td>
 										<input 
 											class="form-control btnTriumphi"
-											name="entryValue" 
 											type="number"
-											(change)="onChangecardValue(cardList)">
-											<!-- [(ngModel)]="card.quantidade"> -->
+											[name]="card.quantidade" 
+											(change)="onChangecardValue(cardList)"
+											[(ngModel)]="card.quantidade">
 									</td>
 									<td>
 										<div>
 											<span>{{ card.quantidade * card.valor || 0}}</span>
 										</div>
 									</td>
+									<td>
+										<button 
+											type="button" 
+											class="btn btnTriumphi glyphicon glyphicon-minus"
+											(click)="onRemoveAdd([i])">
+										</button>
+									</td>
 								</tr>
-									<div class="form-control">Valor Total: R${{ cardValue || 0 }},00</div>
+
+								<div class="form-control">Valor Total: R${{ cardValue || 0 }},00</div>
+								
 							</table>
 						</div>						
 					</tab>
@@ -352,10 +368,9 @@
 </div>
 
 <modal-component 
-	#modal 
-	title="Clientes"
-	[secondary-action]="secondaryAction"
-	[primary-action]="primaryAction">
+	#modalClient 
+	[title]="titleClient"
+	[primary-action]="primaryActionClient">
 		<div class="app-modal-body">
 			<tr *ngFor="let client of clientList, let i = index">
 				<td>
@@ -365,11 +380,31 @@
 						name="clienteChecked"
 						[value]="clientList[i].idCliente"
 						(change)="onClientChange(clientList[i])">
-						<!-- [ngModel]="clientSelected = clientList[i].idCliente" -->
 				</td>
 				<td>{{ clientList[i].nome }}</td>
 			</tr>
 		</div>
 </modal-component>
 
-	
+<modal-component 
+#modalCard
+[title]="titleCard"
+[primary-action]="primaryActionCard">
+	<div class="app-modal-body">
+		<table class="table table-striped tableDisplay">
+			<tr *ngFor="let prod of productList, let i = index">
+				<td>
+					<label class="control-label">{{ prod.nome }}</label>
+				</td>
+				<td>
+					<button
+						class="btn btnTriumphi glyphicon glyphicon-plus"
+						[disabled]="buttonDisabled[prod.idProduto]"
+						[value]="prod.idProduto"
+						(click)="onIncludesNewProd(prod)">
+					</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</modal-component>

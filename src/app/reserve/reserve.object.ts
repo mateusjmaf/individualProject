@@ -6,9 +6,8 @@ import { KitParty } from "../kitParty/kit-party.object";
 export class Reserve {
 	
   idReserva: number;
-	adicionais: Additional;
 	aniversariante: string;
-	cardapios: Card[];
+	cardapios: Array<Card>;
 	cliente: Client;
 	dataReserva: Date;
 	desconto: number;
@@ -19,9 +18,8 @@ export class Reserve {
 
 	constructor(
 		idReserva?: number,
-		adicionais?: Additional,
 		aniversariante?: string,
-		cardapios?: Card[],
+		cardapios?: Array<Card>,
 		cliente?: Client,
 		dataReserva?: Date,
 		desconto?: number,
@@ -32,7 +30,6 @@ export class Reserve {
 	) {
 
 		this.idReserva = idReserva;
-		this.adicionais = adicionais;
 		this.aniversariante = aniversariante;
 		this.cardapios = cardapios;
 		this.cliente = cliente;
