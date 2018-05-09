@@ -28,15 +28,16 @@ export class ReserveComponent implements OnInit {
 
   @ViewChild('clienteChecked') clienteChecked;
 
-  buttonDisabled: {} = {};
-
   addsValue: number = 0;
   addsList: Additional[];
 
+  buttonDisabled: {};
+  
   cardValue: number = 0;
   cardList:  Array<Card>;
   
-  count: number = 1;
+  countAdd: number;
+  countCard: number;
 
   clientList: Client[];
   clientName: string = '';
@@ -127,29 +128,25 @@ export class ReserveComponent implements OnInit {
   }
 
   // recalculate total price of card 
-  onChangeProductValue(list) {
+  onChangeProductValue(card) {
     this.cardValue = 0;
-    let subTotal = 0;
     
-    for(let prod of list) {
+    for(let prod of card) {
       if(prod.quantidade) {
-        subTotal += prod.quantidade * prod.valor;
+        this.cardValue += prod.quantidade * prod.valor;
       }
     }
-    this.cardValue += subTotal;
   }
 
   // recalculate total price of adds items list
-  onChangeAdditionalValue(list) {
+  onChangeAdditionalValue(adds) {
     this.addsValue = 0;
-    let subTotal = 0;
     
-    for(let add of list) {
+    for(let add of adds) {
       if(add.quantidade) {
-        subTotal += add.quantidade * add.valor;
+        this.addsValue += add.quantidade * add.valor;
       }
     }
-    this.addsValue += subTotal;
   }
 
   getKits() {
@@ -161,7 +158,6 @@ export class ReserveComponent implements OnInit {
 
   getCards(id) {
     return this.serverHttp.readById(id, 'cardapioRest' +'/buscarCardapioPorIdReserva/').subscribe(response => {
-      // response.length > 0 ? this.cardList = response : this.cardList = undefined;
       this.cardList = response;
     })
   }
@@ -169,7 +165,6 @@ export class ReserveComponent implements OnInit {
   getProducts() {
     return this.serverHttp.readByName(' ', 'produtoRest'+'/buscarProdutosPorNome').subscribe(response => {
       this.productList = response;
-      console.log(this.productList);
       this.modalCard.show();
     })
   }
@@ -196,21 +191,35 @@ export class ReserveComponent implements OnInit {
   
   // add new item for adds list
   onIncludesNewAdd() {
-    this.count++;
+    this.countAdd++;
+    console.log('count', this.countAdd)
     var add = new Additional();
     this.addsList.push(add);
   }
 
   // add new prod for product list
   onIncludesNewProd(prod) {
+    this.countCard++;
     this.buttonDisabled[prod.idProduto] = true;
-    this.cardList.push(prod);
+    let card = new Card();
+    card.valor = prod.valor;
+    card.quantidade = 0;
+    card.produto = Object.assign(prod);
+    this.cardList.push(card);
   }
 
-  // remove determinado item da lista de adicionais
+  // remove any item of adds list
   onRemoveAdd(index) {
     this.addsList.splice(index, 1);
     this.onChangeAdditionalValue(this.addsList);
+  }
+
+  // remove any product of card list
+  onRemoveCard(card, index) {
+    this.cardList.splice(index, 1);
+    this.onChangeProductValue(card);
+    this.buttonDisabled[card.produto.idProduto] = false;
+    
   }
 
   // calculate all prices of reserve (card, adds and kit) and subtract discount price
@@ -220,9 +229,12 @@ export class ReserveComponent implements OnInit {
 
   resetForm() {
     this.addsList = new Array<Additional>();
+    this.buttonDisabled = {};
     this.cardList = new Array<Card>();
     this.clientPicked = new Client();
     this.clientList = new Array<Client>();
+    this.countAdd = 0;
+    this.countCard = 0;
     this.productList = new Array<Product>();
     this.reserve = new Reserve();
     this.reserve.desconto = 0;

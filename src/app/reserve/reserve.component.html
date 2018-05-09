@@ -172,16 +172,16 @@
 										<input 
 											class="form-control btnTriumphi"
 											type="number"
-											[name]="card.valor" 
-											(change)="onChangecardValue(cardList)"
-											[(ngModel)]="card.valor || card.produto.valor">
+											[name]="countCard+'v'" 
+											(change)="onChangeProductValue(cardList)"
+											[(ngModel)]="card.valor">
 									</td>
 									<td>
 										<input 
 											class="form-control btnTriumphi"
 											type="number"
-											[name]="card.quantidade" 
-											(change)="onChangecardValue(cardList)"
+											[name]="countCard" 
+											(change)="onChangeProductValue(cardList)"
 											[(ngModel)]="card.quantidade">
 									</td>
 									<td>
@@ -193,7 +193,7 @@
 										<button 
 											type="button" 
 											class="btn btnTriumphi glyphicon glyphicon-minus"
-											(click)="onRemoveAdd([i])">
+											(click)="onRemoveCard(card, [i])">
 										</button>
 									</td>
 								</tr>
@@ -229,28 +229,27 @@
 									<ng-template #haveAdds>
 										<tr *ngFor="let add of addsList, let i = index">
 											<td>
-												{{addsList[i].idAdicional}}
 												<input 
-												class="form-control btnTriumphi"
-												type="text"
-												[name]="count"
-												[(ngModel)]="add.descricao">
+													class="form-control btnTriumphi"
+													type="text"
+													[name]="countAdd"
+													[(ngModel)]="add.descricao">
 											</td>
 											<td>
 												<input 
 													class="form-control btnTriumphi"
 													type="number"
-													[name]="count" 
+													[name]="countAdd" 
 													(change)="onChangeAdditionalValue(addsList)"
 													[(ngModel)]="add.valor">
 											</td>
 											<td>
 												<input 
-												class="form-control btnTriumphi"
-												type="number"
-												[name]="count" 
-												(change)="onChangeAdditionalValue(addsList)"
-												[(ngModel)]="add.quantidade">
+													class="form-control btnTriumphi"
+													type="number"
+													[name]="countAdd" 
+													(change)="onChangeAdditionalValue(addsList)"
+													[(ngModel)]="add.quantidade">
 											</td>
 											<td>
 												<div>
@@ -371,25 +370,25 @@
 	#modalClient 
 	[title]="titleClient"
 	[primary-action]="primaryActionClient">
-		<div class="app-modal-body">
-			<tr *ngFor="let client of clientList, let i = index">
-				<td>
-					<input
-						#clienteChecked
-						type="radio" 
-						name="clienteChecked"
-						[value]="clientList[i].idCliente"
-						(change)="onClientChange(clientList[i])">
-				</td>
-				<td>{{ clientList[i].nome }}</td>
-			</tr>
-		</div>
+	<div class="app-modal-body">
+		<tr *ngFor="let client of clientList, let i = index">
+			<td>
+				<input
+					#clienteChecked
+					type="radio" 
+					name="clienteChecked"
+					[value]="clientList[i].idCliente"
+					(change)="onClientChange(clientList[i])">
+			</td>
+			<td>{{ clientList[i].nome }}</td>
+		</tr>
+	</div>
 </modal-component>
 
 <modal-component 
-#modalCard
-[title]="titleCard"
-[primary-action]="primaryActionCard">
+	#modalCard
+	[title]="titleCard"
+	[primary-action]="primaryActionCard">
 	<div class="app-modal-body">
 		<table class="table table-striped tableDisplay">
 			<tr *ngFor="let prod of productList, let i = index">
@@ -400,7 +399,6 @@
 					<button
 						class="btn btnTriumphi glyphicon glyphicon-plus"
 						[disabled]="buttonDisabled[prod.idProduto]"
-						[value]="prod.idProduto"
 						(click)="onIncludesNewProd(prod)">
 					</button>
 				</td>
