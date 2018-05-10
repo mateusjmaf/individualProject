@@ -108,17 +108,32 @@
 						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<div class="div-form form-group">
-									<label class="control-label col-xs-12 col-md-4">Data da Reserva:</label>
+									<label class="control-label col-xs-12 col-md-4">Data:</label>
 									<div class="col-xs-12 col-md-8">
 										<input 
 											class="form-control btnTriumphi"
 											name="reserveDate" 
-											type="datetime-local"
+											type="date"
 											[(ngModel)]="reserve.dataReserva">
 									</div>
 								</div>
 							</div>
 			
+							<div class="col-xs-12 col-md-6">
+								<div class="div-form form-group">
+									<label class="control-label col-xs-12 col-md-4">Horário:</label>
+									<div class="col-xs-12 col-md-8">
+										<input 
+											class="form-control btnTriumphi"
+											name="reserveTime" 
+											type="time"
+											[(ngModel)]="reserve.horarioReserva">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<div class="div-form form-group">
 									<label class="control-label col-xs-4">Desconto:</label>
@@ -131,9 +146,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
-
-						<div class="row">
+							
 							<div class="col-xs-12 col-md-6">
 								<div class="div-form form-group">
 									<label class="control-label col-xs-4">Valor Total:</label>

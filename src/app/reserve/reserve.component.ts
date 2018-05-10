@@ -101,14 +101,10 @@ export class ReserveComponent implements OnInit {
     // })
   }
   
-  addKitParty() {
-    // implementar adicao quando modal estiver implementada
-    alert('ok');
-  }
-  
   onSubmit() {
     this.onTotalAmount();
-    // this.reserve.cardapios = this.cardList;
+    // this.reserve.adicionais = this.addsList;
+    this.reserve.cardapios = this.cardList;
     this.reserve.cliente = this.clientPicked;
     this.reserve.kitFesta = this.kitSelected;
 
@@ -173,8 +169,8 @@ export class ReserveComponent implements OnInit {
     return this.serverHttp.readByName(`${this.clientName}`, 'clienteRest'+'/buscarClientesPorNome').subscribe(response => {
 
       if (!undefined && response.length === 1) {
-        this.clientPicked = response;
-        this.clientName = this.clientPicked[0].nome;
+        this.clientPicked = response[0];
+        this.clientName = this.clientPicked.nome;
 
       } else { 
         this.clientList = response;
