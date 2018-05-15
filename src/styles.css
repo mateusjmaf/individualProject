@@ -127,9 +127,8 @@ fieldset {
 
 .forms {
 	background-color:#ffffff;
-	border: 1px solid;
-	border-color: #f8ecda;
 	border-radius: 7px;
+	box-shadow: 0px 7px 14px 1px #8c5b39;
 	font-size: 18px;
 	padding: 7px;
 	padding-top: 14px;
@@ -227,6 +226,24 @@ input:checked + .slider:before  {
 
 .slider.round:before  {
 	border-radius: 50%;
+}
+
+.tabReserve {
+	color: #777;
+}
+
+.nav-tabs>li>a:hover {
+	background-color: #d6c2c2;
+	color: #f7f6f6;
+}
+
+.nav-tabs>li.active>a {
+	background-color: #777 !important;
+	color: #ffffff;
+}
+
+.tabReserve:hover {
+	color: #777;
 }
 
 .tableDisplay  {
