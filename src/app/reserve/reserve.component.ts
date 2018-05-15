@@ -53,7 +53,7 @@ export class ReserveComponent implements OnInit {
 
   titleCard = "Produtos";
   titleClient = "Clientes";
-  
+
   primaryActionClient: ModalAction = {
     action: () => {
       this.modalClient.hide();
@@ -73,7 +73,7 @@ export class ReserveComponent implements OnInit {
   ngOnInit() {
     this.resetForm();
     this.getKits();
-    // this.searchReserve();
+    this.searchReserve();
   }
   
   
@@ -92,7 +92,16 @@ export class ReserveComponent implements OnInit {
   }
   
   editReserve(reserve: Reserve) {
+    console.log('reserva', reserve)
     this.reserve = reserve;
+    // this.reserve.cardapios = reserve.adicionais;
+
+    this.reserve.cardapios = reserve.cardapios;
+    this.clientPicked = reserve.cliente;
+    this.clientName = this.clientPicked.nome;
+    this.kitSelected = reserve.kitFesta;
+    console.log('kitee', reserve.kitFesta)
+
     this.buttonDisabled = {};
     
     // verifica se há determinado produto no cardapio, se sim desabilita botão para adicionar ao cardapio
@@ -228,7 +237,7 @@ export class ReserveComponent implements OnInit {
     this.buttonDisabled = {};
     this.cardList = new Array<Card>();
     this.clientPicked = new Client();
-    this.clientList = new Array<Client>();
+    // this.clientList = new Array<Client>();
     this.countAdd = 0;
     this.countCard = 0;
     this.productList = new Array<Product>();

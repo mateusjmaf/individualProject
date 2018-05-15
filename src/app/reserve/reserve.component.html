@@ -14,7 +14,7 @@
 				<tabset>
 					<br>
 
-					<tab heading="Dados Principais" id="tab1">
+					<tab class="tabReserve" heading="Dados Principais" id="tab1">
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="div-form form-group">
@@ -56,7 +56,7 @@
 									<div class="col-xs-11 col-md-2">
 										<input 
 											class="form-control btnTriumphi" 
-											name="aniversariante" 
+											name="idadeAniver" 
 											placeholder="Insira idade"
 											type="number"
 											[(ngModel)]="reserve.idadeAniver">
@@ -74,10 +74,10 @@
 											class="form-control btnTriumphi"
 											name="reserveType"
 											[(ngModel)]="reserve.tipoReserva">
-											<option [ngValue]="reservada">Reservada
-											<option [ngValue]="prereservada">Pré-Reservada
-											<option [ngValue]="cancelada">Cancelada
-											<option [ngValue]="finalizada">Finalizada
+											<option value="Reservada">Reservada
+											<option value="Pré-Reservada">Pré-Reservada
+											<option value="Cancelada">Cancelada
+											<option value="Finalizada">Finalizada
 										</select>
 									</div>			
 								</div>
@@ -89,8 +89,8 @@
 									<div class="col-xs-12 col-md-8">	
 										<select 
 											class="form-control btnTriumphi"
-											name="reserveType"
-											(click)="onTotalAmount"
+											name="kitParty"
+											(click)="onTotalAmount()"
 											[(ngModel)]="kitSelected">
 												<option
 													*ngFor="let kit of kitList, let i = index"
@@ -113,27 +113,12 @@
 										<input 
 											class="form-control btnTriumphi"
 											name="reserveDate" 
-											type="date"
+											type="datetime-local"
 											[(ngModel)]="reserve.dataReserva">
 									</div>
 								</div>
 							</div>
 			
-							<div class="col-xs-12 col-md-6">
-								<div class="div-form form-group">
-									<label class="control-label col-xs-12 col-md-4">Horário:</label>
-									<div class="col-xs-12 col-md-8">
-										<input 
-											class="form-control btnTriumphi"
-											name="reserveTime" 
-											type="time"
-											[(ngModel)]="reserve.horarioReserva">
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<div class="div-form form-group">
 									<label class="control-label col-xs-4">Desconto:</label>
@@ -146,7 +131,9 @@
 									</div>
 								</div>
 							</div>
-							
+						</div>
+
+						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<div class="div-form form-group">
 									<label class="control-label col-xs-4">Valor Total:</label>
@@ -158,7 +145,7 @@
 						</div>
 					</tab>
 
-					<tab heading="Cardápio" >
+					<tab class="tabReserve" heading="Cardápio">
 						<a (click)="getCards()"></a>
 						<div class="row">
 							<table class="table table-striped tableDisplay">
@@ -217,7 +204,7 @@
 						</div>						
 					</tab>
 
-					<tab heading="Adicionais">
+					<tab class="tabReserve" heading="Adicionais">
 						<div class="row">
 								<table class="table table-striped tableDisplay">
 	
@@ -349,19 +336,19 @@
 				</tr>
 
 				<ng-container
-					*ngIf="reserveist; then searchSuccess; else searchFail">
+					*ngIf="reserveList; then searchSuccess; else searchFail">
 				</ng-container>
 				
 				<ng-template #searchSuccess>
-					<tr *ngFor="let client of reserveist, let i = index">
-						<td>{{ reserveList[i].nome }}</td>
-						<td>{{ reserveist[i].dataReserva }}</td>
-						<td>{{ reserveist[i].tipoReserva }}</td>
+					<tr *ngFor="let reserve of reserveList, let i = index">
+						<td>{{ reserve.cliente.nome }}</td>
+						<td>{{ reserve.dataReserva | date: 'M/d/yy, h:mm a' }}</td>
+						<td>{{ reserve.tipoReserva }}</td>
 						<td class="tableEditColumn tableEditColumnIcon">
-							<a class="tableEditColumnIcon" (click)="deleteClient(reserveist[i].idReserva)">
+							<a class="tableEditColumnIcon" (click)="deleteReserve(reserve.idReserva)">
 								<span class="glyphicon glyphicon-trash"></span>
 							</a>
-							<a class="tableEditColumnIcon" (click)="editClient(reserveist[i])">
+							<a class="tableEditColumnIcon" (click)="editReserve(reserve)">
 								<span class="glyphicon glyphicon-edit"></span>
 							</a>
 						</td>

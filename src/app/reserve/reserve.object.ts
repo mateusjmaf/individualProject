@@ -12,7 +12,6 @@ export class Reserve {
 	cliente: Client;
 	dataReserva: Date;
 	desconto: number;
-	horarioReserva: Time;
 	idadeAniver: number;
 	kitFesta: KitParty
 	tipoReserva: string;
@@ -26,7 +25,6 @@ export class Reserve {
 		dataReserva?: Date,
 		desconto?: number,
 		idadeAniver?: number,
-		horarioReserva?: Time,
 		kitFesta?: KitParty,
 		tipoReserva?: string,
 		valorReserva?: number,
@@ -39,7 +37,6 @@ export class Reserve {
 		this.dataReserva = dataReserva;
 		this.desconto = desconto;
 		this.idadeAniver = idadeAniver;
-		this.horarioReserva = horarioReserva;
 		this.kitFesta = kitFesta; 
 		this.tipoReserva = tipoReserva;
 		this.valorReserva = valorReserva;
