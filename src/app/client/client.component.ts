@@ -26,8 +26,6 @@ export class ClientComponent implements OnInit {
   onSubmit() {
     if(this.client.idCliente) {
       return this.serverHttp.update(this.client, this.restRoute+'/editarCliente').subscribe(response => {
-        // this.clientList = response;
-        // adicionar um retorno com a mensagem que vem do servidor
         alert(response);
         this.resetForm();
       })
