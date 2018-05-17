@@ -28,6 +28,9 @@ export class ReserveComponent implements OnInit {
 
   @ViewChild('clienteChecked') clienteChecked;
 
+  teste: boolean = true;
+
+  
   addsValue: number = 0;
   addsList: Additional[];
 
@@ -92,15 +95,16 @@ export class ReserveComponent implements OnInit {
   }
   
   editReserve(reserve: Reserve) {
-    console.log('reserva', reserve)
+    this.getCards(reserve.idReserva);
     this.reserve = reserve;
-    // this.reserve.cardapios = reserve.adicionais;
-
-    this.reserve.cardapios = reserve.cardapios;
     this.clientPicked = reserve.cliente;
     this.clientName = this.clientPicked.nome;
-    this.kitSelected = reserve.kitFesta;
+    
+    this.reserve.cardapios = reserve.cardapios;
+
     console.log('kitee', reserve.kitFesta)
+    console.log('reserva', reserve)
+    // this.reserve.cardapios = reserve.adicionais;
 
     this.buttonDisabled = {};
     
@@ -112,7 +116,9 @@ export class ReserveComponent implements OnInit {
   
   onSubmit() {
     this.onTotalAmount();
+    
     // this.reserve.adicionais = this.addsList;
+
     this.reserve.cardapios = this.cardList;
     this.reserve.cliente = this.clientPicked;
     this.reserve.kitFesta = this.kitSelected;
@@ -229,7 +235,9 @@ export class ReserveComponent implements OnInit {
 
   // calculate all prices of reserve (card, adds and kit) and subtract discount price
   onTotalAmount() {
-    this.reserve.valorReserva = this.cardValue + this.addsValue + this.kitSelected.preco - this.reserve.desconto;
+    if(this.kitSelected.preco) {
+      this.reserve.valorReserva = this.cardValue + this.addsValue + this.kitSelected.preco - this.reserve.desconto;
+    } 
   }
 
   resetForm() {
@@ -237,9 +245,10 @@ export class ReserveComponent implements OnInit {
     this.buttonDisabled = {};
     this.cardList = new Array<Card>();
     this.clientPicked = new Client();
-    // this.clientList = new Array<Client>();
+    this.clientName = undefined;
     this.countAdd = 0;
     this.countCard = 0;
+    this.kitSelected = undefined;
     this.productList = new Array<Product>();
     this.reserve = new Reserve();
     this.reserve.desconto = 0;

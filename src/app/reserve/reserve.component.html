@@ -90,13 +90,13 @@
 										<select 
 											class="form-control btnTriumphi"
 											name="kitParty"
-											(click)="onTotalAmount()"
+											(blur)="onTotalAmount()"
 											[(ngModel)]="kitSelected">
 												<option
 													*ngFor="let kit of kitList, let i = index"
 													[ngValue]="kit"
 													[selected]="(reserve.kitFesta && kit.idKit == reserve.kitFesta.idKit)">
-														{{ kit.descricao }} / R${{ kit.preco}},00 
+														{{ kit.descricao }} - R${{ kit.preco }},00 
 											</option>
 										</select>
 									</div>			
@@ -146,7 +146,7 @@
 					</tab>
 
 					<tab class="tabReserve" heading="Cardápio">
-						<a (click)="getCards()"></a>
+						<a></a>
 						<div class="row">
 							<table class="table table-striped tableDisplay">
 
