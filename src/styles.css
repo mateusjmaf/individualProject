@@ -232,14 +232,17 @@ input:checked + .slider:before  {
 	color: #777;
 }
 
+.nav-tabs>li>a>span {
+	color: black;
+}
 .nav-tabs>li>a:hover {
 	background-color: #d6c2c2;
 	color: #f7f6f6;
 }
 
 .nav-tabs>li.active>a {
-	background-color: #777 !important;
-	color: #ffffff;
+	background-color: #ac7b58 !important;
+	color: #ffffff !important;
 }
 
 .tabReserve:hover {
