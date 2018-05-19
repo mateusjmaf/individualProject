@@ -23,7 +23,7 @@
 										<input 
 											#clientPicked
 											name="client"
-											class="form-control btnTriumphi" 
+											class="form-control inputTriumphi" 
 											placeholder="Insira o nome do cliente"
 											type="text"
 											[(ngModel)]="clientName">		
@@ -45,7 +45,7 @@
 									<label class="control-label col-xs-12 col-md-2">Aniversariante:</label>
 									<div class="col-xs-12 col-md-6">
 										<input 
-											class="form-control btnTriumphi" 
+											class="form-control inputTriumphi" 
 											name="aniversariante" 
 											placeholder="Insira o nome do aniversariante"
 											type="text"
@@ -55,7 +55,7 @@
 									<label class="control-label col-xs-12 col-md-2">Idade:</label>
 									<div class="col-xs-11 col-md-2">
 										<input 
-											class="form-control btnTriumphi" 
+											class="form-control inputTriumphi" 
 											name="idadeAniver" 
 											placeholder="Insira idade"
 											type="number"
@@ -71,7 +71,7 @@
 									<label class="control-label col-xs-12 col-md-4">Situação Reserva</label>
 									<div class="col-xs-12 col-md-8">	
 										<select 
-											class="form-control btnTriumphi"
+											class="form-control inputTriumphi"
 											name="reserveType"
 											[(ngModel)]="reserve.tipoReserva">
 											<option value="Reservada">Reservada
@@ -88,7 +88,7 @@
 									<label class="control-label col-xs-12 col-md-4">Kit Festa</label>
 									<div class="col-xs-12 col-md-8">	
 										<select 
-											class="form-control btnTriumphi"
+											class="form-control inputTriumphi"
 											name="kitParty"
 											(blur)="onTotalAmount()"
 											[(ngModel)]="kitSelected">
@@ -111,7 +111,7 @@
 									<label class="control-label col-xs-12 col-md-4">Data:</label>
 									<div class="col-xs-12 col-md-8">
 										<input 
-											class="form-control btnTriumphi"
+											class="form-control inputTriumphi"
 											name="reserveDate" 
 											type="datetime-local"
 											[(ngModel)]="reserve.dataReserva">
@@ -124,7 +124,7 @@
 									<label class="control-label col-xs-4">Desconto:</label>
 									<div class="col-xs-8">
 										<input 
-											class="form-control btnTriumphi"
+											class="form-control inputTriumphi"
 											name="discount" 
 											type="number"
 											[(ngModel)]="reserve.desconto">
@@ -148,7 +148,7 @@
 					<tab class="tabReserve" heading="Cardápio">
 						<a></a>
 						<div class="row">
-							<table class="table table-striped tableDisplay">
+							<table class="table table-hover tableDisplay">
 
 								<tr class="tableHeader">
 									<th>Produto</th>
@@ -170,17 +170,17 @@
 									</td>
 									<td>
 										<input 
-											class="form-control btnTriumphi"
+											class="form-control inputTriumphi"
 											type="number"
-											[name]="countCard+'v'" 
+											[name]="i+'v'" 
 											(change)="onChangeProductValue(cardList)"
 											[(ngModel)]="card.valor">
 									</td>
 									<td>
 										<input 
-											class="form-control btnTriumphi"
+											class="form-control inputTriumphi"
 											type="number"
-											[name]="countCard" 
+											[name]="i+'q'" 
 											(change)="onChangeProductValue(cardList)"
 											[(ngModel)]="card.quantidade">
 									</td>
@@ -206,7 +206,7 @@
 
 					<tab class="tabReserve" heading="Adicionais">
 						<div class="row">
-								<table class="table table-striped tableDisplay">
+								<table class="table table-hover tableDisplay">
 	
 									<tr class="tableHeader">
 										<th>Descrição</th>
@@ -230,14 +230,14 @@
 										<tr *ngFor="let add of addsList, let i = index">
 											<td>
 												<input 
-													class="form-control btnTriumphi"
+													class="form-control inputTriumphi"
 													type="text"
 													[name]="countAdd"
 													[(ngModel)]="add.descricao">
 											</td>
 											<td>
 												<input 
-													class="form-control btnTriumphi"
+													class="form-control inputTriumphi"
 													type="number"
 													[name]="countAdd" 
 													(change)="onChangeAdditionalValue(addsList)"
@@ -245,7 +245,7 @@
 											</td>
 											<td>
 												<input 
-													class="form-control btnTriumphi"
+													class="form-control inputTriumphi"
 													type="number"
 													[name]="countAdd" 
 													(change)="onChangeAdditionalValue(addsList)"
@@ -306,7 +306,7 @@
 	<div class="col-xs-6 col-xs-offset-3">
 		<div class="input-group inputGroup">
 			<input 
-				class="form-control btnTriumphi" 
+				class="form-control inputTriumphi" 
 				type="text" 
 				placeholder="Buscar Reserva"
 				[(ngModel)]="reserveSearchValue">
@@ -326,7 +326,7 @@
 	
 	<div class="row">
 		<div>
-			<table class="table table-striped tableDisplay">
+			<table class="table table-hover tableDisplay">
 
 				<tr class="tableHeader">
 					<th>NOME</th>
@@ -390,7 +390,7 @@
 	[title]="titleCard"
 	[primary-action]="primaryActionCard">
 	<div class="app-modal-body">
-		<table class="table table-striped tableDisplay">
+		<table class="table table-hover tableDisplay">
 			<tr *ngFor="let prod of productList, let i = index">
 				<td>
 					<label class="control-label">{{ prod.nome }}</label>

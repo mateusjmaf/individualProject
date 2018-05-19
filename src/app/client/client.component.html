@@ -17,7 +17,7 @@
 						<label class="control-label col-xs-12 col-md-2">Nome:</label>
 						<div class="col-xs-12 col-md-10">
 							<input
-								class="form-control btnTriumphi" 
+								class="form-control inputTriumphi" 
 								name="clientName" 
 								placeholder="Insira seu nome"
 								type="text"
@@ -33,7 +33,7 @@
 						<label class="control-label col-xs-12 col-md-2">E-mail: </label>
 						<div class="col-xs-12 col-md-10">
 							<input 
-								class="form-control btnTriumphi" 
+								class="form-control inputTriumphi" 
 								name="mail" 
 								placeholder="Insira seu e-mail"
 								type="email"
@@ -49,7 +49,7 @@
 						<label class="control-label col-xs-12 col-md-4">Celular: </label>
 						<div class="col-xs-12 col-md-8">
 							<input 
-								class="form-control btnTriumphi"
+								class="form-control inputTriumphi"
 								name="cellphone" 
 								placeholder="Insira seu número de celular"
 								type="number"
@@ -62,7 +62,7 @@
 						<label class="control-label col-xs-12 col-md-4">Telefone: </label>
 						<div class="col-xs-12 col-md-8">
 							<input 
-								class="form-control btnTriumphi" 
+								class="form-control inputTriumphi" 
 								name="tellphone" 
 								placeholder="Insira seu número de telefone"
 								type="number"
@@ -79,7 +79,7 @@
 						<label class="control-label col-xs-12 col-md-4">CPF:</label>
 						<div class="col-xs-12 col-md-8">
 							<input 
-								class="form-control btnTriumphi"
+								class="form-control inputTriumphi"
 								name="cpf" 
 								placeholder="Insira seu CPF"
 								type="number"
@@ -93,7 +93,7 @@
 						<label class="control-label col-xs-12 col-md-4">RG:</label>
 						<div class="col-xs-12 col-md-8">
 							<input 
-								class="form-control btnTriumphi"
+								class="form-control inputTriumphi"
 								name="rg" 
 								placeholder="Insira seu RG"
 								type="number"
@@ -109,7 +109,7 @@
 						<label class="control-label col-xs-12 col-md-4">Sexo:</label>
 						<div class="col-xs-12 col-md-8">
 							<select 
-								class="form-control btnTriumphi" 
+								class="form-control inputTriumphi" 
 								name="genre"
 								[(ngModel)]="client.sexo">
 									<option>Masculino
@@ -123,7 +123,7 @@
 						<label class="control-label col-xs-12 col-md-4">Nascimento:</label>
 						<div class="col-xs-12 col-md-8"> 
 							<input 
-								class="form-control btnTriumphi"
+								class="form-control inputTriumphi"
 								name="birthday" 
 								type="date"
 								[(ngModel)]="client.datNasc">
@@ -138,7 +138,7 @@
 						<label class="control-label col-xs-12 col-md-3">Endereço:</label>
 						<div class="col-xs-12 col-md-9">
 							<input 
-								class="form-control btnTriumphi"
+								class="form-control inputTriumphi"
 								name="street"
 								placeholder="Insira seu endereço"
 								type="text"
@@ -152,7 +152,7 @@
 						<label class="control-label  col-xs-12 col-md-4">CEP:</label>
 						<div class="col-xs-12 col-md-8">
 							<input 
-								class="form-control btnTriumphi"
+								class="form-control inputTriumphi"
 								name="cep" 
 								placeholder="Insira seu CEP"
 								type="number"
@@ -168,7 +168,7 @@
 						<label class="control-label col-xs-6">Bairro: </label>
 						<div class="col-xs-6">
 							<input 
-								class="form-control btnTriumphi" 
+								class="form-control inputTriumphi" 
 								name="district" 
 								type="text"
 								placeholder="Insira seu bairro"
@@ -182,7 +182,7 @@
 						<label class="control-label col-xs-6">Cidade:</label>
 						<div class="col-xs-6">
 							<input 
-								class="form-control btnTriumphi"
+								class="form-control inputTriumphi"
 								name="city" 
 								placeholder="Insira sua cidade"
 								type="text"
@@ -196,7 +196,7 @@
 						<label class="control-label col-xs-6">Estado:</label>
 						<div class="col-xs-6">
 							<input 
-								class="form-control btnTriumphi"
+								class="form-control inputTriumphi"
 								name="state" 
 								maxlength="2"
 								placeholder="Insira seu estado"
@@ -230,7 +230,7 @@
 	<div class="col-xs-6 col-xs-offset-3">
 		<div class="input-group inputGroup">
 			<input 
-				class="form-control btnTriumphi" 
+				class="form-control inputTriumphi" 
 				type="text" 
 				placeholder="Buscar Cliente" 
 				[(ngModel)]="clientSearchValue">
@@ -250,7 +250,7 @@
 	
 	<div class="row">
 		<div>
-			<table class="table table-striped tableDisplay">
+			<table class="table table-hover tableDisplay">
 
 				<tr class="tableHeader">
 					<th>NOME</th>
