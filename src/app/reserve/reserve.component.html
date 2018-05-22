@@ -172,7 +172,7 @@
 										<input 
 											class="form-control inputTriumphi"
 											type="number"
-											[name]="i+'v'" 
+											[name]="i+'cv'" 
 											(change)="onChangeProductValue(cardList)"
 											[(ngModel)]="card.valor">
 									</td>
@@ -180,7 +180,7 @@
 										<input 
 											class="form-control inputTriumphi"
 											type="number"
-											[name]="i+'q'" 
+											[name]="i+'cq'" 
 											(change)="onChangeProductValue(cardList)"
 											[(ngModel)]="card.quantidade">
 									</td>
@@ -197,7 +197,7 @@
 										</button>
 									</td>
 								</tr>
-
+								<br>
 								<div class="form-control">Valor Total: R${{ cardValue || 0 }},00</div>
 								
 							</table>
@@ -232,14 +232,14 @@
 												<input 
 													class="form-control inputTriumphi"
 													type="text"
-													[name]="countAdd"
+													[name]="i+'d'"
 													[(ngModel)]="add.descricao">
 											</td>
 											<td>
 												<input 
 													class="form-control inputTriumphi"
 													type="number"
-													[name]="countAdd" 
+													[name]="i+'av'"
 													(change)="onChangeAdditionalValue(addsList)"
 													[(ngModel)]="add.valor">
 											</td>
@@ -247,7 +247,7 @@
 												<input 
 													class="form-control inputTriumphi"
 													type="number"
-													[name]="countAdd" 
+													[name]="i+'aq'"
 													(change)="onChangeAdditionalValue(addsList)"
 													[(ngModel)]="add.quantidade">
 											</td>
