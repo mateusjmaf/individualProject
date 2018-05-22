@@ -6,7 +6,8 @@ import { Time } from "ngx-bootstrap/timepicker/timepicker.models";
 
 export class Reserve {
 	
-  idReserva: number;
+	idReserva: number;
+	adicionais: Array<Additional>;
 	aniversariante: string;
 	cardapios: Array<Card>;
 	cliente: Client;
@@ -19,6 +20,7 @@ export class Reserve {
 
 	constructor(
 		idReserva?: number,
+		adicionais?: Array<Additional>,
 		aniversariante?: string,
 		cardapios?: Array<Card>,
 		cliente?: Client,
@@ -32,6 +34,7 @@ export class Reserve {
 
 		this.idReserva = idReserva;
 		this.aniversariante = aniversariante;
+		this.adicionais = adicionais;
 		this.cardapios = cardapios;
 		this.cliente = cliente;
 		this.dataReserva = dataReserva;
