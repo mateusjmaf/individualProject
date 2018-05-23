@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { CashFlow } from './cash-flow.object';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServerHttpService } from '../../service/server.http.service';
+
+import { CashFlow } from './cash-flow.object';
+import { ModalComponent } from '../modal/modal.component';
+import { ModalAction } from '../modal/moda.interface.component';
+import { Reserve } from '../reserve/reserve.object';
 
 @Component({
   selector: 'app-cash-flow',
@@ -9,18 +12,35 @@ import { ServerHttpService } from '../../service/server.http.service';
   styleUrls: ['./cash-flow.component.css']
 })
 export class CashFlowComponent implements OnInit {
+  
+  @ViewChild('reservePicked') reservePicked;
 
-  cashFlow: CashFlow;
-  clientList: CashFlow[];
-  clientSearchValue: string = '';
-  restRoute: string = 'clienteRest';
+  @ViewChild('modalReserve') modalReserve: ModalComponent;
 
+  flow: CashFlow;
+  flowList: CashFlow[];
+  
+  flowSearchValue: string = '';
+  
+  reserveList: Reserve[];
+  reserveOrder: number = 0;
+
+  restRoute: string = 'fluxoCaixaRest';
+
+  titleReserves = "Reservas";
+  
+  primaryActionReserve: ModalAction = {
+    action: () => {
+      this.modalReserve.hide();
+    }
+  };
   constructor(private serverHttp: ServerHttpService) { }
   
   ngOnInit() {
-    this.cashFlow = new CashFlow();
-    this.cashFlow.tipoMovimento = 'outflow';
-    this.searchClient();
+    this.flow = new CashFlow();
+    // alterar para outflow
+    this.flow.tipoMovimento = 'inflow';
+    // this.searchFlow();
   }
   
   addCategoria() {
@@ -28,41 +48,50 @@ export class CashFlowComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.cashFlow.idRegistro) {
-      return this.serverHttp.update(this.cashFlow, this.restRoute+'/editarCliente').subscribe(response => {
+    if(this.flow.idMovimento) {
+      return this.serverHttp.update(this.flow, this.restRoute+'/editarFluxo').subscribe(response => {
         alert(response);
         this.resetForm();
       })
     } else {
-      return this.serverHttp.create(this.cashFlow, this.restRoute+'/criarCliente').subscribe(
+      return this.serverHttp.create(this.flow, this.restRoute+'/addFluxo').subscribe(
         response => { 
-          this.searchClient();
+          // this.searchFlow();
           this.resetForm();
         }
       )
     }
   }
 
-  deleteClient(id: number) {
-    return this.serverHttp.delete(id, this.restRoute+'/deletarCliente').subscribe(
+  onReserveChange(reserve: Reserve) {
+    this.reservePicked = reserve;
+    this.reserveOrder = this.reservePicked.idReserve;
+  }
+
+  deleteFlow(id: number) {
+    return this.serverHttp.delete(id, this.restRoute+'/deletarFluxo').subscribe(
       response => { 
-        this.searchClient();
+        // this.searchFlow();
       }
     )
   }
 
-  searchClient() {
-    return this.serverHttp.readByName(this.clientSearchValue, this.restRoute+'/buscarClientesPorNome').subscribe(response => {
-      response.length > 0 ? this.clientList = response : this.clientList = undefined;
+  searchFlow() {
+    return this.serverHttp.readByName(this.flowSearchValue, this.restRoute+'/buscarFluxoPorTipoMovimentacao').subscribe(response => {
+      response.length > 0 ? this.flowList = response : this.flowList = undefined;
     })
   }
 
-  editClient(clientParam: CashFlow) {
-    this.cashFlow = clientParam;
+  editFlow(clientParam: CashFlow) {
+    this.flow = clientParam;
+  }
+
+  getReserves() {
+    this.modalReserve.show();
   }
 
   resetForm() {
-    this.cashFlow = new CashFlow();
+    this.flow = new CashFlow();
   }
 
 
