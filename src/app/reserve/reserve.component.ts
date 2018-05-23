@@ -26,8 +26,6 @@ export class ReserveComponent implements OnInit {
   
   @ViewChild('clientPicked') clientPicked;
 
-  @ViewChild('clienteChecked') clienteChecked;
-
   addsValue: number = 0;
   addsList: Additional[];
 
@@ -194,7 +192,6 @@ export class ReserveComponent implements OnInit {
       }
     }
   }
-
 
   onClientChange(client: Client) {
     this.clientPicked = client;
