@@ -17,13 +17,15 @@ export class CashFlowComponent implements OnInit {
 
   @ViewChild('modalReserve') modalReserve: ModalComponent;
 
+  clientName: string = ' ';
+
   flow: CashFlow;
   flowList: CashFlow[];
   
   flowSearchValue: string = '';
   
   reserveList: Reserve[];
-  reserveOrder: number = 0;
+  reserveOrder: number;
 
   restRoute: string = 'fluxoCaixaRest';
 
@@ -37,10 +39,8 @@ export class CashFlowComponent implements OnInit {
   constructor(private serverHttp: ServerHttpService) { }
   
   ngOnInit() {
-    this.flow = new CashFlow();
-    // alterar para outflow
-    this.flow.tipoMovimento = 'inflow';
-    // this.searchFlow();
+    this.resetForm();
+    
   }
   
   addCategoria() {
@@ -56,7 +56,6 @@ export class CashFlowComponent implements OnInit {
     } else {
       return this.serverHttp.create(this.flow, this.restRoute+'/addFluxo').subscribe(
         response => { 
-          // this.searchFlow();
           this.resetForm();
         }
       )
@@ -65,13 +64,14 @@ export class CashFlowComponent implements OnInit {
 
   onReserveChange(reserve: Reserve) {
     this.reservePicked = reserve;
-    this.reserveOrder = this.reservePicked.idReserve;
+    this.clientName = this.reservePicked.cliente.nome;
+    this.reserveOrder = this.reservePicked.idReserva;
   }
 
   deleteFlow(id: number) {
     return this.serverHttp.delete(id, this.restRoute+'/deletarFluxo').subscribe(
       response => { 
-        // this.searchFlow();
+        this.searchFlow();
       }
     )
   }
@@ -87,12 +87,30 @@ export class CashFlowComponent implements OnInit {
   }
 
   getReserves() {
-    this.modalReserve.show();
+    return this.serverHttp.readByName(`${this.clientName}`, 'reservaRest'+'/buscarReservasPorCliente').subscribe(response => {
+      console.log(response)
+
+      if (!undefined && response.length === 1) {
+        this.onReserveChange(response[0]);
+        // this.reservePicked = response[0];
+        // this.clientName = this.reservePicked.nome;
+
+      } else { 
+        this.reserveList = response;
+        this.modalReserve.show();
+      }
+
+    })
   }
 
   resetForm() {
+    this.searchFlow();
     this.flow = new CashFlow();
-  }
+    this.reserveOrder = 0;
+    // alterar para outflow
+    this.flow.tipoMovimento = 'inflow';
 
+    // this.searchFlow();
+  }
 
 }
