@@ -48,6 +48,8 @@ export class CashFlowComponent implements OnInit {
   }
 
   onSubmit() {
+    this.reservePicked ? this.flow.reserva = this.reservePicked : null;
+
     if(this.flow.idMovimento) {
       return this.serverHttp.update(this.flow, this.restRoute+'/editarFluxo').subscribe(response => {
         alert(response);
@@ -68,8 +70,8 @@ export class CashFlowComponent implements OnInit {
     this.reserveOrder = this.reservePicked.idReserva;
   }
 
-  deleteFlow(id: number) {
-    return this.serverHttp.delete(id, this.restRoute+'/deletarFluxo').subscribe(
+  deleteFlow(idMovimento: number) {
+    return this.serverHttp.delete(idMovimento, this.restRoute+'/deletarFluxo').subscribe(
       response => { 
         this.searchFlow();
       }
@@ -77,23 +79,20 @@ export class CashFlowComponent implements OnInit {
   }
 
   searchFlow() {
-    return this.serverHttp.readByName(this.flowSearchValue, this.restRoute+'/buscarFluxoPorTipoMovimentacao').subscribe(response => {
+    return this.serverHttp.readByName(this.flowSearchValue, this.restRoute+'/buscarPorTipoMovimento').subscribe(response => {
       response.length > 0 ? this.flowList = response : this.flowList = undefined;
     })
   }
 
-  editFlow(clientParam: CashFlow) {
-    this.flow = clientParam;
+  editFlow(flowParam: CashFlow) {
+    this.flow = flowParam;
   }
 
   getReserves() {
     return this.serverHttp.readByName(`${this.clientName}`, 'reservaRest'+'/buscarReservasPorCliente').subscribe(response => {
-      console.log(response)
 
       if (!undefined && response.length === 1) {
         this.onReserveChange(response[0]);
-        // this.reservePicked = response[0];
-        // this.clientName = this.reservePicked.nome;
 
       } else { 
         this.reserveList = response;
@@ -107,10 +106,8 @@ export class CashFlowComponent implements OnInit {
     this.searchFlow();
     this.flow = new CashFlow();
     this.reserveOrder = 0;
-    // alterar para outflow
-    this.flow.tipoMovimento = 'inflow';
-
-    // this.searchFlow();
+    // alterar para Saída
+    this.flow.tipoMovimento = 'Entrada';
   }
 
 }
