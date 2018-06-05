@@ -11,24 +11,14 @@
 					<div class="row">
 						<label class="control-label col-xs-4">Tipo de Transação:</label>
 						<div class="col-xs-8">
-							<label class="radio-inline">
-								<input 
-									name="transactionType"
-									type="radio" 
-									value="Saída"
-									[(ngModel)]="flow.tipoMovimento">
-									Saída
-							</label>
-							<label class="radio-inline">
-								<input 
-									name="transactionType" 
-									type="radio" 
-									value="Entrada" 
-									[(ngModel)]="flow.tipoMovimento">
-										Entrada
-							</label>
+							<select 
+								class="form-control inputTriumphi" 
+								name="transactionType"
+								[(ngModel)]="flow.tipoMovimento">
+									<option value="1">Saída
+									<option value="2">Entrada
+							</select>
 						</div>
-						
 					</div>
 				</div>
 				
@@ -36,54 +26,57 @@
 					<div class="row">
 							
 						<ng-container
-								*ngIf="flow.tipoMovimento == 'outflow'; then outflow; else inflow">
-							</ng-container>
+							*ngIf="flow.tipoMovimento == 1; then outflow; else inflow">
+						</ng-container>
 
-							<ng-template #outflow>
-								<label class="control-label col-xs-4">Descricação de custos:</label>
-								<div class="col-xs-5">
-									<select 
-										class="form-control inputTriumphi" 
-										name="costDescription">
-											<option>Selecionar
-									</select>
-								</div>
-								
-								<div class="col-xs-2">			
-									<button 
-										type="button" 
-										class="btn btnTriumphi glyphicon glyphicon-plus"
-										(click)="addCategoria()">
-									</button>
-								</div>
-							</ng-template>
+						<ng-template #outflow>
+							<label class="control-label col-xs-4">Descricação de custos:</label>
+							<div class="col-xs-5">
+								<select 
+									class="form-control inputTriumphi" 
+									name="costDescription">
+										<option>Selecionar
+								</select>
+							</div>
+							
+							<div class="col-xs-2">			
+								<button 
+									type="button" 
+									class="btn btnTriumphi glyphicon glyphicon-plus"
+									(click)="addCategoria()">
+								</button>
+							</div>
+						</ng-template>
 
-							<ng-template #inflow>
-								<label class="control-label col-xs-4">Ordem | Cliente:</label>
-								<div class="col-xs-8">
-									<div class="input-group">
-										<span class="input-group-addon">{{ reserveOrder }}</span>
-										<input 
-											#reservePicked
-											aria-label="Amount (to the nearest dollar)"
-											class="form-control"
-											name="reserveClient"
-											type="text" 
-											[(ngModel)]="clientName">
-										<span class="input-group-btn">
-											<button 
-												class="btn btnTriumphi" 
-												type="button"
-												(click)="getReserves()">
-													<span class="glyphicon glyphicon-search"></span>
-											</button>
-										</span>
-									</div>
+						<ng-template #inflow>
+							<label class="control-label col-xs-4">Ordem | Cliente:</label>
+							<div class="col-xs-8">
+								<div class="input-group">
+									<span class="input-group-addon">{{ reserveOrder }}</span>
+									<input 
+										#reservePicked
+										aria-label="Amount (to the nearest dollar)"
+										class="form-control"
+										name="reserveClient"
+										type="text" 
+										[(ngModel)]="clientName">
+									<span class="input-group-btn">
+										<button 
+											class="btn btnTriumphi" 
+											type="button"
+											(click)="getReserves()">
+												<span class="glyphicon glyphicon-search"></span>
+										</button>
+									</span>
 								</div>
-							</ng-template>
+							</div>
+						</ng-template>
+
 					</div>
 				</div>
 			</div>
+
+			<br>
 			
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
@@ -92,11 +85,12 @@
 						<div class="col-xs-8">
 							<select 
 								class="form-control inputTriumphi"
-								name="formPyment">
-									<option>Dinheiro
-									<option>Cartão Débito
-									<option>Cartão Crédito
-									<option>Cheque
+								name="typePayment"
+								[(ngModel)]="flow.formaPagamento">
+									<option value="1">Dinheiro
+									<option value="2">Cartão Débito
+									<option value="3">Cartão Crédito
+									<option value="4">Cheque
 							</select>
 						</div>
 					</div>
@@ -108,17 +102,18 @@
 						<div class="col-xs-8">
 							<select 
 								class="form-control inputTriumphi" 
-								name="installmentNumber">
-									<option>1x
-									<option>2x
-									<option>3x
-									<option>4x
-									<option>5x
-									<option>6x
-									<option>7x
-									<option>8x
-									<option>9x
-									<option>10x
+								name="installmentNumber"
+								[(ngModel)]="flow.numeroParcelas">
+									<option value="1">1x
+									<option value="2">2x
+									<option value="3">3x
+									<option value="4">4x
+									<option value="5">5x
+									<option value="6">6x
+									<option value="7">7x
+									<option value="8">8x
+									<option value="9">9x
+									<option value="10">10x
 							</select>
 						</div>
 					</div>
@@ -209,34 +204,35 @@
 	<div class="col-xs-6 col-xs-offset-1">
 		<div class="row">
 			<label class="control-label col-xs-1">
-				<span class="glyphicon glyphicon-filter">
-				</span>
+				<span class="glyphicon glyphicon-filter"></span>
 			</label>
 			<div class="col-xs-11">
 				<label class="radio-inline">
 					<input 
+						name="flowSearchValue"
 						type="radio" 
-						value="outflow"
+						value="1"
 						(change)="searchFlow()"
-						[(ngModel)]="reserveSearchValue">
-					Saída
+						[(ngModel)]="flowSearchValue">
+							Saída
 				</label>
 				<label class="radio-inline">
 					<input 
+						name="flowSearchValue"
 						type="radio"
-						value="inflow"
+						value="2"
 						(change)="searchFlow()"
-						[(ngModel)]="reserveSearchValue">
-					Entrada
+						[(ngModel)]="flowSearchValue">
+							Entrada
 				</label>
 				<label class="radio-inline">
 					<input 
-						selected
+						name="flowSearchValue"
 						type="radio"
-						value="null"
+						value=" "
 						(change)="searchFlow()"
-						[(ngModel)]="reserveSearchValue">
-					Ambos
+						[(ngModel)]="flowSearchValue">
+							Ambos
 				</label>
 			</div>
 		</div>
@@ -261,9 +257,9 @@
 				
 				<ng-template #searchSuccess>
 					<tr *ngFor="let flow of flowList, let i = index">
-						<td>{{ flow.tipoMovimento }}</td>
-						<td>{{ flow.dataRegistro | date: 'M/d/yy, h:mm a' }}</td>
-						<td>{{ flow.formaPagamento }}</td>
+						<td>{{ getTransactionType(flow.tipoMovimento) }}</td>
+						<td>{{ flow.dataMovimento | date: 'M/d/yyyy' }}</td>
+						<td>{{ getTypePayment(flow.formaPagamento) }}</td>
 						<td class="tableEditColumn tableEditColumnIcon">
 							<a class="tableEditColumnIcon" (click)="deleteFlow(flow.idMovimento)">
 								<span class="glyphicon glyphicon-trash"></span>

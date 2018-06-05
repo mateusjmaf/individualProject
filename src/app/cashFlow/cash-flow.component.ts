@@ -17,12 +17,12 @@ export class CashFlowComponent implements OnInit {
 
   @ViewChild('modalReserve') modalReserve: ModalComponent;
 
-  clientName: string = ' ';
+  clientName: string = '';
 
   flow: CashFlow;
   flowList: CashFlow[];
   
-  flowSearchValue: string = '';
+  flowSearchValue: string = ' ';
   
   reserveList: Reserve[];
   reserveOrder: number;
@@ -40,7 +40,6 @@ export class CashFlowComponent implements OnInit {
   
   ngOnInit() {
     this.resetForm();
-    
   }
   
   addCategoria() {
@@ -86,6 +85,26 @@ export class CashFlowComponent implements OnInit {
 
   editFlow(flowParam: CashFlow) {
     this.flow = flowParam;
+    if (this.flow.tipoMovimento === 2) {
+      this.onReserveChange(this.flow.reserva);
+    }
+  }
+
+  getTransactionType(tipoMovimento) {
+    switch (tipoMovimento) {
+      case 1 : return 'Saída';
+      case 2 : return 'Entrada';
+    }
+  }
+
+
+  getTypePayment(formaPagamento) {
+    switch (formaPagamento) {
+      case 1 : return 'Dinheiro';
+      case 2 : return 'Cartão Débito';
+      case 3 : return 'Cartão Crédito';
+      case 4 : return 'Cheque';
+    }
   }
 
   getReserves() {
@@ -106,8 +125,7 @@ export class CashFlowComponent implements OnInit {
     this.searchFlow();
     this.flow = new CashFlow();
     this.reserveOrder = 0;
-    // alterar para Saída
-    this.flow.tipoMovimento = 'Entrada';
+    this.flow.tipoMovimento = 1;
   }
 
 }

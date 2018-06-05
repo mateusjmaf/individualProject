@@ -3,19 +3,19 @@ import { Reserve } from "../reserve/reserve.object";
 export class CashFlow {
   idMovimento: number;
 	dataMovimento: Date;
-	formaPagamento: string;
+	formaPagamento: number;
 	numeroParcelas: number;
 	reserva: Reserve;
-	tipoMovimento: string;
+	tipoMovimento: number;
 	valor: number;
 
 	constructor (
 		idMovimento?: number,
 		dataMovimento?: Date,
-		formaPagamento?: string,
+		formaPagamento?: number,
 		numeroParcelas?: number,
 		reserva?: Reserve,
-		tipoMovimento?: string,
+		tipoMovimento?: number,
 		valor?: number,) {
 
 			this.idMovimento = idMovimento;
