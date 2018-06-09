@@ -8,19 +8,20 @@ import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { CoreModule } from './../service/core.http.module';
 
+import { AdditionalComponent } from './additional/additional.component';
+import { CardComponent } from './card/card.component';
+import { CashFlowComponent } from './cashFlow/cash-flow.component';
 import { ClientComponent } from './client/client.component';
+import { ExpenseComponent } from './expense/expense.component';
+import { HomeComponent } from './home/home.component';
 import { KitPartyComponent } from './kitParty/kit-party.component';
 import { LoginComponent } from './login/login.component';
+import { ModalComponent } from './modal/modal.component';
 import { ProductComponent } from './product/product.component';
 import { ReportsComponent } from './reports/reports.component';
 import { ReserveComponent } from './reserve/reserve.component';
 import { StaffComponent } from './staff/staff.component';
-import { CashFlowComponent } from './cashFlow/cash-flow.component';
-import { HomeComponent } from './home/home.component';
-import { CardComponent } from './card/card.component';
-import { AdditionalComponent } from './additional/additional.component';
 
-import { ModalComponent } from './modal/modal.component';
 import { TabsModule } from 'ngx-bootstrap';
 import { ModalModule } from 'ngx-bootstrap/modal';
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -30,18 +31,19 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    AdditionalComponent,
+    CardComponent,
+    CashFlowComponent,
     ClientComponent,
+    ExpenseComponent,
+    HomeComponent,
     KitPartyComponent,
     LoginComponent,
+    ModalComponent,
     ProductComponent,
     ReportsComponent,
     ReserveComponent,
     StaffComponent,
-    CashFlowComponent,
-    CardComponent,
-    AdditionalComponent,
-    ModalComponent,
     // CalendarComponent,
   ],
   imports: [
