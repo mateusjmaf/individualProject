@@ -5,6 +5,7 @@ import { CashFlow } from './cash-flow.object';
 import { ModalComponent } from '../modal/modal.component';
 import { ModalAction } from '../modal/moda.interface.component';
 import { Reserve } from '../reserve/reserve.object';
+import { Expense } from '../expense/expense.objects';
 
 @Component({
   selector: 'app-cash-flow',
@@ -15,9 +16,15 @@ export class CashFlowComponent implements OnInit {
   
   @ViewChild('reservePicked') reservePicked;
 
+  @ViewChild('modalExpense') modalExpense: ModalComponent;
+
   @ViewChild('modalReserve') modalReserve: ModalComponent;
 
   clientName: string = '';
+
+  expense: Expense;
+  expenseList: Expense[];
+  expenseSelected: Expense;
 
   flow: CashFlow;
   flowList: CashFlow[];
@@ -29,26 +36,30 @@ export class CashFlowComponent implements OnInit {
 
   restRoute: string = 'fluxoCaixaRest';
 
+  titleExpenses = "Incluir nova despesa";
   titleReserves = "Reservas";
+  
+  primaryActionExpense: ModalAction = {
+    action: () => {
+      this.modalExpense.hide();
+    }
+  };
   
   primaryActionReserve: ModalAction = {
     action: () => {
       this.modalReserve.hide();
     }
   };
+
   constructor(private serverHttp: ServerHttpService) { }
   
   ngOnInit() {
     this.resetForm();
   }
-  
-  addCategoria() {
-
-  }
 
   onSubmit() {
-    this.reservePicked ? this.flow.reserva = this.reservePicked : null;
-
+    this.assignFlowDependeces();
+    console.log('reserve submit', this.flow.reserva)
     if(this.flow.idMovimento) {
       return this.serverHttp.update(this.flow, this.restRoute+'/editarFluxo').subscribe(response => {
         alert(response);
@@ -62,11 +73,28 @@ export class CashFlowComponent implements OnInit {
       )
     }
   }
+  
+  addExpense() {
+    return this.serverHttp.create(this.expense, 'despesaRest'+'/addDespesa').subscribe(
+      response => { 
+        this.getExpense();
+      }
+    )
+  }
+
+  assignFlowDependeces() {
+    this.flow.tipoMovimento === 1 ? this.flow.despesa = this.expenseSelected : null;
+    this.flow.tipoMovimento === 2 ? this.flow.reserva = this.reservePicked : null;
+  }
 
   onReserveChange(reserve: Reserve) {
     this.reservePicked = reserve;
-    this.clientName = this.reservePicked.cliente.nome;
-    this.reserveOrder = this.reservePicked.idReserva;
+    this.clientName = reserve.cliente.nome;
+    this.reserveOrder = reserve.idReserva;
+  }
+
+  openModalExpense() {
+    this.modalExpense.show();
   }
 
   deleteFlow(idMovimento: number) {
@@ -77,6 +105,12 @@ export class CashFlowComponent implements OnInit {
     )
   }
 
+  searchExpense() {
+    return this.serverHttp.readByName(' ', 'despesaRest'+'/buscarPorNome').subscribe(response => {
+      response.length > 0 ? this.expenseList = response : this.expenseList = undefined;
+    })
+  }
+
   searchFlow() {
     return this.serverHttp.readByName(this.flowSearchValue, this.restRoute+'/buscarPorTipoMovimento').subscribe(response => {
       response.length > 0 ? this.flowList = response : this.flowList = undefined;
@@ -84,10 +118,19 @@ export class CashFlowComponent implements OnInit {
   }
 
   editFlow(flowParam: CashFlow) {
+    console.log('flowParam', flowParam)
+    
     this.flow = flowParam;
-    if (this.flow.tipoMovimento === 2) {
-      this.onReserveChange(this.flow.reserva);
-    }
+    this.flow.tipoMovimento = flowParam.tipoMovimento;
+    flowParam.despesa ? this.expenseSelected = flowParam.despesa : null;
+    flowParam.reserva ? this.onReserveChange(flowParam.reserva) : null;
+  }
+
+  getExpense() {
+    return this.serverHttp.readByName(' ', 'despesaRest'+'/buscarPorNome').subscribe(response =>{
+      this.expenseList = response;
+      this.expenseSelected = response[0];
+    })
   }
 
   getTransactionType(tipoMovimento) {
@@ -123,9 +166,12 @@ export class CashFlowComponent implements OnInit {
 
   resetForm() {
     this.searchFlow();
+    this.getExpense();
+    this.expense = new Expense();
     this.flow = new CashFlow();
-    this.reserveOrder = 0;
     this.flow.tipoMovimento = 1;
+    this.reserveOrder = 0;
+    this.reservePicked = undefined;
   }
 
 }

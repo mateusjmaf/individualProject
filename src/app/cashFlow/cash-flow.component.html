@@ -15,8 +15,8 @@
 								class="form-control inputTriumphi" 
 								name="transactionType"
 								[(ngModel)]="flow.tipoMovimento">
-									<option value="1">Saída
-									<option value="2">Entrada
+									<option [ngValue]="1">Saída
+									<option [ngValue]="2">Entrada
 							</select>
 						</div>
 					</div>
@@ -30,20 +30,30 @@
 						</ng-container>
 
 						<ng-template #outflow>
-							<label class="control-label col-xs-4">Descricação de custos:</label>
+							<label class="control-label col-xs-4">Despesa:</label>
 							<div class="col-xs-5">
 								<select 
 									class="form-control inputTriumphi" 
-									name="costDescription">
-										<option>Selecionar
+									name="expense"
+									[(ngModel)]="expenseSelected">
+									<option
+										*ngFor="let expense of expenseList"
+										[ngValue]="expense"
+										[selected]="(flow.despesa && expense.idDespesa == flow.despesa.idDespesa)">
+											{{ expense.descricao }}
+									</option>
 								</select>
+								{{ (flow.despesa && expenseSelected === flow.despesa) }}
+								{{ (flow.despesa) }}
+								{{ expenseSelected | json }}
+
 							</div>
 							
 							<div class="col-xs-2">			
 								<button 
 									type="button" 
 									class="btn btnTriumphi glyphicon glyphicon-plus"
-									(click)="addCategoria()">
+									(click)="openModalExpense()">
 								</button>
 							</div>
 						</ng-template>
@@ -318,5 +328,30 @@
 				Desculpe, nenhum resultado encontrado.
 			</div>
 		</ng-template>
+	</div>
+</modal-component>
+
+<modal-component 
+	#modalExpense 
+	[title]="titleExpenses"
+	[primary-action]="primaryActionExpense">
+	<div class="app-modal-body">
+		<div class="row">
+			<label class="control-label col-xs-3">Tipo de Transação:</label>
+			<div class="col-xs-6">
+				<input
+					class="form-control inputTriumphi" 
+					type="text" 
+					name="newExpense"
+					[(ngModel)]="expense.descricao">
+			</div>
+			<div class="col-xs-2">
+				<button
+					class="btn btnTriumphi glyphicon glyphicon-plus"
+					type="button"
+					(click)="addExpense()">
+				</button>
+			</div>
+		</div>
 	</div>
 </modal-component>
