@@ -118,11 +118,8 @@ export class CashFlowComponent implements OnInit {
   }
 
   editFlow(flowParam: CashFlow) {
-    console.log('flowParam', flowParam)
-    
     this.flow = flowParam;
     this.flow.tipoMovimento = flowParam.tipoMovimento;
-    flowParam.despesa ? this.expenseSelected = flowParam.despesa : null;
     flowParam.reserva ? this.onReserveChange(flowParam.reserva) : null;
   }
 
