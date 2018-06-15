@@ -1,6 +1,5 @@
 <div class="centerIcon">
 	<span class="glyphicon glyphicon-user"></span>
-	<span class="glyphicon glyphicon-star"></span>
 </div>
 
 <div class="row forms">
@@ -8,19 +7,21 @@
 		<form 
 			class="form-horizontal form-group" 
 			name="cadastrarCliente"
-			#f="ngForm"
+			#clientForm="ngForm"
 			(ngSubmit)="onSubmit()">
 		
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-2">Nome:</label>
+					<div class="form-group" [class.has-error]="!clientName.valid && clientName.touched">
+						<label class="control-label col-xs-12 col-md-2" for="clientName">Nome:</label>
 						<div class="col-xs-12 col-md-10">
 							<input
+								#clientName="ngModel"
 								class="form-control inputTriumphi" 
 								name="clientName" 
 								placeholder="Insira seu nome"
 								type="text"
+								required
 								[(ngModel)]="client.nome">
 						</div>
 					</div>
@@ -29,14 +30,17 @@
 			
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="div-form form-group">
-						<label class="control-label col-xs-12 col-md-2">E-mail: </label>
+					<div class="form-group" [class.has-error]="!clientEmail.valid && clientEmail.touched">
+						<label class="control-label col-xs-12 col-md-2" for="clientEmail">E-mail:</label>
 						<div class="col-xs-12 col-md-10">
 							<input 
+								#clientEmail="ngModel"
 								class="form-control inputTriumphi" 
+								email
 								name="mail" 
 								placeholder="Insira seu e-mail"
 								type="email"
+								required
 								[(ngModel)]="client.email">
 						</div>
 					</div>
@@ -45,21 +49,24 @@
 			
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-4">Celular: </label>
+					<div class="form-group" [class.has-error]="!clientCell.valid && clientCell.touched">
+						<label class="control-label col-xs-12 col-md-4" for="clientCell">Celular:</label>
 						<div class="col-xs-12 col-md-8">
 							<input 
+								#clientCell="ngModel"
 								class="form-control inputTriumphi"
 								name="cellphone" 
 								placeholder="Insira seu número de celular"
 								type="number"
+								required
 								[(ngModel)]="client.cell">
 						</div>
 					</div>
 				</div>
+
 				<div class="col-xs-12 col-md-6">
 					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-4">Telefone: </label>
+						<label class="control-label col-xs-12 col-md-4">Telefone:</label>
 						<div class="col-xs-12 col-md-8">
 							<input 
 								class="form-control inputTriumphi" 
@@ -68,35 +75,38 @@
 								type="number"
 								[(ngModel)]="client.tell">
 						</div>
-
 					</div>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-4">CPF:</label>
+					<div class="form-group" [class.has-error]="!clientCpf.valid && clientCpf.touched">
+						<label class="control-label col-xs-12 col-md-4" for="clientCpf">CPF:</label>
 						<div class="col-xs-12 col-md-8">
 							<input 
+								#clientCpf="ngModel"
 								class="form-control inputTriumphi"
 								name="cpf" 
 								placeholder="Insira seu CPF"
 								type="number"
+								required
 								[(ngModel)]="client.cpf">
 						</div>
 					</div>
 				</div>
 
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-4">RG:</label>
+					<div class="form-group" [class.has-error]="!clientRg.valid && clientRg.touched">
+						<label class="control-label col-xs-12 col-md-4" for="clientRg">RG:</label>
 						<div class="col-xs-12 col-md-8">
 							<input 
+								#clientRg="ngModel"
 								class="form-control inputTriumphi"
 								name="rg" 
 								placeholder="Insira seu RG"
 								type="number"
+								required
 								[(ngModel)]="client.rg">
 						</div>
 					</div>
@@ -105,27 +115,32 @@
 			
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<div class="div-form form-group">
+					<div class="div-form form-group" [class.has-error]="!clientGenre.valid && clientGenre.touched">
 						<label class="control-label col-xs-12 col-md-4">Sexo:</label>
 						<div class="col-xs-12 col-md-8">
 							<select 
+								#clientGenre="ngModel"
 								class="form-control inputTriumphi" 
 								name="genre"
+								required
 								[(ngModel)]="client.sexo">
-									<option>Masculino
-									<option>Feminino
+									<option> Masculino
+									<option> Feminino
 							</select>
 						</div>
 					</div>
 				</div>
+
 				<div class="col-xs-12 col-md-6">
-					<div class="div-form form-group">
-						<label class="control-label col-xs-12 col-md-4">Nascimento:</label>
+					<div class="div-form form-group" [class.has-error]="!clientBirthday.valid && clientBirthday.touched">
+						<label class="control-label col-xs-12 col-md-4" for="clientBirthday">Nascimento:</label>
 						<div class="col-xs-12 col-md-8"> 
 							<input 
+								#clientBirthday="ngModel"
 								class="form-control inputTriumphi"
 								name="birthday" 
 								type="date"
+								required
 								[(ngModel)]="client.datNasc">
 						</div>
 					</div>
@@ -135,7 +150,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-md-8">
 					<div class="div-form form-group">
-						<label class="control-label col-xs-12 col-md-3">Endereço:</label>
+						<label class="control-label col-xs-12 col-md-3">Logradouro:</label>
 						<div class="col-xs-12 col-md-9">
 							<input 
 								class="form-control inputTriumphi"
@@ -148,14 +163,16 @@
 				</div>
 
 				<div class="col-xs-12 col-md-4">	
-					<div class="div-form form-group">
-						<label class="control-label  col-xs-12 col-md-4">CEP:</label>
+					<div class="div-form form-group" [class.has-error]="!clientCep.valid && clientCep.touched">
+						<label class="control-label  col-xs-12 col-md-4" for="clientCep">CEP:</label>
 						<div class="col-xs-12 col-md-8">
 							<input 
+								#clientCep="ngModel"
 								class="form-control inputTriumphi"
 								name="cep" 
 								placeholder="Insira seu CEP"
 								type="number"
+								required
 								[(ngModel)]="client.cep">
 						</div>
 					</div>
@@ -165,7 +182,7 @@
 			<div class="row">
 				<div class="col-xs-4">
 					<div class="div-form form-group">
-						<label class="control-label col-xs-6">Bairro: </label>
+						<label class="control-label col-xs-6">Bairro:</label>
 						<div class="col-xs-6">
 							<input 
 								class="form-control inputTriumphi" 
@@ -215,7 +232,8 @@
 						(click)="resetForm()">
 					</button>
 					<button 
-						type="submit" 
+						type="submit"
+						[disabled]="!clientForm.valid"
 						class="btn btn-default glyphicon glyphicon-ok btnPrimary">
 					</button>
 				</div>
