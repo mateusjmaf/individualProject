@@ -6,20 +6,22 @@
 	<div class="col-xs-12">
 		<form 
 			class="form-horizontal form-group" 
-			name="cadastrarStaff"
-			#f="ngForm"
+			name="staffForm"
+			#staffForm="ngForm"
 			(ngSubmit)="onSubmit()">
 
 			<div class="row">
 				<div class="col-xs-12">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="!nomeStaff.valid && nomeStaff.touched">
 						<label class="control-label col-xs12 col-md-2">Nome:</label>
 						<div class="col-xs-12 col-md-10">
-							<input 
+							<input
+								#nomeStaff="ngModel"
 								class="form-control inputTriumphi"
 								name="nomeStaff" 
 								placeholder="Inserir nome"
 								type="text"
+								required
 								[(ngModel)]="staff.nome">
 						</div>
 					</div>
@@ -28,14 +30,16 @@
 			
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="!cellStaff.valid && cellStaff.touched">
 						<label class="control-label col-xs-12 col-md-4">Celular:</label>
 						<div class="col-xs-12 col-md-8">
 							<input
+								#cellStaff="ngModel"
 								class="form-control inputTriumphi"
 								name="cellStaff" 
-								placeholder="Inserir n° de celular"
+								placeholder="Inserir n° de celular" 	
 								type="text"
+								required
 								[(ngModel)]="staff.cell">
 						</div>
 					</div>
@@ -58,28 +62,32 @@
 			
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="!cpfStaff.valid && cpfStaff.touched">
 						<label class="control-label col-xs-12 col-md-4">CPF:</label>
 						<div class="col-xs-12 col-md-8">
-							<input 
+							<input
+								#cpfStaff="ngModel"
 								class="form-control inputTriumphi"  
 								name="cpfStaff" 
 								placeholder="Inserir CPF"
 								type="number"
+								required
 								[(ngModel)]="staff.cpf">
 						</div>
 					</div>
 				</div>
 
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="!rgStaff.valid && rgStaff.touched">
 						<label class="control-label col-xs-12 col-md-4">RG:</label>
 						<div class="col-xs-12 col-md-8">
-							<input 
+							<input
+								#rgStaff="ngModel"
 								class="form-control inputTriumphi"  
 								name="rgStaff" 
 								placeholder="Inserir RG"
 								type="number"
+								required
 								[(ngModel)]="staff.rg">
 						</div>
 					</div>
@@ -88,12 +96,14 @@
 			
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="!genreStaff.valid && genreStaff.touched">
 						<label class="control-label col-xs-12 col-md-4">Sexo:</label>
 						<div class="col-xs-12 col-md-8">
-							<select 
+							<select
+								#genreStaff="ngModel"
 								class="form-control inputTriumphi" 
 								name="sexoStaff"
+								required
 								[(ngModel)]="staff.sexo">
 								<option>Masculino
 								<option>Feminino
@@ -103,13 +113,15 @@
 				</div>
 
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="!birthdayStaff.valid && birthdayStaff.touched">
 						<label class="control-label col-xs-12 col-md-4">Nascimento:</label>
 						<div class="col-xs-12 col-md-8">
-							<input 
+							<input
+								#birthdayStaff="ngModel"
 								class="form-control inputTriumphi"
-								name="dataNascimentoStaff"
-								type="date" 
+								name="birthdayStaff"
+								type="date"
+								required
 								[(ngModel)]="staff.dataNasc">
 						</div>
 					</div>
@@ -118,12 +130,14 @@
 			
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="!officeStaff.valid && officeStaff.touched">
 						<label class="control-label col-xs-12 col-md-4">Cargo:</label>
 						<div class="col-xs-12 col-md-8">
-							<select 
+							<select
+								#officeStaff="ngModel"
 								class="form-control inputTriumphi"
-								name="funcaoStaff" 
+								name="officeStaff"
+								required
 								[(ngModel)]="staff.cargo">
 									<option value="copeiro">Copeiro
 									<option value="garcom">Garçom
@@ -135,14 +149,16 @@
 				</div>
 
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="!cepStaff.valid && cepStaff.touched">
 						<label class="control-label col-xs-12 col-md-4">CEP:</label>
 						<div class="col-xs-12 col-md-8">
-							<input 
+							<input
+								#cepStaff="ngModel"
 								class="form-control inputTriumphi"
 								name="cepStaff"
 								placeholder="Inserir CEP"
-								type="number" 
+								type="number"
+								required
 								[(ngModel)]="staff.cep">
 						</div>
 					</div>
@@ -151,28 +167,32 @@
 			
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="!districtStaff.valid && districtStaff.touched">
 						<label class="control-label col-xs-12 col-md-4">Bairro:</label>
 						<div class="col-xs-12 col-md-8">
-							<input 
+							<input
+								#districtStaff="ngModel"
 								class="form-control inputTriumphi"
 								name="bairroStaff"
 								placeholder="Inserir bairro"
-								type="text" 
+								type="text"
+								required
 								[(ngModel)]="staff.bairro">
 						</div>
 					</div>
 				</div>
 
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="!cidadeStaff.valid && cidadeStaff.touched">
 						<label class="control-label col-xs-12 col-md-4">Cidade:</label>
 						<div class="col-xs-12 col-md-8">
-							<input 
+							<input
+								#cidadeStaff="ngModel"
 								class="form-control inputTriumphi"
 								name="cidadeStaff"
 								placeholder="Inserir cidade"
-								type="text" 
+								type="text"
+								required
 								[(ngModel)]="staff.cidade">
 						</div>
 					</div>
@@ -181,28 +201,32 @@
 			
 			<div class="row">
 				<div class="col-xs-12 col-md-8">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="!streetStaff.valid && streetStaff.touched">
 						<label class="control-label col-xs-12 col-md-3">Endereço:</label>
 						<div class="col-xs-12 col-md-9">
-							<input 
+							<input
+								#streetStaff="ngModel"
 								class="form-control inputTriumphi"
 								name="enderecoStaff"
 								placeholder="Inserir endereço"
-								type="text" 
+								type="text"
+								required
 								[(ngModel)]="staff.endereco">
 						</div>
 					</div>
 				</div>
 
 				<div class="col-xs-12 col-md-4">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="!stateStaff.valid && stateStaff.touched">
 						<label class="control-label col-xs-12 col-md-4">Estado:</label>
 						<div class="col-xs-12 col-md-8">
-							<input 
+							<input
+								#stateStaff="ngModel"
 								class="form-control inputTriumphi"
 								name="estadoStaff"
 								placeholder="Inserir estado"
-								type="text" 
+								type="text"
+								required
 								[(ngModel)]="staff.estado">
 						</div>
 					</div>
@@ -213,12 +237,13 @@
 				<div class="footerFormSubmit">		
 					<button 
 						type="button" 
-						class="btn btn-default glyphicon glyphicon-remove btnSecondary"
+						class="btn glyphicon glyphicon-remove btnSecondary"
 						(click)="alert(response)">
 					</button>
 					<button 
 						type="submit" 
-						class="btn btn-default glyphicon glyphicon-ok btnPrimary">
+						class="btn glyphicon glyphicon-ok btnPrimary"
+						[disabled]="staffForm.invalid">
 					</button>
 				</div>
 			</div>
