@@ -22,6 +22,7 @@ export class KitPartyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.resetForm();
     this.searchKit();
   }
 
@@ -63,6 +64,10 @@ export class KitPartyComponent implements OnInit {
 
   resetForm() {
     this.kit = new KitParty();
+    this.kit.copeiro = 0;
+    this.kit.garcom = 0;
+    this.kit.monitor = 0;
+    this.kit.recep = 0;
   }
 
 }

@@ -6,37 +6,36 @@
 
 <div class="row forms">
 	<div class="col-xs-12">
-
 		<form 
 		class="form-horizontal form-group" 
-		name="cadastrarProduto"
-		#formKit="ngForm"
+		name="kitForm"
+		#kitForm="ngForm"
 		(ngSubmit)="onSubmit()">
+
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="descriptionKit.invalid && descriptionKit.touched">
 						<label class="col-xs-12 col-md-4 control-label">Descrição:</label>
 						<div class="col-xs-12 col-md-8">
-							<input 
+							<input
+								#descriptionKit="ngModel"
 								class="form-control inputTriumphi" 
-								name="descricao" 
-								required="required"
+								name="descriptionKit" 
+								required
+								type="text"
 								[(ngModel)]="kit.descricao">
 						</div>
 					</div>
 					
-					<div class="form-group">
-						<label class="control-label col-xs-12 col-md-4">
-							Preço:
-						</label>
-
+					<div class="form-group" [class.has-error]="priceKit.invalid && priceKit.touched">
+						<label class="control-label col-xs-12 col-md-4">Preço:</label>
 						<div class="col-xs-12 col-md-8">
-							<input 
+							<input
+								#priceKit="ngModel"
 								class="form-control inputTriumphi"
 								name="preco" 
+								required
 								type="number" 
-								required="required"
 								[(ngModel)]="kit.preco">
 						</div>
 					</div>
@@ -44,7 +43,7 @@
 					
 					<div class="row">
 						<div class="col-xs-12">
-							<div class="form-group ">
+							<div class="form-group">
 								<label class="col-xs-4 control-label">Disponibilidade:</label>
 								<div class="form-check form-check-inline col-xs-12 col-md-8">
 									<label class="form-check-label">Dm <br>
@@ -102,7 +101,7 @@
 							<label class="switch">
 								<input 
 									type="checkbox"
-									name="decorBasic"
+									name="basicDecoration"
 									[(ngModel)]="kit.decorBasic">
 								<span class="slider round"></span>
 							</label>
@@ -119,53 +118,53 @@
 						</div>						
 
 						<div class="col-xs-12">
-							<div class="form-group">
-								<label class="control-label col-xs-11 col-md-5">
-									Garçom:
-								</label>
+							<div class="form-group" [class.has-error]="bartenderKit.invalid && bartenderKit.touched">
+								<label class="control-label col-xs-11 col-md-5">Garçom:</label>
 								<div class="col-xs-12 col-md-7">
-									<input 
+									<input
+										#bartenderKit="ngModel"
 										class="form-control inputTriumphi"
-										name="garcom" 
+										name="bartenderKit" 
+										required
 										type="number"
 										[(ngModel)]="kit.garcom">
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label class="control-label col-xs-11 col-md-5">
-									Recepcionista: 
-								</label>
+							<div class="form-group" [class.has-error]="hostessKit.invalid && hostessKit.touched">
+								<label class="control-label col-xs-11 col-md-5">Recepcionista:</label>
 								<div class="col-xs-12 col-md-7">	
-									<input 
+									<input
+										#hostessKit="ngModel"
 										class="form-control inputTriumphi"
 										name="recepcionista" 
+										required
 										type="number"
 										[(ngModel)]="kit.recep">
 								</div>
 							</div>	
 
-							<div class="form-group">
-								<label class="control-label col-xs-11 col-md-5">
-									Copeiro: 
-								</label>
+							<div class="form-group" [class.has-error]="barmanKit.invalid && barmanKit.touched">
+								<label class="control-label col-xs-11 col-md-5">Copeiro:</label>
 								<div class="col-xs-12 col-md-7">
-									<input 
+									<input
+										#barmanKit="ngModel"
 										class="form-control inputTriumphi"
 										name="copeiro" 
 										type="number"
+										required
 										[(ngModel)]="kit.copeiro">
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label class="control-label col-xs-11 col-md-5">
-									Monitor: 
-								</label>
+							<div class="form-group" [class.has-error]="guideKit.invalid && guideKit.touched">
+								<label class="control-label col-xs-11 col-md-5">Monitor:</label>
 								<div class="col-xs-12 col-md-7">	
-									<input 
+									<input
+										#guideKit="ngModel"
 										class="form-control inputTriumphi"
-										name="monitor" 
+										name="monitor"
+										required
 										type="number"
 										[(ngModel)]="kit.monitor">
 								</div>
@@ -183,7 +182,8 @@
 					</button>
 					<button 
 						type="submit" 
-						class="btn glyphicon glyphicon-ok btnPrimary">
+						class="btn glyphicon glyphicon-ok btnPrimary"
+						[disabled]="kitForm.invalid">
 					</button>
 				</div>
 
