@@ -1,12 +1,18 @@
 <div class="centerIcon">
 	<span class="glyphicon glyphicon-usd"></span>
 </div>
-<br />
+
+<br>
+
 <div class="row forms">
 	<div class="col-xs-12">
-		<form class="form-horizontal form-group">
+		<form 
+			class="form-horizontal form-group"
+			name="cashFlowForm"
+			#cashFlowForm="ngForm"
+			(ngSubmit)="onSubmit()">
+
 			<div class="row">
-			
 				<div class="col-xs-12 col-md-6">
 					<div class="row">
 						<label class="control-label col-xs-4">Tipo de Transação:</label>
@@ -30,27 +36,30 @@
 						</ng-container>
 
 						<ng-template #outflow>
-							<label class="control-label col-xs-4">Despesa:</label>
-							<div class="col-xs-5">
-								<select 
-									class="form-control inputTriumphi" 
-									name="expense"
-									[(ngModel)]="expenseSelected">
-									<option
-										*ngFor="let expense of expenseList"
-										[ngValue]="expense"
-										[selected]="(flow.despesa && expense.idDespesa == flow.despesa.idDespesa)">
-											{{ expense.descricao }}
-									</option>
-								</select>
-							</div>
-							
-							<div class="col-xs-2">			
-								<button 
-									type="button" 
-									class="btn btnTriumphi glyphicon glyphicon-plus"
-									(click)="openModalExpense()">
-								</button>
+							<div>
+								<label class="control-label col-xs-4">Despesa:</label>
+								<div class="col-xs-5">
+									<select 
+										class="form-control inputTriumphi" 
+										name="expense"
+										[(ngModel)]="expenseSelected">
+										
+										<option
+											*ngFor="let expense of expenseList"
+											[ngValue]="expense"
+											[selected]="(flow.despesa && expense.idDespesa == flow.despesa.idDespesa)">
+												{{ expense.descricao }}
+										</option>
+									</select>
+								</div>
+								
+								<div class="col-xs-2">			
+									<button 
+										type="button" 
+										class="btn btnTriumphi glyphicon glyphicon-plus"
+										(click)="openModalExpense()">
+									</button>
+								</div>
 							</div>
 						</ng-template>
 
@@ -86,12 +95,14 @@
 			
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="typePayment.invalid && typePayment.touched">
 						<label class="control-label col-xs-4">Forma de Pagamento:</label>
 						<div class="col-xs-8">
-							<select 
+							<select
+								#typePayment="ngModel"
 								class="form-control inputTriumphi"
 								name="typePayment"
+								required
 								[(ngModel)]="flow.formaPagamento">
 									<option value="1">Dinheiro
 									<option value="2">Cartão Débito
@@ -103,12 +114,14 @@
 				</div>
 				
 				<div class="col-xs-12 col-md-6">
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="installmentNumber.invalid && installmentNumber.touched">
 						<label class="control-label col-xs-4">N° Parcelas:</label>
 						<div class="col-xs-8">
-							<select 
+							<select
+								#installmentNumber="ngModel"
 								class="form-control inputTriumphi" 
 								name="installmentNumber"
+								required
 								[(ngModel)]="flow.numeroParcelas">
 									<option value="1">1x
 									<option value="2">2x
@@ -125,67 +138,99 @@
 					</div>
 				</div>
 			</div>
+
+			<ng-container *ngIf="flow.formaPagamento == 4; then check"></ng-container>
+
+			<ng-template #check>
+				<div class="row">
+
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group" [class.has-error]="checkNumber.invalid && checkNumber.touched">
+							<label class="control-label col-xs-4">Nº Cheque:</label>
+							<div class="col-xs-8">
+								<input
+									#checkNumber
+									class="form-control inputTriumphi"  
+									name="checkNumber"
+									required>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group" [class.has-error]="checkAgency.invalid && checkAgency.touched">
+							<label class="control-label col-xs-4">Agência:</label>
+							<div class="col-xs-8">
+								<input
+									#checkAgency
+									class="form-control inputTriumphi"
+									name="agency"
+									required>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group" [class.has-error]="checkAgency.invalid && checkAgency.touched">
+							<label class="control-label col-xs-4">Conta Corrente:</label>
+							<div class="col-xs-8">
+								<input
+									#checkAgency
+									class="form-control inputTriumphi"
+									name="checkAgency"
+									required>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-md-6">
+						<div class="form-group" [class.has-error]="checkBank.invalid && checkBank.touched">
+							<label class="control-label col-xs-4">Banco:</label>
+							<div class="col-xs-8">
+								<input
+									#checkBank
+									class="form-control" inputTriumphi
+									name="checkBank"
+									required>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</ng-template>
 			
 			<div class="row">
 				<div class="col-xs-12 col-md-6">	
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="priceCashflow.invalid && priceCashflow.touched">
 						<label class="control-label col-xs-4">Valor:</label>
 						<div class="col-xs-8">
-							<input 
+							<input
+								#priceCashflow="ngModel"
 								class="form-control inputTriumphi"  
-								type="number" 
 								name="flowValue"
+								required
+								type="number" 
 								[(ngModel)]="flow.valor">
 						</div>
 					</div>
 				</div>
 				
 				<div class="col-xs-12 col-md-6">	
-					<div class="form-group">
+					<div class="form-group" [class.has-error]="dateCashflow.invalid && dateCashflow.touched">
 						<label class="control-label col-xs-4">Data</label>
 						<div class="col-xs-8">
-							<input 
+							<input
+								#dateCashflow="ngModel"
 								class="form-control inputTriumphi"  
-								type="date" 
 								name="flowDate"
+								required
+								type="date"
 								[(ngModel)]="flow.dataMovimento">
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-xs-12 col-md-6">
-					<div class="div-form form-group cheque hide">
-						<div class="col-xs-6 col-md-4">
-							<label class="control-label">Nº Cheque</label>
-								<input 
-									class="form-control inputTriumphi"  
-									name="checkNumber">
-						</div>
-						<div class="col-xs-6 col-md-4">
-							<label class="control-label">Agência</label>	
-								<input 
-									class="form-control inputTriumphi"
-									name="agency">
-						</div>
-						<div class="col-xs-6 col-md-4">
-							<label class="control-label">Conta Corrente</label>
-								<input 
-									class="form-control inputTriumphi"
-									name="currentAccount">
-						</div>
-						<div class="col-xs-6 col-md-4">
-							<label class="control-label">Banco</label>	
-								<input 
-									class="form-control" inputTriumphi
-									name="bank">
-						</div>
-					</div>
-				</div>
-				
-				
-			</div>
 			<div class="row">
 				<div class="footerFormSubmit">		
 					<button 
@@ -196,6 +241,7 @@
 					<button 
 						type="button" 
 						class="btn btn-default glyphicon glyphicon-ok btnPrimary"
+						[disabled]="cashFlowForm.invalid"
 						(click)="onSubmit()">
 					</button>
 				</div>
