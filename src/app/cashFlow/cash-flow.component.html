@@ -149,10 +149,11 @@
 							<label class="control-label col-xs-4">Nº Cheque:</label>
 							<div class="col-xs-8">
 								<input
-									#checkNumber
+									#checkNumber="ngModel"
 									class="form-control inputTriumphi"  
 									name="checkNumber"
-									required>
+									required
+									[(ngModel)]="flow.numeroCheque">
 							</div>
 						</div>
 					</div>
@@ -162,10 +163,11 @@
 							<label class="control-label col-xs-4">Agência:</label>
 							<div class="col-xs-8">
 								<input
-									#checkAgency
+									#checkAgency="ngModel"
 									class="form-control inputTriumphi"
 									name="agency"
-									required>
+									required
+									[(ngModel)]="flow.agencia">
 							</div>
 						</div>
 					</div>
@@ -175,10 +177,11 @@
 							<label class="control-label col-xs-4">Conta Corrente:</label>
 							<div class="col-xs-8">
 								<input
-									#checkAgency
+									#checkAgency="ngModel"
 									class="form-control inputTriumphi"
 									name="checkAgency"
-									required>
+									required
+									[(ngModel)]="flow.contaCorrente">
 							</div>
 						</div>
 					</div>
@@ -188,10 +191,11 @@
 							<label class="control-label col-xs-4">Banco:</label>
 							<div class="col-xs-8">
 								<input
-									#checkBank
+									#checkBank="ngModel"
 									class="form-control" inputTriumphi
 									name="checkBank"
-									required>
+									required
+									[(ngModel)]="flow.banco">
 							</div>
 						</div>
 					</div>
