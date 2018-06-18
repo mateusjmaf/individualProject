@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Additional } from '../additional/additional.object';
 import { Card } from '../card/card.object';

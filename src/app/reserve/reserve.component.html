@@ -8,24 +8,25 @@
 	<div class="col-xs-12">
 		<form 
 			class="form-horizontal form-group"
-			#f="ngForm"
+			#reserveForm="ngForm"
 			(ngSubmit)="onSubmit()">
 			<div>
 				<tabset>
 					<br>
 
-					<tab class="tabReserve" heading="Dados Principais" id="tab1">
+					<tab class="tabReserve" heading="Dados Principais">
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="div-form form-group">
 									<label class="control-label col-xs-12 col-md-2">Cliente:</label>
 									<div class="col-xs-11 col-md-9">
-										<input 
+										<input
 											#clientPicked
 											name="client"
 											class="form-control inputTriumphi" 
 											placeholder="Insira o nome do cliente"
 											type="text"
+											t-required
 											[(ngModel)]="clientName">		
 									</div>
 									<div class="col-xs-1">
@@ -40,25 +41,33 @@
 						</div>
 			
 						<div class="row">
-							<div class="col-xs-12">
-								<div class="div-form form-group">
-									<label class="control-label col-xs-12 col-md-2">Aniversariante:</label>
-									<div class="col-xs-12 col-md-6">
-										<input 
+							<div class="col-xs-12 col-md-6">
+								<div class="form-group" [class.has-error]="birthdayPerson.invalid && birthdayPerson.touched">
+									<label class="control-label col-xs-4">Aniversariante:</label>
+									<div class="col-xs-8">
+										<input
+											#birthdayPerson="ngModel"
 											class="form-control inputTriumphi" 
-											name="aniversariante" 
+											name="birthdayPerson" 
 											placeholder="Insira o nome do aniversariante"
 											type="text"
+											required
 											[(ngModel)]="reserve.aniversariante">
 									</div>
-			
-									<label class="control-label col-xs-12 col-md-2">Idade:</label>
-									<div class="col-xs-11 col-md-2">
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-md-6">
+								<div class="form-group" [class.has-error]="birthdayPersonYearsOld.invalid && birthdayPersonYearsOld.touched">
+									<label class="control-label col-xs-4">Idade:</label>
+									<div class="col-xs-8">
 										<input 
+											#birthdayPersonYearsOld="ngModel"
 											class="form-control inputTriumphi" 
-											name="idadeAniver" 
+											name="birthdayPersonYearsOld" 
 											placeholder="Insira idade"
 											type="number"
+											required
 											[(ngModel)]="reserve.idadeAniver">
 									</div>
 								</div>
@@ -67,12 +76,14 @@
 			
 						<div class="row">
 							<div class="col-xs-12 col-md-6">
-								<div class="div-form form-group">
+								<div class="div-form form-group" [class.has-error]="reserveType.invalid && reserveType.touched">
 									<label class="control-label col-xs-12 col-md-4">Situação Reserva:</label>
 									<div class="col-xs-12 col-md-8">	
-										<select 
+										<select
+											#reserveType="ngModel"
 											class="form-control inputTriumphi"
 											name="reserveType"
+											required
 											[(ngModel)]="reserve.tipoReserva">
 											<option value="Reservada">Reservada
 											<option value="Pré-Reservada">Pré-Reservada
@@ -84,12 +95,14 @@
 							</div>
 			
 							<div class="col-xs-12 col-md-6">
-								<div class="div-form form-group">
+								<div class="div-form form-group" [class.has-error]="kitParty.invalid && kitParty.touched">
 									<label class="control-label col-xs-12 col-md-4">Kit Festa:</label>
 									<div class="col-xs-12 col-md-8">	
-										<select 
+										<select
+											#kitParty="ngModel"
 											class="form-control inputTriumphi"
 											name="kitParty"
+											required
 											(blur)="onTotalAmount()"
 											[(ngModel)]="kitSelected">
 												<option
@@ -97,7 +110,7 @@
 													[ngValue]="kit"
 													[selected]="(reserve.kitFesta && kit.idKit == reserve.kitFesta.idKit)">
 														{{ kit.descricao }} - R${{ kit.preco }},00 
-											</option>
+												</option>
 										</select>
 									</div>			
 									
@@ -107,12 +120,14 @@
 			
 						<div class="row">
 							<div class="col-xs-12 col-md-6">
-								<div class="div-form form-group">
+								<div class="div-form form-group" [class.has-error]="reserveDate.invalid && reserveDate.touched">
 									<label class="control-label col-xs-12 col-md-4">Data:</label>
 									<div class="col-xs-12 col-md-8">
-										<input 
+										<input
+											#reserveDate="ngModel"
 											class="form-control inputTriumphi"
-											name="reserveDate" 
+											name="reserveDate"
+											required
 											type="datetime-local"
 											[(ngModel)]="reserve.dataReserva">
 									</div>
@@ -123,7 +138,7 @@
 								<div class="div-form form-group">
 									<label class="control-label col-xs-4">Desconto:</label>
 									<div class="col-xs-8">
-										<input 
+										<input
 											class="form-control inputTriumphi"
 											name="discount" 
 											type="number"
@@ -146,7 +161,6 @@
 					</tab>
 
 					<tab class="tabReserve" heading="Cardápio">
-						<a></a>
 						<div class="row">
 							<table class="table table-hover tableDisplay">
 
@@ -326,7 +340,8 @@
 					</button>
 					<button 
 						type="submit" 
-						class="btn glyphicon glyphicon-ok btnPrimary">
+						class="btn glyphicon glyphicon-ok btnPrimary"
+						[disabled]="reserveForm.invalid">
 					</button>
 				</div>
 			</div>
