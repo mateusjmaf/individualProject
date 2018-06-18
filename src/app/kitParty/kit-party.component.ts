@@ -14,12 +14,10 @@ export class KitPartyComponent implements OnInit {
 
   kit: KitParty;
   kitList: KitParty[];
-  kitSearchValue: string = ' ';
-  restRoute: string = 'kitRest';
+  kitSearchValue = ' ';
+  restRoute = 'kitRest';
 
-  constructor(private serverHttp: ServerHttpService) { 
-    this.kit = new KitParty();
-  }
+  constructor(private serverHttp: ServerHttpService) { this.kit = new KitParty(); }
 
   ngOnInit() {
     this.resetForm();
@@ -27,35 +25,30 @@ export class KitPartyComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.kit.idKit) {
-      return this.serverHttp.update(this.kit, this.restRoute+'/editarKit').subscribe(response => {
+    if (this.kit.idKit) {
+      return this.serverHttp.update(this.kit, this.restRoute + '/editarKit').subscribe(response => {
         alert(response);
         this.resetForm();
-      })
+      });
     } else {
-      return this.serverHttp.create(this.kit, this.restRoute+'/addKit').subscribe(
-        response => { 
-          this.searchKit();
-          alert(response);
-          this.resetForm();
-        }
-      )
+      return this.serverHttp.create(this.kit, this.restRoute + '/addKit').subscribe( response => {
+        this.searchKit();
+        alert(response);
+        this.resetForm();
+      });
     }
-    
   }
 
   deleteKit(id: number) {
-    return this.serverHttp.delete(id, this.restRoute+'/deletarKit').subscribe(
-      response => { 
-        this.searchKit();
-      }
-    )
+    return this.serverHttp.delete(id, this.restRoute + '/deletarKit').subscribe( response => {
+      this.searchKit();
+    });
   }
 
   searchKit() {
-    return this.serverHttp.readByName(this.kitSearchValue, this.restRoute+'/buscarKitPorNome').subscribe(response => {
+    return this.serverHttp.readByName(this.kitSearchValue, this.restRoute + '/buscarKitPorNome').subscribe(response => {
       response.length > 0 ? this.kitList = response : this.kitList = undefined;
-    })
+    });
   }
 
   editKit(KitParty: KitParty) {

@@ -1,11 +1,11 @@
-import { Additional } from "../additional/additional.object";
-import { Card } from "../card/card.object";
-import { Client } from "../client/client.object";
-import { KitParty } from "../kitParty/kit-party.object";
-import { Time } from "ngx-bootstrap/timepicker/timepicker.models";
+import { Additional } from '../additional/additional.object';
+import { Card } from '../card/card.object';
+import { Client } from '../client/client.object';
+import { KitParty } from '../kitParty/kit-party.object';
 
+// tslint:disable:indent
 export class Reserve {
-	
+
 	idReserva: number;
 	adicionais: Array<Additional>;
 	aniversariante: string;
@@ -14,7 +14,7 @@ export class Reserve {
 	dataReserva: Date;
 	desconto: number;
 	idadeAniver: number;
-	kitFesta: KitParty
+	kitFesta: KitParty;
 	tipoReserva: string;
 	valorReserva: number;
 
@@ -40,9 +40,8 @@ export class Reserve {
 		this.dataReserva = dataReserva;
 		this.desconto = desconto;
 		this.idadeAniver = idadeAniver;
-		this.kitFesta = kitFesta; 
+		this.kitFesta = kitFesta;
 		this.tipoReserva = tipoReserva;
 		this.valorReserva = valorReserva;
 	}
 }
-	

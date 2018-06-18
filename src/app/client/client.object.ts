@@ -1,4 +1,4 @@
-export class Client{
+export class Client {
 
   idCliente: number;
   nome: string;
@@ -41,7 +41,7 @@ export class Client{
     this.endereco  = endereco;
     this.cep = cep;
     this.bairro = bairro;
-    this.cidade= cidade;
+    this.cidade = cidade;
     this.estado = estado;
     this.sexo = sexo;
     this.datNasc = datNasc;

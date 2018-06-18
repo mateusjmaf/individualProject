@@ -3,19 +3,20 @@ import { Component, Input, ViewChild, ElementRef, EventEmitter, Output } from '@
 import { ModalAction } from './moda.interface.component';
 
 @Component({
-  selector: 'modal-component',
+  selector: 'app-modal-component',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent {
 
+  // tslint:disable:no-input-rename
   @Input('primary-action') primaryAction?: ModalAction;
-  
+
   @Input('secondary-action') secondaryAction?: ModalAction;
-  
+
   @Input('title') title: string;
 
-  showModal: string = "fade";
+  showModal = 'fade';
 
   public visible = false;
   public visibleAnimate = false;

@@ -7,20 +7,21 @@ import { ModalAction } from '../modal/moda.interface.component';
 import { Reserve } from '../reserve/reserve.object';
 import { Expense } from '../expense/expense.objects';
 
+// tslint:disable:no-unused-expression
 @Component({
   selector: 'app-cash-flow',
   templateUrl: './cash-flow.component.html',
   styleUrls: ['./cash-flow.component.css']
 })
 export class CashFlowComponent implements OnInit {
-  
+
   @ViewChild('reservePicked') reservePicked;
 
   @ViewChild('modalExpense') modalExpense: ModalComponent;
 
   @ViewChild('modalReserve') modalReserve: ModalComponent;
 
-  clientName: string = '';
+  clientName = ' ';
 
   expense: Expense;
   expenseList: Expense[];
@@ -28,23 +29,23 @@ export class CashFlowComponent implements OnInit {
 
   flow: CashFlow;
   flowList: CashFlow[];
-  
-  flowSearchValue: string = ' ';
-  
+
+  flowSearchValue = ' ';
+
   reserveList: Reserve[];
   reserveOrder: number;
 
-  restRoute: string = 'fluxoCaixaRest';
+  restRoute = 'fluxoCaixaRest';
 
-  titleExpenses = "Incluir nova despesa";
-  titleReserves = "Reservas";
-  
+  titleExpenses = 'Incluir nova despesa';
+  titleReserves = 'Reservas';
+
   primaryActionExpense: ModalAction = {
     action: () => {
       this.modalExpense.hide();
     }
   };
-  
+
   primaryActionReserve: ModalAction = {
     action: () => {
       this.modalReserve.hide();
@@ -52,34 +53,35 @@ export class CashFlowComponent implements OnInit {
   };
 
   constructor(private serverHttp: ServerHttpService) { }
-  
+
   ngOnInit() {
     this.resetForm();
   }
 
   onSubmit() {
     this.assignFlowDependeces();
-    console.log('reserve submit', this.flow.reserva)
-    if(this.flow.idMovimento) {
-      return this.serverHttp.update(this.flow, this.restRoute+'/editarFluxo').subscribe(response => {
+
+    if (this.flow.idMovimento) {
+      return this.serverHttp.update(this.flow, this.restRoute + '/editarFluxo').subscribe(response => {
         alert(response);
         this.resetForm();
-      })
+      });
+
     } else {
-      return this.serverHttp.create(this.flow, this.restRoute+'/addFluxo').subscribe(
-        response => { 
+      return this.serverHttp.create(this.flow, this.restRoute + '/addFluxo').subscribe(
+        response => {
           this.resetForm();
         }
-      )
+      );
     }
   }
-  
+
   addExpense() {
-    return this.serverHttp.create(this.expense, 'despesaRest'+'/addDespesa').subscribe(
-      response => { 
+    return this.serverHttp.create(this.expense, 'despesaRest' + '/addDespesa').subscribe(
+      response => {
         this.getExpense();
       }
-    )
+    );
   }
 
   assignFlowDependeces() {
@@ -98,23 +100,23 @@ export class CashFlowComponent implements OnInit {
   }
 
   deleteFlow(idMovimento: number) {
-    return this.serverHttp.delete(idMovimento, this.restRoute+'/deletarFluxo').subscribe(
-      response => { 
+    return this.serverHttp.delete(idMovimento, this.restRoute + '/deletarFluxo').subscribe(
+      response => {
         this.searchFlow();
       }
-    )
+    );
   }
 
   searchExpense() {
-    return this.serverHttp.readByName(' ', 'despesaRest'+'/buscarPorNome').subscribe(response => {
+    return this.serverHttp.readByName(' ', 'despesaRest' + '/buscarPorNome').subscribe(response => {
       response.length > 0 ? this.expenseList = response : this.expenseList = undefined;
-    })
+    });
   }
 
   searchFlow() {
-    return this.serverHttp.readByName(this.flowSearchValue, this.restRoute+'/buscarPorTipoMovimento').subscribe(response => {
+    return this.serverHttp.readByName(this.flowSearchValue, this.restRoute + '/buscarPorTipoMovimento').subscribe(response => {
       response.length > 0 ? this.flowList = response : this.flowList = undefined;
-    })
+    });
   }
 
   editFlow(flowParam: CashFlow) {
@@ -124,10 +126,10 @@ export class CashFlowComponent implements OnInit {
   }
 
   getExpense() {
-    return this.serverHttp.readByName(' ', 'despesaRest'+'/buscarPorNome').subscribe(response =>{
+    return this.serverHttp.readByName(' ', 'despesaRest' + '/buscarPorNome').subscribe(response => {
       this.expenseList = response;
       this.expenseSelected = response[0];
-    })
+    });
   }
 
   getTransactionType(tipoMovimento) {
@@ -136,7 +138,6 @@ export class CashFlowComponent implements OnInit {
       case 2 : return 'Entrada';
     }
   }
-
 
   getTypePayment(formaPagamento) {
     switch (formaPagamento) {
@@ -148,17 +149,17 @@ export class CashFlowComponent implements OnInit {
   }
 
   getReserves() {
-    return this.serverHttp.readByName(`${this.clientName}`, 'reservaRest'+'/buscarReservasPorCliente').subscribe(response => {
+    return this.serverHttp.readByName(`${this.clientName}`, 'reservaRest' + '/buscarReservasPorCliente').subscribe(response => {
 
       if (!undefined && response.length === 1) {
         this.onReserveChange(response[0]);
 
-      } else { 
+      } else {
         this.reserveList = response;
         this.modalReserve.show();
       }
 
-    })
+    });
   }
 
   resetForm() {

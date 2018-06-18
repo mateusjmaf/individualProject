@@ -1,6 +1,7 @@
-import { Category } from "../category/category.object";
+import { Category } from '../category/category.object';
 
-export class Product{
+// tslint:disable:indent
+export class Product {
 
   idProduto: number;
 	nome: string;
@@ -12,11 +13,11 @@ export class Product{
     nome?: string,
     descricao?: string,
     valor?: number
-  ){
+  ) {
+
     this.idProduto = id;
     this.nome = nome;
     this.descricao = descricao;
     this.valor = valor;
   }
-  
 }

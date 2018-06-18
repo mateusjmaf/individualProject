@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServerHttpService } from '../../service/server.http.service';
 import { Observable } from 'rxjs/Observable';
 
-import { Card } from './card.object'
+import { Card } from './card.object';
 
 @Component({
   selector: 'app-card',
@@ -14,10 +14,10 @@ export class CardComponent implements OnInit {
 
   card: Card;
   cardList: Card[];
-  cardSearchValue: number = 0;
-  restRoute: string = 'cardapioRest';
+  cardSearchValue = 0;
+  restRoute = 'cardapioRest';
 
-  constructor(private serverHttp: ServerHttpService) { 
+  constructor(private serverHttp: ServerHttpService) {
     this.card = new Card();
   }
 
@@ -28,9 +28,9 @@ export class CardComponent implements OnInit {
   onSubmit() { }
 
   searchcard() {
-    return this.serverHttp.readById(this.cardSearchValue, this.restRoute+'/buscarCardapioPorIdReserva').subscribe(response => {
+    return this.serverHttp.readById(this.cardSearchValue, this.restRoute + '/buscarCardapioPorIdReserva').subscribe(response => {
       response.length > 0 ? this.cardList = response : this.cardList = undefined;
-    })
+    });
   }
 
   editcard(Card: Card) {

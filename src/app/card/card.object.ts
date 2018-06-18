@@ -1,8 +1,8 @@
-import { Product } from "../product/product.object";
-import { Reserve } from "../reserve/reserve.object";
+import { Product } from '../product/product.object';
+import { Reserve } from '../reserve/reserve.object';
 
 export class Card {
-  
+
   idCardapio: number;
   reserva: Reserve;
   produto: Product;

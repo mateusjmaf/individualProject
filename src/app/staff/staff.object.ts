@@ -31,6 +31,7 @@ export class Staff {
     sexo?: string,
     dataNasc?: Date
   ) {
+
     this.idStaff = idStaff;
     this.nome = nome;
     this.cell = cell;
@@ -41,7 +42,7 @@ export class Staff {
     this.endereco  = endereco;
     this.cep = cep;
     this.bairro = bairro;
-    this.cidade= cidade;
+    this.cidade = cidade;
     this.estado = estado;
     this.sexo = sexo;
     this.dataNasc = dataNasc;

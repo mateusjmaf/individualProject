@@ -1,10 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ServerHttpService } from '../../service/server.http.service';
-import { Observable } from 'rxjs/Observable';
 
-import { Product } from './product.object'
-import { Category } from "../category/category.object";
+import { Product } from './product.object';
 
 @Component({
   selector: 'app-product',
@@ -13,11 +11,11 @@ import { Category } from "../category/category.object";
   providers: [ ],
 })
 export class ProductComponent implements OnInit {
-  
+
   product: Product;
   productList: Product[];
-  productSearchValue: string = ' ';
-  restRoute: string = 'produtoRest';
+  productSearchValue = ' ';
+  restRoute = 'produtoRest';
 
   constructor( private serverHttp: ServerHttpService ) { }
 
@@ -26,38 +24,32 @@ export class ProductComponent implements OnInit {
 
     this.searchProduct();
   }
-  
+
   onSubmit() {
-    if(this.product.idProduto) {
-      return this.serverHttp.update(this.product, this.restRoute+'/editarProduto').subscribe(response => {
+    if (this.product.idProduto) {
+      return this.serverHttp.update(this.product, this.restRoute + '/editarProduto').subscribe(response => {
         alert(response);
         this.resetForm();
 
-      })
+      });
     } else {
-      return this.serverHttp.create(this.product, this.restRoute+'/addProduto').subscribe(
-        response => { 
-          this.searchProduct();
-          this.resetForm();
-
-        }
-      )
+      return this.serverHttp.create(this.product, this.restRoute + '/addProduto').subscribe( response => {
+        this.searchProduct();
+        this.resetForm();
+      });
     }
   }
 
   deleteProduct(id: number) {
-    return this.serverHttp.delete(id, this.restRoute+'/deletarProduto').subscribe(
-      response => { 
-        this.searchProduct();
-      }
-    )
+    return this.serverHttp.delete(id, this.restRoute + '/deletarProduto').subscribe( response => {
+      this.searchProduct();
+    });
   }
 
   searchProduct() {
-    return this.serverHttp.readByName(this.productSearchValue, this.restRoute+'/buscarProdutosPorNome').subscribe(response => {
+    return this.serverHttp.readByName(this.productSearchValue, this.restRoute + '/buscarProdutosPorNome').subscribe(response => {
       response.length > 0 ? this.productList = response : this.productList = undefined;
-      
-    })
+    });
   }
 
   editProduct(product: Product) {
@@ -67,5 +59,5 @@ export class ProductComponent implements OnInit {
   resetForm() {
     this.product = new Product();
   }
-  
+
 }

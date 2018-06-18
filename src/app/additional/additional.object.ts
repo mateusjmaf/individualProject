@@ -1,4 +1,4 @@
-import { Reserve } from "../reserve/reserve.object";
+import { Reserve } from '../reserve/reserve.object';
 
 export class Additional {
 
@@ -15,7 +15,7 @@ export class Additional {
     quantidade?: number,
     valor?: number
   ) {
-    
+
     this.idAdicional = idAdicional;
     this.descricao = descricao;
     this.reserva = reserva;

@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
-  calendarOptions:Object = {
+  calendarOptions = {
     height: 'parent',
     fixedWeekCount : false,
     defaultDate: '2016-09-12',

@@ -1,4 +1,6 @@
+// tslint:disable:indent
 export class KitParty {
+
   idKit: number;
 	descricao: string;
 	decorBasic: boolean;
@@ -31,13 +33,13 @@ export class KitParty {
 	  sx?: boolean,
 	  sb?: boolean,
 	  dm?: boolean,
-  ){
+  ) {
 
     this.idKit = id;
     this.descricao = desc;
     this.decorBasic = decorBasic;
     this.preco = preco;
-    this.garcom = garcom; 
+    this.garcom = garcom;
     this.recep = recep;
     this.copeiro = copeiro;
     this.monitor = monitor;
@@ -49,5 +51,4 @@ export class KitParty {
     this.sab = sb;
     this.dom = dm;
   }
-  
 }

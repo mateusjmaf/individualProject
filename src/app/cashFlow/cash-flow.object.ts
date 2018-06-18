@@ -1,7 +1,10 @@
-import { Reserve } from "../reserve/reserve.object";
-import { Expense } from "../expense/expense.objects";
+import { Reserve } from '../reserve/reserve.object';
+import { Expense } from '../expense/expense.objects';
+
+// tslint:disable:indent
 
 export class CashFlow {
+
 	idMovimento: number;
 	agencia: number;
 	banco: string;
@@ -27,20 +30,20 @@ export class CashFlow {
 		numeroParcelas?: number,
 		reserva?: Reserve,
 		tipoMovimento?: number,
-		valor?: number,) {
+		valor?: number) {
 
-			this.idMovimento = idMovimento;
-			this.agencia = agencia;
-			this.banco = banco;
-			this.contaCorrente = contaCorrente;
-			this.numeroCheque = numeroCheque;
-			this.dataMovimento = dataMovimento;
-			this.despesa = despesa;
-			this.formaPagamento = formaPagamento;
-			this.numeroParcelas = numeroParcelas;
-			this.reserva = reserva;
-			this.tipoMovimento = tipoMovimento;
-			this.valor = valor;
+		this.idMovimento = idMovimento;
+		this.agencia = agencia;
+		this.banco = banco;
+		this.contaCorrente = contaCorrente;
+		this.numeroCheque = numeroCheque;
+		this.dataMovimento = dataMovimento;
+		this.despesa = despesa;
+		this.formaPagamento = formaPagamento;
+		this.numeroParcelas = numeroParcelas;
+		this.reserva = reserva;
+		this.tipoMovimento = tipoMovimento;
+		this.valor = valor;
 	}
-	
+
 }
