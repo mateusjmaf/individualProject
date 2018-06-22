@@ -18,7 +18,6 @@ import { KitPartyComponent } from './kitParty/kit-party.component';
 import { LoginComponent } from './login/login.component';
 import { ModalComponent } from './modal/modal.component';
 import { ProductComponent } from './product/product.component';
-import { ReportsComponent } from './reports/reports.component';
 import { ReserveComponent } from './reserve/reserve.component';
 import { StaffComponent } from './staff/staff.component';
 
@@ -41,7 +40,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     LoginComponent,
     ModalComponent,
     ProductComponent,
-    ReportsComponent,
     ReserveComponent,
     StaffComponent,
     // CalendarComponent,
@@ -57,7 +55,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     // NgbModule.forRoot(),
     // CalendarModule,
   ],
-  providers: [],
+  providers: [CoreModule],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]
 })

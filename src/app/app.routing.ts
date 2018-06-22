@@ -5,7 +5,6 @@ import { ClientComponent } from './client/client.component';
 import { KitPartyComponent } from './kitParty/kit-party.component';
 import { LoginComponent } from './login/login.component';
 import { ProductComponent } from './product/product.component';
-import { ReportsComponent } from './reports/reports.component';
 import { ReserveComponent } from './reserve/reserve.component';
 import { StaffComponent } from './staff/staff.component';
 import { CashFlowComponent } from './cashFlow/cash-flow.component';
@@ -21,7 +20,6 @@ const app_routes: Routes = [
     { path: 'product', component: ProductComponent },
     { path: 'reserve', component: ReserveComponent },
     { path: 'staff', component: StaffComponent },
-    { path: 'report', component: ReportsComponent },
     // { path: 'calendar', component: CalendarComponent }
 ];
 
