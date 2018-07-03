@@ -1,7 +1,9 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ServerHttpService } from './server.http.service';
+import { NgModule } from '@angular/core';
+
+import { ExpenseService } from './expense.service';
 import { HttpModule } from '@angular/http';
+import { ServerHttpService } from './server.http.service';
 
 @NgModule({
   imports: [
@@ -9,7 +11,8 @@ import { HttpModule } from '@angular/http';
     HttpModule
   ],
   providers: [
-    ServerHttpService
+    ServerHttpService,
+    ExpenseService
   ],
 
 })
