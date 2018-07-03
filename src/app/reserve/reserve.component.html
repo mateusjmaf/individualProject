@@ -26,7 +26,7 @@
 											class="form-control inputTriumphi" 
 											placeholder="Insira o nome do cliente"
 											type="text"
-											t-required
+											required
 											[(ngModel)]="clientName">		
 									</div>
 									<div class="col-xs-1">
@@ -232,12 +232,11 @@
 									<tr>
 										<td colspan="5">
 											<div class="noData">
-												Não há Cardápio para esta reserva.
+												Não há cardápio para esta reserva.
 											</div>
 										</td>
 									</tr>
 								</ng-template>
-								
 								
 							</table>
 						</div>						
@@ -375,44 +374,40 @@
 	<br>
 	
 	<div class="row">
-		<div>
-			<table class="table table-hover tableDisplay">
+		<table class="table table-hover tableDisplay">
+			<tr class="tableHeader">
+				<th>NOME</th>
+				<th>DATA</th>
+				<th>TIPO</th>
+				<th class="tableEditColumn">AÇÕES</th>
+			</tr>
 
-				<tr class="tableHeader">
-					<th>NOME</th>
-					<th>DATA</th>
-					<th>TIPO</th>
-					<th class="tableEditColumn">AÇÕES</th>
+			<ng-container
+				*ngIf="reserveList; then searchSuccess; else searchFail">
+			</ng-container>
+			
+			<ng-template #searchSuccess>
+				<tr *ngFor="let reserve of reserveList, let i = index">
+					<td>{{ reserve.cliente.nome }}</td>
+					<td>{{ reserve.dataReserva | date: 'M/d/yy, h:mm a' }}</td>
+					<td>{{ reserve.tipoReserva }}</td>
+					<td class="tableEditColumn tableEditColumnIcon">
+						<a class="tableEditColumnIcon" (click)="deleteReserve(reserve.idReserva)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</a>
+						<a class="tableEditColumnIcon" (click)="editReserve(reserve)">
+							<span class="glyphicon glyphicon-edit"></span>
+						</a>
+					</td>
 				</tr>
-
-				<ng-container
-					*ngIf="reserveList; then searchSuccess; else searchFail">
-				</ng-container>
-				
-				<ng-template #searchSuccess>
-					<tr *ngFor="let reserve of reserveList, let i = index">
-						<td>{{ reserve.cliente.nome }}</td>
-						<td>{{ reserve.dataReserva | date: 'M/d/yy, h:mm a' }}</td>
-						<td>{{ reserve.tipoReserva }}</td>
-						<td class="tableEditColumn tableEditColumnIcon">
-							<a class="tableEditColumnIcon" (click)="deleteReserve(reserve.idReserva)">
-								<span class="glyphicon glyphicon-trash"></span>
-							</a>
-							<a class="tableEditColumnIcon" (click)="editReserve(reserve)">
-								<span class="glyphicon glyphicon-edit"></span>
-							</a>
-						</td>
-					</tr>
-				</ng-template>
-
-			</table>
-
-			<ng-template #searchFail>
-				<div class="noData">
-					Desculpe, nenhum resultado encontrado.
-				</div>
 			</ng-template>
-		</div>
+
+		</table>
+
+		<ng-template #searchFail>
+			<div class="noData"> Desculpe, nenhum resultado encontrado. </div>
+		</ng-template>
+
 	</div>	
 </div>
 
@@ -421,16 +416,42 @@
 	[title]="titleClient"
 	[primary-action]="primaryActionClient">
 	<div class="app-modal-body">
-		<tr *ngFor="let client of clientList, let i = index">
-			<td>
-				<input
-					type="radio" 
-					name="clienteChecked"
-					[value]="clientList[i].idCliente"
-					(change)="onClientChange(clientList[i])">
-			</td>
-			<td>{{ clientList[i].nome }}</td>
-		</tr>
+		<div class="row">
+			<table class="table table-hover tableDisplay">
+				<tr class="tableHeader">
+					<th>SELECIONE</th>
+					<th>CLIENTE</th>
+				</tr>
+
+				<ng-container
+					*ngIf="clientList; then haveClient; else notHaveClient">
+				</ng-container>
+			
+				<ng-template #haveClient>
+					<tr *ngFor="let client of clientList, let i = index">
+						<td>
+							<input
+								type="radio" 
+								name="clienteChecked"
+								[value]="clientList[i].idCliente"
+								(change)="onClientChange(clientList[i])">
+							</td>
+						<td>{{ clientList[i].nome }}</td>
+					</tr>
+				</ng-template>
+				
+				<ng-template #notHaveClient>
+					<tr>
+						<td colspan="2">
+							<div class="noData">
+									Desculpe, nenhum resultado encontrado.
+							</div>
+						</td>
+					</tr>
+				</ng-template>
+
+			</table>
+		</div>
 	</div>
 </app-modal-component>
 

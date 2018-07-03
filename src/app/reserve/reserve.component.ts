@@ -150,7 +150,9 @@ export class ReserveComponent implements OnInit {
         this.clientName = this.clientPicked.nome;
 
       } else {
-        this.clientList = response;
+        response ? this.clientList = response : this.clientList = null;
+        // this.clientList = response;
+
         this.modalClient.show();
 
       }
