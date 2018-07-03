@@ -39,6 +39,13 @@ export class ServerHttpService {
     }).catch(this.handleError);
   }
 
+  readByParam(object: Object, restPath: string) {
+    return this._http.post(`${URL_API}/${restPath}`, JSON.stringify(object), { headers: this.headers})
+      .map((response: Response) => {
+        return response.json();
+    }).catch(this.handleError);
+  }
+
   update(object: Object, restPath: string) {
     return this._http.put(`${URL_API}/${restPath}`, JSON.stringify(object), { headers: this.headers})
     .map((response: Response) => {
