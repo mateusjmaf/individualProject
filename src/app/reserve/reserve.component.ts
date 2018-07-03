@@ -151,7 +151,6 @@ export class ReserveComponent implements OnInit {
 
       } else {
         response ? this.clientList = response : this.clientList = null;
-        // this.clientList = response;
 
         this.modalClient.show();
 
