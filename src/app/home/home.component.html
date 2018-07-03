@@ -1,3 +1,9 @@
+<style>
+	.modalLineSpace {
+		margin-bottom: 14px;
+	}
+</style>
+
 <div class="row">		
 	<nav class="navbar navbar-default navbar-fixed-top navbars" role="navigation">
 		<div class="container-fluid">	
@@ -104,72 +110,83 @@
 	[primary-action]="primaryActionCashflow">
 
 	<div class="app-modal-body">
-		<div class="row">
-				<div class="col-xs-12 col-md-6">
-					<div class="row">
-						<label class="control-label col-xs-4">Tipo de Transação:</label>
-						<div class="col-xs-8">
-							<select 
-								class="form-control inputTriumphi" 
-								name="transactionType"
-								[(ngModel)]="transactionType">
 
-									<option value="1">Saída
-									<option value="2">Entrada
-									<option value=" ">Ambos
-							</select>
-						</div>
-					</div>
-				</div>
-				
-				<div class="col-xs-12 col-md-6">
-					<div class="row" *ngIf="transactionType != ' '">
-							
-						<ng-container
-							*ngIf="transactionType == 1; then outflowReport; else inflowReport">
-						</ng-container>
+		<div class="row modalLineSpace">
+			<label class="control-label col-xs-4">Tipo de Transação:</label>
+			<div class="col-xs-8">
+				<select 
+					class="form-control inputTriumphi" 
+					name="transactionType"
+					[(ngModel)]="cashflowParameter.tipoMovimento">
 
-						<ng-template #outflowReport>
-							<div>
-								<label class="control-label col-xs-4">Despesa:</label>
-								<div class="col-xs-8">
-									<select 
-										class="form-control inputTriumphi" 
-										name="expense"
-										[(ngModel)]="expenseSelected">
-										
-										<option [ngValue]=" " [selected]="expenseSelected != ' ' ? false : true">Todas</option>
-										<option
-											*ngFor="let expense of expenseList"
-											[ngValue]="expense">
-												{{ expense.descricao }}
-										</option>
-									</select>
-								</div>
-								
-							</div>
-						</ng-template>
-
-						<ng-template #inflowReport>
-							<label class="control-label col-xs-4">Situção da rerva:</label>
-							<div class="col-md-8">	
-								<select
-									class="form-control inputTriumphi"
-									name="reserveTypeFlowReport"
-									[(ngModel)]="reserveTypeFlowReport">
-
-									<option value=" ">Todas
-									<option value="Reservada">Reservada
-									<option value="Pré-Reservada">Pré-Reservada
-									<option value="Cancelada">Cancelada
-									<option value="Finalizada">Finalizada
-								</select>
-							</div>			
-						</ng-template>
-
-					</div>
-				</div>
+						<option value="1">Saída
+						<option value="2">Entrada
+						<option value=" ">Ambos
+				</select>
 			</div>
+		</div>
+				
+		<div class="row modalLineSpace" [hidden]="(cashflowParameter.tipoMovimento == ' ')">
+			<ng-container *ngIf="cashflowParameter.tipoMovimento == 1; then outflowReport; else inflowReport"></ng-container>
+
+			<ng-template #outflowReport>
+				<label class="control-label col-xs-4">Despesa:</label>
+				<div class="col-xs-8">
+					<select 
+						class="form-control inputTriumphi" 
+						name="expense"
+						[(ngModel)]="expenseSelected">
+						
+						<option [ngValue]=" " [selected]="expenseSelected != ' ' ? false : true">Todas</option>
+						<option
+							*ngFor="let expense of expenseList"
+							[ngValue]="expense">
+								{{ expense.descricao }}
+						</option>
+					</select>
+				</div>
+			</ng-template>
+
+			<ng-template #inflowReport>
+				<label class="control-label col-xs-4">Situção da rerva:</label>
+				<div class="col-md-8">	
+					<select
+						class="form-control inputTriumphi"
+						name="reserveTypeFlowReport"
+						[(ngModel)]="reserveTypeFlowReport">
+
+						<option value=" ">Todas
+						<option value="Reservada">Reservada
+						<option value="Pré-Reservada">Pré-Reservada
+						<option value="Cancelada">Cancelada
+						<option value="Finalizada">Finalizada
+					</select>
+				</div>			
+			</ng-template>
+		</div> 
+
+		<div class="row modalLineSpace">
+			<label class="control-label col-xs-4">Data inicial:</label>
+			<div class="col-xs-8">	
+				<input
+					class="form-control inputTriumphi"  
+					name="cashflowParameterStartDate"
+					type="date"
+					[(ngModel)]="cashflowParameter.dataInicio">
+			</div>
+		</div>
+		
+		<div class="row">
+			<label class="control-label col-xs-4">Data Final:</label>
+			<div class="col-xs-8">	
+				<input
+					class="form-control inputTriumphi"  
+					name="cashflowParameterEndDate"
+					type="date"
+					[(ngModel)]="cashflowParameter.dataFim">
+			</div>
+		</div>
+
 	</div>
 </app-modal-component>
 
@@ -179,15 +196,15 @@
 	[primary-action]="primaryActionParty">
 
 	<div class="app-modal-body">
-		<div class="row">
+		<div class="row modalLineSpace">
 			<label class="control-label col-xs-4">Situção da rerva:</label>
-			<div class="col-md-8">	
+			<div class="col-xs-8">	
 				<select
 					class="form-control inputTriumphi"
 					name="reserveTypePartyReport"
-					[(ngModel)]="reserveTypePartyReport">
+					[(ngModel)]="reserveParameter.tipoReserva">
 
-					<option value=" ">Todas
+					<option value="">Todas
 					<option value="Reservada">Reservada
 					<option value="Pré-Reservada">Pré-Reservada
 					<option value="Cancelada">Cancelada
@@ -195,5 +212,28 @@
 				</select>
 			</div>
 		</div>
+
+		<div class="row modalLineSpace">
+			<label class="control-label col-xs-4">Data inicial:</label>
+			<div class="col-xs-8">	
+				<input
+					class="form-control inputTriumphi"  
+					name="reserveDateStartReport"
+					type="date"
+					[(ngModel)]="reserveParameter.dataInicio">
+			</div>
+		</div>
+
+		<div class="row">
+			<label class="control-label col-xs-4">Data Final:</label>
+			<div class="col-xs-8">	
+				<input
+					class="form-control inputTriumphi"  
+					name="reserveDateEndReport"
+					type="date"
+					[(ngModel)]="reserveParameter.dataFim">
+			</div>
+		</div>
+
 	</div>
 </app-modal-component>
