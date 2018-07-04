@@ -135,12 +135,12 @@
 					<select 
 						class="form-control inputTriumphi" 
 						name="expense"
-						[(ngModel)]="expenseSelected">
+						[(ngModel)]="cashflowParameter.despesa">
 						
 						<option [ngValue]=" " [selected]="expenseSelected != ' ' ? false : true">Todas</option>
 						<option
 							*ngFor="let expense of expenseList"
-							[ngValue]="expense">
+							[ngValue]="expense.id">
 								{{ expense.descricao }}
 						</option>
 					</select>

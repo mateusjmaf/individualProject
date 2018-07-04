@@ -20,8 +20,13 @@ export class HomeComponent implements OnInit {
 
   reserveList: Reserve[];
 
-  reserveTypeFlowReport = ' ';
-  reserveTypePartyReport = ' ';
+  cashflowParameter = {
+    dataInicio: Date,
+    dataFim: Date,
+    despesa: '',
+    situacaoReserva: '',
+    tipoMovimento: '1'
+  };
 
   reserveParameter = {
     dataInicio: Date,
@@ -29,11 +34,10 @@ export class HomeComponent implements OnInit {
     tipoReserva: ''
   };
 
-  transactionType = '1';
-
   primaryActionCashflow: ModalAction = {
     action: () => {
       this.modalCashflowReport.hide();
+      this.getFlowReport();
     }
   };
 
@@ -68,9 +72,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getFlow() {
-    return this.serverHttp.readByName(this.transactionType, 'fluxoCaixaRest' + '/buscarPorTipoMovimento').subscribe(response => {
-      // response.length > 0 ? this.flowList = response : this.flowList = undefined;
+  getFlowReport() {
+    this.serverHttp.readByParam(this.cashflowParameter, 'fluxoCaixaRest' + '/buscarPorParametros').subscribe(response => {
+      this.generateCashflowReport(response);
     });
   }
 
@@ -101,7 +105,63 @@ export class HomeComponent implements OnInit {
     return doc;
   }
 
-  generateCashflowReport() {
+  generateCashflowReport(cashflows) {
+    let dataRow = 33;
+    const title = 'Relatório do Fluxo de Caixa';
+    const transactionType = this.cashflowParameter.tipoMovimento !== '' ? this.cashflowParameter.tipoMovimento : 'Ambos';
+    const startDate = this.cashflowParameter.dataInicio;
+    const endDate = this.cashflowParameter.dataFim;
+
+    const doc = this.generatePdf(title, transactionType, startDate, endDate);
+
+    doc.setFontSize(12);
+    doc.text(14, 34, 'Data');
+    doc.text(30, 34, '|    Valor ');
+    doc.text(60, 34, '|    Parcela(s)');
+    doc.text(90, 34, '|    Forma/Pagamento');
+
+    switch (transactionType) {
+      case '1': doc.text(135, 34, '|    Saídas'); break;
+      case '2': doc.text(135, 34, '|    Entradas'); break;
+      default: doc.text(135, 34, '|    Entrada/Saída'); break;
+    }
+
+    doc.line(7, 38, 200, 38);
+    doc.setFontSize(10);
+    doc.setFontType('normal');
+
+    if (cashflows.length > 0) {
+
+      for (const cashflow of cashflows) {
+        dataRow += 10;
+        doc.text(10, dataRow, cashflow.dataMovimento);
+        doc.text(40, dataRow, 'R$' + cashflow.valor);
+        doc.text(60, dataRow, '' + cashflow.numeroParcelas);
+        switch (cashflow.formaPagamento) {
+          case 1 : doc.text(90, dataRow, 'Dinheiro'); break;
+          case 2 : doc.text(90, dataRow, 'Cartão Débito'); break;
+          case 3 : doc.text(90, dataRow, 'Cartão Crédito'); break;
+          case 4 : doc.text(90, dataRow, 'Cheque'); break;
+        }
+        // doc.text(174, dataRow, 'R$' + cashflow.tipoMovimento);
+
+        doc.setLineWidth(0.3);
+        doc.line(7, dataRow + 3, 200, dataRow + 3);
+      }
+
+    } else {
+      doc.setFont('courier');
+      doc.setFontType('bolditalic');
+      dataRow += 10;
+      doc.text(65, dataRow, 'Nenhum dado encontrado com este parâmetro.');
+    }
+
+
+    doc.setLineWidth(1.2);
+    doc.line(7, dataRow + 3, 200, dataRow + 3);
+
+    doc.save('relatorioFluxoCaixa.pdf');
+  }
 
   generateReserveReport(reserves) {
     let dataRow = 33;
