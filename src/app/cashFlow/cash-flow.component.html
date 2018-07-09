@@ -302,6 +302,7 @@
 
 				<tr class="tableHeader">
 					<th>TIPO</th>
+					<th>VALOR</th>
 					<th>DATA</th>
 					<th>FORMA DE PAGAMENTO</th>
 					<th class="tableEditColumn">AÇÕES</th>
@@ -314,7 +315,8 @@
 				<ng-template #searchSuccess>
 					<tr *ngFor="let flow of flowList, let i = index">
 						<td>{{ getTransactionType(flow.tipoMovimento) }}</td>
-						<td>{{ flow.dataMovimento | date: 'M/d/yyyy' }}</td>
+						<td>R${{ flow.valor }}</td>
+						<td>{{ flow.dataMovimento | date: 'd/M/yyyy' }}</td>
 						<td>{{ getTypePayment(flow.formaPagamento) }}</td>
 						<td class="tableEditColumn tableEditColumnIcon">
 							<a class="tableEditColumnIcon" (click)="deleteFlow(flow.idMovimento)">

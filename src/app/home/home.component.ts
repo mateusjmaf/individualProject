@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import * as jsPDF from 'jspdf';
 
+import { CashFlow } from '../cashFlow/cash-flow.object';
 import { Expense } from '../expense/expense.objects';
 import { ModalAction } from '../modal/moda.interface.component';
 import { ModalComponent } from '../modal/modal.component';
@@ -18,20 +19,12 @@ export class HomeComponent implements OnInit {
   expenseList: Expense[];
   expenseSelected: Expense;
 
-  reserveList: Reserve[];
-
   cashflowParameter = {
     dataInicio: Date,
     dataFim: Date,
     despesa: '',
     situacaoReserva: '',
-    tipoMovimento: '1'
-  };
-
-  reserveParameter = {
-    dataInicio: Date,
-    dataFim: Date,
-    tipoReserva: ''
+    tipoMovimento: ' '
   };
 
   primaryActionCashflow: ModalAction = {
@@ -48,21 +41,18 @@ export class HomeComponent implements OnInit {
     }
   };
 
+  reserveParameter = {
+    dataInicio: Date,
+    dataFim: Date,
+    tipoReserva: ''
+  };
+
   @ViewChild('modalCashflowReport') modalCashflowReport: ModalComponent;
   @ViewChild('modalPartyReport') modalPartyReport: ModalComponent;
 
   constructor(private serverHttp: ServerHttpService) { }
 
   ngOnInit() {
-  }
-
-  showModalCashflowReport() {
-    this.getExpense();
-    this.modalCashflowReport.show();
-  }
-
-  showModalPartyReport() {
-    this.modalPartyReport.show();
   }
 
   getExpense() {
@@ -82,6 +72,14 @@ export class HomeComponent implements OnInit {
     this.serverHttp.readByParam(this.reserveParameter, `reservaRest` + `/buscarReservasPorParametros`).subscribe(response => {
       this.generateReserveReport(response);
     });
+  }
+
+  getTransactionType(transactionType) {
+    switch (transactionType) {
+      case 1: return 'Saída';
+      case 2: return 'Entrada';
+      default: return 'Ambos';
+    }
   }
 
   generatePdf(title, type, startDate, endDate) {
@@ -105,26 +103,22 @@ export class HomeComponent implements OnInit {
     return doc;
   }
 
-  generateCashflowReport(cashflows) {
+  generateCashflowReport(cashflows: Array<CashFlow>) {
+    const type = this.getTransactionType(this.cashflowParameter.tipoMovimento);
+    const startDate = this.cashflowParameter.dataInicio;
     let dataRow = 33;
     const title = 'Relatório do Fluxo de Caixa';
-    const transactionType = this.cashflowParameter.tipoMovimento !== '' ? this.cashflowParameter.tipoMovimento : 'Ambos';
-    const startDate = this.cashflowParameter.dataInicio;
     const endDate = this.cashflowParameter.dataFim;
 
-    const doc = this.generatePdf(title, transactionType, startDate, endDate);
+    const doc = this.generatePdf(title, type, startDate, endDate);
 
     doc.setFontSize(12);
     doc.text(14, 34, 'Data');
     doc.text(30, 34, '|    Valor ');
-    doc.text(60, 34, '|    Parcela(s)');
-    doc.text(90, 34, '|    Forma/Pagamento');
-
-    switch (transactionType) {
-      case '1': doc.text(135, 34, '|    Saídas'); break;
-      case '2': doc.text(135, 34, '|    Entradas'); break;
-      default: doc.text(135, 34, '|    Entrada/Saída'); break;
-    }
+    doc.text(60, 34, '|    Parcela');
+    doc.text(84, 34, '|    Pagamento');
+    doc.text(115, 34, '|    Tipo');
+    doc.text(140, 34, '|    Descrição');
 
     doc.line(7, 38, 200, 38);
     doc.setFontSize(10);
@@ -135,15 +129,25 @@ export class HomeComponent implements OnInit {
       for (const cashflow of cashflows) {
         dataRow += 10;
         doc.text(10, dataRow, cashflow.dataMovimento);
-        doc.text(40, dataRow, 'R$' + cashflow.valor);
-        doc.text(60, dataRow, '' + cashflow.numeroParcelas);
+        doc.text(34, dataRow, 'R$' + cashflow.valor);
+        doc.text(65, dataRow, cashflow.numeroParcelas + 'x');
+
         switch (cashflow.formaPagamento) {
-          case 1 : doc.text(90, dataRow, 'Dinheiro'); break;
-          case 2 : doc.text(90, dataRow, 'Cartão Débito'); break;
-          case 3 : doc.text(90, dataRow, 'Cartão Crédito'); break;
-          case 4 : doc.text(90, dataRow, 'Cheque'); break;
+          case 1 : doc.text(89, dataRow, 'Dinheiro'); break;
+          case 2 : doc.text(89, dataRow, 'Cartão Débito'); break;
+          case 3 : doc.text(89, dataRow, 'Cartão Crédito'); break;
+          case 4 : doc.text(89, dataRow, 'Cheque'); break;
         }
-        // doc.text(174, dataRow, 'R$' + cashflow.tipoMovimento);
+
+        doc.text(119, dataRow, '' + this.getTransactionType(cashflow.tipoMovimento));
+
+        if (cashflow.tipoMovimento === 1) {
+          doc.text(144, dataRow, '' + cashflow.despesa.descricao);
+        }
+
+        if (cashflow.tipoMovimento === 2) {
+          doc.text(144, dataRow, '' + cashflow.reserva.cliente.nome);
+        }
 
         doc.setLineWidth(0.3);
         doc.line(7, dataRow + 3, 200, dataRow + 3);
@@ -215,6 +219,15 @@ export class HomeComponent implements OnInit {
     this.reserveParameter.tipoReserva = '';
     this.reserveParameter.dataInicio = undefined;
     this.reserveParameter.dataFim = undefined;
+  }
+
+  showModalCashflowReport() {
+    this.getExpense();
+    this.modalCashflowReport.show();
+  }
+
+  showModalPartyReport() {
+    this.modalPartyReport.show();
   }
 
 }

@@ -119,9 +119,9 @@
 					name="transactionType"
 					[(ngModel)]="cashflowParameter.tipoMovimento">
 
+						<option value=" ">Ambos
 						<option value="1">Saída
 						<option value="2">Entrada
-						<option value=" ">Ambos
 				</select>
 			</div>
 		</div>
@@ -137,10 +137,10 @@
 						name="expense"
 						[(ngModel)]="cashflowParameter.despesa">
 						
-						<option [ngValue]=" " [selected]="expenseSelected != ' ' ? false : true">Todas</option>
+						<option [ngValue]=" " [selected]="cashflowParameter.despesa != ' ' ? false : true">Todas</option>
 						<option
 							*ngFor="let expense of expenseList"
-							[ngValue]="expense.id">
+							[ngValue]="expense.idDespesa">
 								{{ expense.descricao }}
 						</option>
 					</select>
