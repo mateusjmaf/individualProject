@@ -41,23 +41,37 @@ fieldset {
     float: none;
 }
 
+.footerFormLogin,
 .footerFormSubmit {
-	float: right !important;
 	padding-right: 15px;
 }
 
+.footerFormLogin {
+	text-align: center;
+}
+
+.footerFormSubmit {
+	float: right !important;
+}
+
+.btnLogin {
+	width: 100%
+}
+.btnLogin,
 .btnPrimary,
 .btnSecondary {
 	font-size:21px;
 	border-radius: 25px;
 }
 
+.btnLogin,
 .btnPrimary {
 	background-color: #ffffff;
 	border-color: #72b2b8;
 	color:#72b2b8;
 }
 
+.btnLogin:hover,
 .btnPrimary:hover {
 	background-color: #ffffff;
 	color: #72b2b8;
@@ -77,6 +91,7 @@ fieldset {
 	color: #ffffff;
 }
 
+.inputTriumphiLogin,
 .inputTriumphi {
 	border-color: #72b2b8;
 	color: #0f252a;
@@ -97,10 +112,19 @@ fieldset {
 }
 
 .btnTriumphi:focus,
-.btnSearch:focus
+.btnSearch:focus,
+inputTriumphiLogin:focus,
 .inputTriumphi:focus {
 	border-color: #4e898f;
 	box-shadow: 0 0 15px 1px #72b2b8;
+}
+
+.inputTriumphiLogin {
+	border-radius: 25px;
+	font-size: 21px;
+	height: 44px;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 .btnSearch {
@@ -137,13 +161,19 @@ fieldset {
 	background-color: #d3ffe2e0;
 }
 
-.forms {
+.forms,
+.formLogin {
 	background-color: #ffffff70;
 	border-radius: 7px;
 	box-shadow: 0px 7px 14px 1px #72b2b8;
 	font-size: 18px;
 	padding: 7px;
 	padding-top: 14px;
+}
+
+.formLogin{
+	font-size: 21px;
+	padding: 14px
 }
 
 .forms input, select {
