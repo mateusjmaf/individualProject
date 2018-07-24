@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { TabsModule } from 'ngx-bootstrap';
 
-import { routing } from './app.routing';
 import { AppComponent } from './app.component';
+import { routing } from './app.routing';
 import { CoreModule } from './../service/core.http.module';
+import { AuthService } from './login/auth.service';
 
 import { AdditionalComponent } from './additional/additional.component';
 import { CardComponent } from './card/card.component';
@@ -22,7 +24,6 @@ import { ReserveComponent } from './reserve/reserve.component';
 import { StaffComponent } from './staff/staff.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
-// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // import { CalendarComponent } from './calendar/calendar.component';
 // import { CalendarModule } from './calendar/calendar.module';
 
@@ -51,11 +52,13 @@ import { NavbarComponent } from './navbar/navbar.component';
     routing,
     CoreModule,
     TabsModule.forRoot(),
-    ModalModule.forRoot(),
     // NgbModule.forRoot(),
     // CalendarModule,
   ],
-  providers: [CoreModule],
+  providers: [
+    CoreModule,
+    AuthService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]
 })
