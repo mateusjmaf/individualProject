@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 import * as jsPDF from 'jspdf';
+
+import { AuthService } from '../login/auth.service';
+import { ServerHttpService } from '../../service/server.http.service';
 
 import { CashFlow } from '../cashFlow/cash-flow.object';
 import { Expense } from '../expense/expense.objects';
 import { ModalAction } from '../modal/moda.interface.component';
 import { ModalComponent } from '../modal/modal.component';
-import { Reserve } from '../reserve/reserve.object';
-import { ServerHttpService } from '../../service/server.http.service';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +20,8 @@ export class HomeComponent implements OnInit {
 
   expenseList: Expense[];
   expenseSelected: Expense;
+
+  showMenu = false;
 
   cashflowParameter = {
     dataInicio: Date,
@@ -50,26 +54,29 @@ export class HomeComponent implements OnInit {
   @ViewChild('modalCashflowReport') modalCashflowReport: ModalComponent;
   @ViewChild('modalPartyReport') modalPartyReport: ModalComponent;
 
-  constructor(private serverHttp: ServerHttpService) { }
+  constructor(private authService: AuthService, private router: Router, private serverHttp: ServerHttpService) { }
 
   ngOnInit() {
+    this.authService.showMenuEmitter.subscribe(
+      show => this.showMenu = show
+    );
   }
 
   getExpense() {
-    return this.serverHttp.readByName(' ', 'despesaRest' + '/buscarPorNome').subscribe(response => {
+    return this.serverHttp.readByName(' ', 'despesaRest/buscarPorNome').subscribe(response => {
       this.expenseList = response;
       this.expenseSelected = response[0];
     });
   }
 
   getFlowReport() {
-    this.serverHttp.readByParam(this.cashflowParameter, 'fluxoCaixaRest' + '/buscarPorParametros').subscribe(response => {
+    this.serverHttp.readByParam(this.cashflowParameter, 'fluxoCaixaRest/buscarPorParametros').subscribe(response => {
       this.generateCashflowReport(response);
     });
   }
 
   getReserveReport() {
-    this.serverHttp.readByParam(this.reserveParameter, `reservaRest` + `/buscarReservasPorParametros`).subscribe(response => {
+    this.serverHttp.readByParam(this.reserveParameter, `reservaRest/buscarReservasPorParametros`).subscribe(response => {
       this.generateReserveReport(response);
     });
   }

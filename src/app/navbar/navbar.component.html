@@ -1,0 +1,95 @@
+<div class="row">		
+	<nav class="navbar navbar-default navbar-fixed-top navbars" role="navigation">
+		<div class="container-fluid">	
+
+			<div class="navbar-header">
+				<a class="navbar-brand">				
+					<img src="assets/images/logo.png" class="img-responsive logo" alt="">
+				</a>
+				<button type="button" class="navbar-toggle menuIconCollapse" data-toggle="collapse" data-target="#navigationMenu">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>					
+				</button>				
+			</div>				
+				
+			<div class="collapse navbar-collapse navbar-right" id="navigationMenu">
+				<ul class="nav navbar-nav ">
+					<!-- <li class="tabs" routerLinkActive="active">
+						<a class="navBottons itemMenu" routerLink="calendar">
+							<span class="glyphicon glyphicon-home" ></span> Home
+						</a>
+					</li> -->
+					<li>
+						<a routerLinkActive="active" class="navBottons itemMenu" routerLink="reserve">
+							<span class="glyphicon glyphicon-calendar"></span> Reservas
+						</a>
+					</li>
+					<li>
+						<a routerLinkActive="active"class="navBottons itemMenu" routerLink="cashFlow">
+							<span class="glyphicon glyphicon-usd"></span> Fluxo de Caixa
+						</a>
+					</li>
+					<li routerLinkActive="active" class="dropdown">  
+						<a routerLinkActive="active" class="dropdown-toggle navBottons itemMenu" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-user"></span> Cadastros
+							<span class="caret"></span>							
+						</a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a routerLinkActive="active" class="itemMenu" routerLink="client"> Clientes</a>
+								</li>
+								<li>
+									<a routerLinkActive="active" class="itemMenu" routerLink="staff"> Staff's</a>
+								</li>
+							</ul>
+					</li>
+					<li>
+						<a routerLinkActive="active" routerLinkActive="active" class="navBottons itemMenu" routerLink="product">
+							<span class="glyphicon glyphicon-glass"></span> Produtos
+						</a>
+					</li>
+					<li>
+						<a routerLinkActive="active" class="navBottons itemMenu" routerLink="kitParty">
+							<span class="glyphicon glyphicon-gift"></span> Kit-Festa
+						</a>
+					</li>
+					<li class="dropdown" routerLinkActive="active">
+						<a routerLinkActive="active" class="dropdown-toggle navBottons" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-file"></span> Relatórios
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<li routerLinkActive="active">
+								<a routerLinkActive="active" class="itemMenu" (click)="showModalCashflowReport()">Relatório de Finanças</a>
+							</li>
+							<li routerLinkActive="active">
+								<a routerLinkActive="active" class="itemMenu" (click)="showModalPartyReport()">Relatório de Festas</a>
+							</li>
+						</ul>						
+					</li>
+
+					<!-- <li class="dropdown" routerLinkActive="active">
+						<a routerLinkActive="active" class="dropdown-toggle navBottons" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-list-alt"></span> Documentos
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu" role="menu">
+							<li routerLinkActive="active"><a class="itemMenu" routerLink="../relatorios/requisicaoProd.html">Requisição de Produtos</a></li>
+							<li routerLinkActive="active"><a class="itemMenu" routerLink="../relatorios/recibosPag.html">Recibos de Pagamentos</a></li>
+							<li routerLinkActive="active"><a class="itemMenu" routerLink="../relatorios/checkList.html">Check-List de Conferência</a></li>														
+						</ul>						
+					</li>	 -->
+
+					<li>
+						<a class="navBottons itemMenu">
+						  <!-- onClick="windows.location("") -->
+							<span class="glyphicon glyphicon-log-out"></span>
+						</a>
+					</li>
+				</ul>
+			</div>	
+
+		</div>		
+	</nav>
+</div>

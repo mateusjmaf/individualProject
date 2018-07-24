@@ -20,9 +20,8 @@ import { ModalComponent } from './modal/modal.component';
 import { ProductComponent } from './product/product.component';
 import { ReserveComponent } from './reserve/reserve.component';
 import { StaffComponent } from './staff/staff.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
-import { TabsModule } from 'ngx-bootstrap';
-import { ModalModule } from 'ngx-bootstrap/modal';
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // import { CalendarComponent } from './calendar/calendar.component';
 // import { CalendarModule } from './calendar/calendar.module';
@@ -39,6 +38,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     KitPartyComponent,
     LoginComponent,
     ModalComponent,
+    NavbarComponent,
     ProductComponent,
     ReserveComponent,
     StaffComponent,
