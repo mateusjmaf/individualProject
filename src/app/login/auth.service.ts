@@ -20,13 +20,19 @@ export class AuthService {
       this.authUser = true;
       this.showMenuEmitter.emit(true);
       this.router.navigate(['/']);
+      return true;
 
     } else {
       this.authUser = false;
       this.showMenuEmitter.emit(false);
       this.router.navigate(['/login']);
+      return false;
 
     }
+  }
+
+  isAuthenticatedUser() {
+    return this.authUser;
   }
 
   private getUserAuth(user: User) {

@@ -8,6 +8,7 @@ import { TabsModule } from 'ngx-bootstrap';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { CoreModule } from './../service/core.http.module';
+import { AuthGuard } from '../service/auth.guard';
 import { AuthService } from './login/auth.service';
 
 import { AdditionalComponent } from './additional/additional.component';
@@ -19,13 +20,10 @@ import { HomeComponent } from './home/home.component';
 import { KitPartyComponent } from './kitParty/kit-party.component';
 import { LoginComponent } from './login/login.component';
 import { ModalComponent } from './modal/modal.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { ProductComponent } from './product/product.component';
 import { ReserveComponent } from './reserve/reserve.component';
 import { StaffComponent } from './staff/staff.component';
-import { NavbarComponent } from './navbar/navbar.component';
-
-// import { CalendarComponent } from './calendar/calendar.component';
-// import { CalendarModule } from './calendar/calendar.module';
 
 @NgModule({
   declarations: [
@@ -52,11 +50,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     routing,
     CoreModule,
     TabsModule.forRoot(),
-    // NgbModule.forRoot(),
-    // CalendarModule,
   ],
   providers: [
     CoreModule,
+    AuthGuard,
     AuthService
   ],
   bootstrap: [AppComponent],

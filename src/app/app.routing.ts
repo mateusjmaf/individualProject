@@ -1,6 +1,8 @@
 import { Routes, RouterModule  } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core/src/metadata/ng_module';
 
+import { AuthGuard } from '../service/auth.guard';
+
 import { ClientComponent } from './client/client.component';
 import { KitPartyComponent } from './kitParty/kit-party.component';
 import { LoginComponent } from './login/login.component';
@@ -13,14 +15,14 @@ import { HomeComponent } from './home/home.component';
 
 const app_routes: Routes = [
     { path: 'login', component: LoginComponent },
-    { path: '', component: HomeComponent },
-    { path: 'home', component: HomeComponent },
-    { path: 'client', component: ClientComponent },
-    { path: 'cashFlow', component: CashFlowComponent },
-    { path: 'kitParty', component: KitPartyComponent },
-    { path: 'product', component: ProductComponent },
-    { path: 'reserve', component: ReserveComponent },
-    { path: 'staff', component: StaffComponent },
+    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'client', component: ClientComponent, canActivate: [AuthGuard] },
+    { path: 'cashFlow', component: CashFlowComponent, canActivate: [AuthGuard] },
+    { path: 'kitParty', component: KitPartyComponent, canActivate: [AuthGuard] },
+    { path: 'product', component: ProductComponent, canActivate: [AuthGuard] },
+    { path: 'reserve', component: ReserveComponent, canActivate: [AuthGuard] },
+    { path: 'staff', component: StaffComponent, canActivate: [AuthGuard] },
     // { path: 'calendar', component: CalendarComponent }
 ];
 
