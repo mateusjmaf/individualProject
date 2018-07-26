@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { TabsModule } from 'ngx-bootstrap';
+import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
-import { routing } from './app.routing';
-import { CoreModule } from './../service/core.http.module';
 import { AuthGuard } from '../service/auth.guard';
 import { AuthService } from './login/auth.service';
+import { CashflowReport } from '../service/cashflow-report.service';
+import { CoreModule } from './../service/core.http.module';
+import { ReserveReport } from '../service/reserve-report.service';
 
 import { AdditionalComponent } from './additional/additional.component';
 import { CardComponent } from './card/card.component';
@@ -45,16 +47,18 @@ import { StaffComponent } from './staff/staff.component';
   ],
   imports: [
     BrowserModule,
+    CoreModule,
     FormsModule,
     HttpModule,
     routing,
-    CoreModule,
     TabsModule.forRoot(),
   ],
   providers: [
-    CoreModule,
     AuthGuard,
-    AuthService
+    AuthService,
+    CashflowReport,
+    CoreModule,
+    ReserveReport
   ],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]

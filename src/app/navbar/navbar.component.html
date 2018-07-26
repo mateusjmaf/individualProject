@@ -1,18 +1,24 @@
-<div class="row">		
+<style>
+	.modalLineSpace {
+		margin-bottom: 14px;
+	}
+</style>
+
+<div class="row">
 	<nav class="navbar navbar-default navbar-fixed-top navbars" role="navigation">
-		<div class="container-fluid">	
+		<div class="container-fluid">
 
 			<div class="navbar-header">
-				<a class="navbar-brand">				
+				<a class="navbar-brand">
 					<img src="assets/images/logo.png" class="img-responsive logo" alt="">
 				</a>
 				<button type="button" class="navbar-toggle menuIconCollapse" data-toggle="collapse" data-target="#navigationMenu">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>					
-				</button>				
-			</div>				
-				
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+
 			<div class="collapse navbar-collapse navbar-right" id="navigationMenu">
 				<ul class="nav navbar-nav ">
 					<!-- <li class="tabs" routerLinkActive="active">
@@ -30,10 +36,10 @@
 							<span class="glyphicon glyphicon-usd"></span> Fluxo de Caixa
 						</a>
 					</li>
-					<li routerLinkActive="active" class="dropdown">  
+					<li routerLinkActive="active" class="dropdown">
 						<a routerLinkActive="active" class="dropdown-toggle navBottons itemMenu" data-toggle="dropdown">
 							<span class="glyphicon glyphicon-user"></span> Cadastros
-							<span class="caret"></span>							
+							<span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu" role="menu">
 								<li>
@@ -66,7 +72,7 @@
 							<li routerLinkActive="active">
 								<a routerLinkActive="active" class="itemMenu" (click)="showModalPartyReport()">Relatório de Festas</a>
 							</li>
-						</ul>						
+						</ul>
 					</li>
 
 					<!-- <li class="dropdown" routerLinkActive="active">
@@ -77,8 +83,8 @@
 						<ul class="dropdown-menu" role="menu">
 							<li routerLinkActive="active"><a class="itemMenu" routerLink="../relatorios/requisicaoProd.html">Requisição de Produtos</a></li>
 							<li routerLinkActive="active"><a class="itemMenu" routerLink="../relatorios/recibosPag.html">Recibos de Pagamentos</a></li>
-							<li routerLinkActive="active"><a class="itemMenu" routerLink="../relatorios/checkList.html">Check-List de Conferência</a></li>														
-						</ul>						
+							<li routerLinkActive="active"><a class="itemMenu" routerLink="../relatorios/checkList.html">Check-List de Conferência</a></li>
+						</ul>
 					</li>	 -->
 
 					<li>
@@ -88,8 +94,141 @@
 						</a>
 					</li>
 				</ul>
-			</div>	
+			</div>
 
-		</div>		
+		</div>
 	</nav>
 </div>
+
+<app-modal-component
+	#modalCashflowReport
+	title="Relatório de Fluxo de Caixa"
+	[primary-action]="primaryActionCashflow">
+
+	<div class="app-modal-body">
+
+		<div class="row modalLineSpace">
+			<label class="control-label col-xs-4">Tipo de Transação:</label>
+			<div class="col-xs-8">
+				<select
+					class="form-control inputTriumphi"
+					name="transactionType"
+					[(ngModel)]="cashflowParameter.tipoMovimento">
+						<option value=" ">Ambos
+						<option value="1">Saída
+						<option value="2">Entrada
+				</select>
+			</div>
+		</div>
+
+		<div class="row modalLineSpace" [hidden]="(cashflowParameter.tipoMovimento == ' ')">
+			<ng-container *ngIf="cashflowParameter.tipoMovimento == 1; then outflowReport; else inflowReport"></ng-container>
+
+			<ng-template #outflowReport>
+				<label class="control-label col-xs-4">Despesa:</label>
+				<div class="col-xs-8">
+					<select
+						class="form-control inputTriumphi"
+						name="expense"
+						[(ngModel)]="cashflowParameter.despesa">
+
+						<option [ngValue]=" " [selected]="cashflowParameter.despesa != ' ' ? false : true">Todas</option>
+						<option
+							*ngFor="let expense of expenseList"
+							[ngValue]="expense.idDespesa">
+								{{ expense.descricao }}
+						</option>
+					</select>
+				</div>
+			</ng-template>
+
+			<ng-template #inflowReport>
+				<label class="control-label col-xs-4">Situção da rerva:</label>
+				<div class="col-md-8">
+					<select
+						class="form-control inputTriumphi"
+						name="reserveTypeFlowReport"
+						[(ngModel)]="reserveTypeFlowReport">
+
+						<option value=" ">Todas
+						<option value="Reservada">Reservada
+						<option value="Pré-Reservada">Pré-Reservada
+						<option value="Cancelada">Cancelada
+						<option value="Finalizada">Finalizada
+					</select>
+				</div>
+			</ng-template>
+		</div>
+
+		<div class="row modalLineSpace">
+			<label class="control-label col-xs-4">Data inicial:</label>
+			<div class="col-xs-8">
+				<input
+					class="form-control inputTriumphi"
+					name="cashflowParameterStartDate"
+					type="date"
+					[(ngModel)]="cashflowParameter.dataInicio">
+			</div>
+		</div>
+
+		<div class="row">
+			<label class="control-label col-xs-4">Data Final:</label>
+			<div class="col-xs-8">
+				<input
+					class="form-control inputTriumphi"
+					name="cashflowParameterEndDate"
+					type="date"
+					[(ngModel)]="cashflowParameter.dataFim">
+			</div>
+		</div>
+
+	</div>
+</app-modal-component>
+
+<app-modal-component
+	#modalPartyReport
+	title="Relatório de Festas"
+	[primary-action]="primaryActionParty">
+
+	<div class="app-modal-body">
+		<div class="row modalLineSpace">
+			<label class="control-label col-xs-4">Situção da rerva:</label>
+			<div class="col-xs-8">
+				<select
+					class="form-control inputTriumphi"
+					name="reserveTypePartyReport"
+					[(ngModel)]="reserveParameter.tipoReserva">
+
+					<option value="">Todas
+					<option value="Reservada">Reservada
+					<option value="Pré-Reservada">Pré-Reservada
+					<option value="Cancelada">Cancelada
+					<option value="Finalizada">Finalizada
+				</select>
+			</div>
+		</div>
+
+		<div class="row modalLineSpace">
+			<label class="control-label col-xs-4">Data inicial:</label>
+			<div class="col-xs-8">
+				<input
+					class="form-control inputTriumphi"
+					name="reserveDateStartReport"
+					type="date"
+					[(ngModel)]="reserveParameter.dataInicio">
+			</div>
+		</div>
+
+		<div class="row">
+			<label class="control-label col-xs-4">Data Final:</label>
+			<div class="col-xs-8">
+				<input
+					class="form-control inputTriumphi"
+					name="reserveDateEndReport"
+					type="date"
+					[(ngModel)]="reserveParameter.dataFim">
+			</div>
+		</div>
+
+	</div>
+</app-modal-component>
