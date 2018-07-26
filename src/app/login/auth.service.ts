@@ -14,31 +14,32 @@ export class AuthService {
   constructor(private router: Router, private serverHttp: ServerHttpService) { }
 
   loginRequest(user: User) {
+    this.serverHttp.readByParam(user, 'userRest/buscarUsuario').subscribe(response => {
+      this.getUserAuth(response);
 
-    // if (this.getUserAuth(user)) {
-    if (user.name === 'tst' && user.password === 'tst') {
-      this.authUser = true;
-      this.showMenuEmitter.emit(true);
-      this.router.navigate(['/']);
-      return true;
-
-    } else {
-      this.authUser = false;
-      this.showMenuEmitter.emit(false);
-      this.router.navigate(['/login']);
-      return false;
-
-    }
+    });
   }
 
   isAuthenticatedUser() {
     return this.authUser;
   }
 
-  private getUserAuth(user: User) {
-    this.serverHttp.readByParam(user, 'userRest/buscarUsuario').subscribe(response => {
-      return response;
-    });
+  private getUserAuth(allowed: boolean) {
+    if (allowed) {
+      this.authUser = true;
+      this.showMenuEmitter.emit(true);
+      this.router.navigate(['/']);
+      return true;
+
+    } else {
+      alert('Acesso negado!');
+
+      this.authUser = false;
+      this.showMenuEmitter.emit(false);
+      this.router.navigate(['/login']);
+      return false;
+
+    }
   }
 
 }
