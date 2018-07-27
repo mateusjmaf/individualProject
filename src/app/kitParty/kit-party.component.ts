@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ServerHttpService } from '../../service/server.http.service';
-import { Observable } from 'rxjs/Observable';
 
 import { KitParty } from './kit-party.object';
+import { ModalComponent } from '../modal/modal.component';
+import { ModalAction } from '../modal/moda.interface.component';
 
 @Component({
   selector: 'app-kit-party',
@@ -12,10 +13,20 @@ import { KitParty } from './kit-party.object';
 })
 export class KitPartyComponent implements OnInit {
 
+  idKit: number;
   kit: KitParty;
   kitList: KitParty[];
   kitSearchValue = ' ';
   restRoute = 'kitRest';
+
+  primaryActionDelete: ModalAction = {
+    action: () => {
+      this.modalKitDelete.hide();
+      this.deleteKit(this.idKit);
+    }
+  };
+
+  @ViewChild('modalKitDelete') modalKitDelete: ModalComponent;
 
   constructor(private serverHttp: ServerHttpService) { this.kit = new KitParty(); }
 
@@ -37,6 +48,11 @@ export class KitPartyComponent implements OnInit {
         this.resetForm();
       });
     }
+  }
+
+  confirmExclusion(idKit) {
+    this.idKit = idKit;
+    this.modalKitDelete.show();
   }
 
   deleteKit(id: number) {

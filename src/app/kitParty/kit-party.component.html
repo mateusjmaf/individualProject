@@ -6,8 +6,8 @@
 
 <div class="row forms">
 	<div class="col-xs-12">
-		<form 
-		class="form-horizontal form-group" 
+		<form
+		class="form-horizontal form-group"
 		name="kitForm"
 		#kitForm="ngForm"
 		(ngSubmit)="onSubmit()">
@@ -19,71 +19,71 @@
 						<div class="col-xs-12 col-md-8">
 							<input
 								#descriptionKit="ngModel"
-								class="form-control inputTriumphi" 
-								name="descriptionKit" 
+								class="form-control inputTriumphi"
+								name="descriptionKit"
 								required
 								type="text"
 								[(ngModel)]="kit.descricao">
 						</div>
 					</div>
-					
+
 					<div class="form-group" [class.has-error]="priceKit.invalid && priceKit.touched">
 						<label class="control-label col-xs-12 col-md-4">Preço:</label>
 						<div class="col-xs-12 col-md-8">
 							<input
 								#priceKit="ngModel"
 								class="form-control inputTriumphi"
-								name="preco" 
+								name="preco"
 								required
-								type="number" 
+								type="number"
 								[(ngModel)]="kit.preco">
 						</div>
 					</div>
 
-					
+
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="form-group">
 								<label class="col-xs-4 control-label">Disponibilidade:</label>
 								<div class="form-check form-check-inline col-xs-12 col-md-8">
 									<label class="form-check-label">Dm <br>
-										<input 
+										<input
 											type="checkbox"
 											name="dom"
 											[(ngModel)]="kit.dom">
-									</label> 
+									</label>
 									<label class="form-check-label">Sg <br>
-										<input 
+										<input
 											type="checkbox"
 											name="seg"
 											[(ngModel)]="kit.seg">
 									</label>
 									<label class="form-check-label">Tr <br>
-										<input 
+										<input
 											type="checkbox"
 											name="ter"
 											[(ngModel)]="kit.ter">
 									</label>
 									<label class="form-check-label">Qa <br>
-										<input 
+										<input
 											type="checkbox"
 											name="qua"
 											[(ngModel)]="kit.qua">
 									</label>
 									<label class="form-check-label">Qi <br>
-										<input 
+										<input
 											type="checkbox"
 											name="qui"
-											[(ngModel)]="kit.qui">	
+											[(ngModel)]="kit.qui">
 									</label>
 									<label class="form-check-label">Sx <br>
-										<input 
+										<input
 											type="checkbox"
 											name="sex"
 											[(ngModel)]="kit.sex">
 									</label>
 									<label class="form-check-label">Sb <br>
-										<input 
+										<input
 											type="checkbox"
 											name="sab"
 											[(ngModel)]="kit.sab">
@@ -99,7 +99,7 @@
 						</label>
 						<div class="col-xs-12 col-md-8">
 							<label class="switch">
-								<input 
+								<input
 									type="checkbox"
 									name="basicDecoration"
 									[(ngModel)]="kit.decorBasic">
@@ -112,10 +112,10 @@
 
 				<div class="col-xs-12 col-md-6">
 					<div class="row groupStaffs">
-						
+
 						<div class="col-xs-12">
 							<label class="control-label">Grupo de Staff`s</label>
-						</div>						
+						</div>
 
 						<div class="col-xs-12">
 							<div class="form-group" [class.has-error]="bartenderKit.invalid && bartenderKit.touched">
@@ -124,7 +124,7 @@
 									<input
 										#bartenderKit="ngModel"
 										class="form-control inputTriumphi"
-										name="bartenderKit" 
+										name="bartenderKit"
 										required
 										type="number"
 										[(ngModel)]="kit.garcom">
@@ -133,16 +133,16 @@
 
 							<div class="form-group" [class.has-error]="hostessKit.invalid && hostessKit.touched">
 								<label class="control-label col-xs-11 col-md-5">Recepcionista:</label>
-								<div class="col-xs-12 col-md-7">	
+								<div class="col-xs-12 col-md-7">
 									<input
 										#hostessKit="ngModel"
 										class="form-control inputTriumphi"
-										name="recepcionista" 
+										name="recepcionista"
 										required
 										type="number"
 										[(ngModel)]="kit.recep">
 								</div>
-							</div>	
+							</div>
 
 							<div class="form-group" [class.has-error]="barmanKit.invalid && barmanKit.touched">
 								<label class="control-label col-xs-11 col-md-5">Copeiro:</label>
@@ -150,7 +150,7 @@
 									<input
 										#barmanKit="ngModel"
 										class="form-control inputTriumphi"
-										name="copeiro" 
+										name="copeiro"
 										type="number"
 										required
 										[(ngModel)]="kit.copeiro">
@@ -159,7 +159,7 @@
 
 							<div class="form-group" [class.has-error]="guideKit.invalid && guideKit.touched">
 								<label class="control-label col-xs-11 col-md-5">Monitor:</label>
-								<div class="col-xs-12 col-md-7">	
+								<div class="col-xs-12 col-md-7">
 									<input
 										#guideKit="ngModel"
 										class="form-control inputTriumphi"
@@ -170,18 +170,18 @@
 								</div>
 							</div>
 
-						</div>	
+						</div>
 					</div>
 				</div>
-			
-				<div class="footerFormSubmit">		
-					<button 
-						type="button" 
+
+				<div class="footerFormSubmit">
+					<button
+						type="button"
 						class="btn glyphicon glyphicon-remove btnSecondary"
 						(click)="resetForm()">
 					</button>
-					<button 
-						type="submit" 
+					<button
+						type="submit"
 						class="btn glyphicon glyphicon-ok btnPrimary"
 						[disabled]="kitForm.invalid">
 					</button>
@@ -197,23 +197,23 @@
 <div class="row forms">
 	<div class="col-xs-6 col-xs-offset-3">
 		<div class="input-group inputGroup">
-			<input 
-				class="form-control inputTriumphi" 
-				type="text" 
-				placeholder="Buscar Kit-Festa" 
+			<input
+				class="form-control inputTriumphi"
+				type="text"
+				placeholder="Buscar Kit-Festa"
 				[(ngModel)]="kitSearchValue">
 			<span class="input-group-btn">
-				<button 
-					class="btn glyphicon glyphicon-search btnSearch" 
-					name="btnBuscar" 
-					type="button" 
-					value="Buscar" 
+				<button
+					class="btn glyphicon glyphicon-search btnSearch"
+					name="btnBuscar"
+					type="button"
+					value="Buscar"
 					(click)="searchKit()">
 				</button>
 			</span>
 		</div>
 	</div>
-	
+
 	<br>
 
 	<div class="row">
@@ -229,16 +229,16 @@
 				<ng-container
 					*ngIf="kitList; then searchSuccess; else searchFail">
 				</ng-container>
-				
+
 				<ng-template #searchSuccess>
-					<tr *ngFor="let kit of kitList, let i = index">
-						<td>{{ kitList[i].descricao }}</td>
-						<td>R$ {{ kitList[i].preco }}</td>
+					<tr *ngFor="let kit of kitList">
+						<td>{{ kit.descricao }}</td>
+						<td>R$ {{ kit.preco }}</td>
 						<td class="tableEditColumn tableEditColumnIcon">
-							<a class="tableEditColumnIcon" (click)="deleteKit(kitList[i].idKit)">
+							<a class="tableEditColumnIcon" (click)="confirmExclusion(kit.idKit)">
 								<span class="glyphicon glyphicon-trash"></span>
 							</a>
-							<a class="tableEditColumnIcon" (click)="editKit(kitList[i])">
+							<a class="tableEditColumnIcon" (click)="editKit(kit)">
 								<span class="glyphicon glyphicon-edit"></span>
 							</a>
 						</td>
@@ -255,3 +255,19 @@
 		</div>
 	</div>
 </div>
+
+<app-modal-component
+	#modalKitDelete
+	title="Atenção!"
+  [primary-action]="primaryActionDelete">
+
+	<div class="app-modal-body">
+		<div class="row">
+
+			<div class="col-xs-12 messageConfirmDelete">
+				<span>Você realmente deseja excluir?</span>
+      </div>
+
+		</div>
+  </div>
+</app-modal-component>
