@@ -6,7 +6,7 @@
 
 <div class="row forms">
 	<div class="col-xs-12">
-		<form 
+		<form
 			class="form-horizontal form-group"
 			#reserveForm="ngForm"
 			(ngSubmit)="onSubmit()">
@@ -23,15 +23,15 @@
 										<input
 											#clientPicked
 											name="client"
-											class="form-control inputTriumphi" 
+											class="form-control inputTriumphi"
 											placeholder="Insira o nome do cliente"
 											type="text"
 											required
-											[(ngModel)]="clientName">		
+											[(ngModel)]="clientName">
 									</div>
 									<div class="col-xs-1">
-										<button 
-											type="button" 
+										<button
+											type="button"
 											class="btn btnTriumphi glyphicon glyphicon-search"
 											(click)="getClients()">
 										</button>
@@ -39,7 +39,7 @@
 								</div>
 							</div>
 						</div>
-			
+
 						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<div class="form-group" [class.has-error]="birthdayPerson.invalid && birthdayPerson.touched">
@@ -47,8 +47,8 @@
 									<div class="col-xs-8">
 										<input
 											#birthdayPerson="ngModel"
-											class="form-control inputTriumphi" 
-											name="birthdayPerson" 
+											class="form-control inputTriumphi"
+											name="birthdayPerson"
 											placeholder="Insira o nome do aniversariante"
 											type="text"
 											required
@@ -61,10 +61,10 @@
 								<div class="form-group" [class.has-error]="birthdayPersonYearsOld.invalid && birthdayPersonYearsOld.touched">
 									<label class="control-label col-xs-4">Idade:</label>
 									<div class="col-xs-8">
-										<input 
+										<input
 											#birthdayPersonYearsOld="ngModel"
-											class="form-control inputTriumphi" 
-											name="birthdayPersonYearsOld" 
+											class="form-control inputTriumphi"
+											name="birthdayPersonYearsOld"
 											placeholder="Insira idade"
 											type="number"
 											required
@@ -73,12 +73,12 @@
 								</div>
 							</div>
 						</div>
-			
+
 						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<div class="div-form form-group" [class.has-error]="reserveType.invalid && reserveType.touched">
 									<label class="control-label col-xs-12 col-md-4">Situação Reserva:</label>
-									<div class="col-xs-12 col-md-8">	
+									<div class="col-xs-12 col-md-8">
 										<select
 											#reserveType="ngModel"
 											class="form-control inputTriumphi"
@@ -90,14 +90,14 @@
 											<option value="Cancelada">Cancelada
 											<option value="Finalizada">Finalizada
 										</select>
-									</div>			
+									</div>
 								</div>
 							</div>
-			
+
 							<div class="col-xs-12 col-md-6">
 								<div class="div-form form-group" [class.has-error]="kitParty.invalid && kitParty.touched">
 									<label class="control-label col-xs-12 col-md-4">Kit Festa:</label>
-									<div class="col-xs-12 col-md-8">	
+									<div class="col-xs-12 col-md-8">
 										<select
 											#kitParty="ngModel"
 											class="form-control inputTriumphi"
@@ -109,15 +109,15 @@
 													*ngFor="let kit of kitList, let i = index"
 													[ngValue]="kit"
 													[selected]="(reserve.kitFesta && kit.idKit == reserve.kitFesta.idKit)">
-														{{ kit.descricao }} - R${{ kit.preco }},00 
+														{{ kit.descricao }} - R${{ kit.preco }},00
 												</option>
 										</select>
-									</div>			
-									
+									</div>
+
 								</div>
 							</div>
 						</div>
-			
+
 						<div class="row">
 							<div class="col-xs-12 col-md-6">
 								<div class="div-form form-group" [class.has-error]="reserveDate.invalid && reserveDate.touched">
@@ -133,14 +133,14 @@
 									</div>
 								</div>
 							</div>
-			
+
 							<div class="col-xs-12 col-md-6">
 								<div class="div-form form-group">
 									<label class="control-label col-xs-4">Desconto:</label>
 									<div class="col-xs-8">
 										<input
 											class="form-control inputTriumphi"
-											name="discount" 
+											name="discount"
 											type="number"
 											[(ngModel)]="reserve.desconto">
 									</div>
@@ -170,8 +170,8 @@
 									<th>Quantidade</th>
 									<th>Subtotal</th>
 									<th>
-										<button 
-											type="button" 
+										<button
+											type="button"
 											class="btn btnTriumphi glyphicon glyphicon-plus"
 											(click)="getProducts()">
 										</button>
@@ -181,25 +181,25 @@
 								<ng-container
 									*ngIf="cardList && cardList.length > 0; then haveCards; else noHaveCards">
 								</ng-container>
-				
+
 								<ng-template #haveCards>
 									<tr *ngFor="let card of cardList, let i = index">
 										<td>
 											{{ card.produto.nome }}
 										</td>
 										<td>
-											<input 
+											<input
 												class="form-control inputTriumphi"
 												type="number"
-												[name]="i+'cv'" 
+												[name]="i+'cv'"
 												(change)="onChangeProductValue(cardList)"
 												[(ngModel)]="card.valor">
 										</td>
 										<td>
-											<input 
+											<input
 												class="form-control inputTriumphi"
 												type="number"
-												[name]="i+'cq'" 
+												[name]="i+'cq'"
 												(change)="onChangeProductValue(cardList)"
 												[(ngModel)]="card.quantidade">
 										</td>
@@ -209,8 +209,8 @@
 											</div>
 										</td>
 										<td>
-											<button 
-												type="button" 
+											<button
+												type="button"
 												class="btn btnTriumphi glyphicon glyphicon-minus"
 												(click)="onRemoveCard(card, [i])">
 											</button>
@@ -223,11 +223,11 @@
 										<td></td>
 										<td></td>
 										<td>
-											<div class="form-control">Valor Total: R${{ cardValue || 0 }},00</div>					
+											<div class="form-control">Valor Total: R${{ cardValue || 0 }},00</div>
 										</td>
 									</tr>
 								</ng-template>
-								
+
 								<ng-template #noHaveCards>
 									<tr>
 										<td colspan="5">
@@ -237,9 +237,9 @@
 										</td>
 									</tr>
 								</ng-template>
-								
+
 							</table>
-						</div>						
+						</div>
 					</tab>
 
 					<tab class="tabReserve" heading="Adicionais">
@@ -252,29 +252,29 @@
 									<th>Quantidade</th>
 									<th>Subtotal</th>
 									<th>
-										<button 
-											type="button" 
+										<button
+											type="button"
 											class="btn btnTriumphi glyphicon glyphicon-plus"
 											(click)="onIncludesNewAdd()">
 										</button>
 									</th>
 								</tr>
-				
+
 								<ng-container
 									*ngIf="addsList && addsList.length > 0; then haveAdds; else noHaveAdds">
 								</ng-container>
-			
+
 								<ng-template #haveAdds>
 									<tr *ngFor="let add of addsList, let i = index">
 										<td>
-											<input 
+											<input
 												class="form-control inputTriumphi"
 												type="text"
 												[name]="i+'d'"
 												[(ngModel)]="add.descricao">
 										</td>
 										<td>
-											<input 
+											<input
 												class="form-control inputTriumphi"
 												type="number"
 												[name]="i+'av'"
@@ -282,7 +282,7 @@
 												[(ngModel)]="add.valor">
 										</td>
 										<td>
-											<input 
+											<input
 												class="form-control inputTriumphi"
 												type="number"
 												[name]="i+'aq'"
@@ -295,8 +295,8 @@
 											</div>
 										</td>
 										<td>
-											<button 
-												type="button" 
+											<button
+												type="button"
 												class="btn btnTriumphi glyphicon glyphicon-minus"
 												(click)="onRemoveAdd([i])">
 											</button>
@@ -312,7 +312,7 @@
 										</td>
 									</tr>
 								</ng-template>
-								
+
 								<ng-template #noHaveAdds>
 									<tr>
 										<td colspan="5">
@@ -328,17 +328,17 @@
 					</tab>
 				</tabset>
 			</div>
-			
 
-			<div class="row">				
-				<div class="footerFormSubmit">		
-					<button 
-						type="button" 
+
+			<div class="row">
+				<div class="footerFormSubmit">
+					<button
+						type="button"
 						class="btn glyphicon glyphicon-remove btnSecondary"
 						(click)="resetForm()">
 					</button>
-					<button 
-						type="submit" 
+					<button
+						type="submit"
 						class="btn glyphicon glyphicon-ok btnPrimary"
 						[disabled]="reserveForm.invalid">
 					</button>
@@ -354,17 +354,17 @@
 <div class="row forms">
 	<div class="col-xs-6 col-xs-offset-3">
 		<div class="input-group inputGroup">
-			<input 
-				class="form-control inputTriumphi" 
-				type="text" 
+			<input
+				class="form-control inputTriumphi"
+				type="text"
 				placeholder="Buscar Reserva"
 				[(ngModel)]="reserveSearchValue">
 			<span class="input-group-btn">
-				<button 
-					class="btn glyphicon glyphicon-search btnSearch" 
-					name="btnBuscar" 
-					type="button" 
-					value="Buscar" 
+				<button
+					class="btn glyphicon glyphicon-search btnSearch"
+					name="btnBuscar"
+					type="button"
+					value="Buscar"
 					(click)="searchReserve()">
 				</button>
 			</span>
@@ -372,7 +372,7 @@
 	</div>
 
 	<br>
-	
+
 	<div class="row">
 		<table class="table table-hover tableDisplay">
 			<tr class="tableHeader">
@@ -385,14 +385,14 @@
 			<ng-container
 				*ngIf="reserveList; then searchSuccess; else searchFail">
 			</ng-container>
-			
+
 			<ng-template #searchSuccess>
 				<tr *ngFor="let reserve of reserveList, let i = index">
 					<td>{{ reserve.cliente.nome }}</td>
 					<td>{{ reserve.dataReserva | date: 'M/d/yy, h:mm a' }}</td>
 					<td>{{ reserve.tipoReserva }}</td>
 					<td class="tableEditColumn tableEditColumnIcon">
-						<a class="tableEditColumnIcon" (click)="deleteReserve(reserve.idReserva)">
+						<a class="tableEditColumnIcon" (click)="confirmExclusion(reserve.idReserva)">
 							<span class="glyphicon glyphicon-trash"></span>
 						</a>
 						<a class="tableEditColumnIcon" (click)="editReserve(reserve)">
@@ -408,11 +408,11 @@
 			<div class="noData"> Desculpe, nenhum resultado encontrado. </div>
 		</ng-template>
 
-	</div>	
+	</div>
 </div>
 
-<app-modal-component 
-	#modalClient 
+<app-modal-component
+	#modalClient
 	[title]="titleClient"
 	[primary-action]="primaryActionClient">
 	<div class="app-modal-body">
@@ -426,12 +426,12 @@
 				<ng-container
 					*ngIf="clientList; then haveClient; else notHaveClient">
 				</ng-container>
-			
+
 				<ng-template #haveClient>
 					<tr *ngFor="let client of clientList, let i = index">
 						<td>
 							<input
-								type="radio" 
+								type="radio"
 								name="clienteChecked"
 								[value]="clientList[i].idCliente"
 								(change)="onClientChange(clientList[i])">
@@ -439,7 +439,7 @@
 						<td>{{ clientList[i].nome }}</td>
 					</tr>
 				</ng-template>
-				
+
 				<ng-template #notHaveClient>
 					<tr>
 						<td colspan="2">
@@ -455,7 +455,7 @@
 	</div>
 </app-modal-component>
 
-<app-modal-component 
+<app-modal-component
 	#modalCard
 	[title]="titleCard"
 	[primary-action]="primaryActionCard">
@@ -475,4 +475,20 @@
 			</tr>
 		</table>
 	</div>
+</app-modal-component>
+
+<app-modal-component
+	#modalReserveDelete
+	title="Atenção!"
+  [primary-action]="primaryActionDelete">
+
+	<div class="app-modal-body">
+		<div class="row">
+
+			<div class="col-xs-12 messageConfirmDelete">
+				<span>Você realmente deseja excluir?</span>
+      </div>
+
+		</div>
+  </div>
 </app-modal-component>

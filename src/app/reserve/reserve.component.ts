@@ -20,12 +20,6 @@ import { element } from 'protractor';
 })
 export class ReserveComponent implements OnInit {
 
-  @ViewChild('modalClient') modalClient: ModalComponent;
-
-  @ViewChild('modalCard') modalCard: ModalComponent;
-
-  @ViewChild('clientPicked') clientPicked;
-
   addsValue = 0;
   addsList: Additional[];
 
@@ -42,12 +36,15 @@ export class ReserveComponent implements OnInit {
 
   productList: Product[];
 
+  idReserve: number;
   reserve: Reserve;
   reserveList: Reserve[];
   reserveSearchValue = ' ';
 
   titleCard = 'Produtos';
   titleClient = 'Clientes';
+
+  private restRoute = 'reservaRest';
 
   primaryActionClient: ModalAction = {
     action: () => {
@@ -61,7 +58,17 @@ export class ReserveComponent implements OnInit {
     }
   };
 
-  private restRoute = 'reservaRest';
+  primaryActionDelete: ModalAction = {
+    action: () => {
+      this.modalReserveDelete.hide();
+      this.deleteReserve(this.idReserve);
+    }
+  };
+
+  @ViewChild('modalCard') modalCard: ModalComponent;
+  @ViewChild('modalClient') modalClient: ModalComponent;
+  @ViewChild('modalReserveDelete') modalReserveDelete: ModalComponent;
+  @ViewChild('clientPicked') clientPicked;
 
   constructor( private serverHttp: ServerHttpService ) { }
 
@@ -90,6 +97,11 @@ export class ReserveComponent implements OnInit {
         }
       );
     }
+  }
+
+  confirmExclusion(idReserva) {
+    this.idReserve = idReserva;
+    this.modalReserveDelete.show();
   }
 
   deleteReserve(id: number) {
