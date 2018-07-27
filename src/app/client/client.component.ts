@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Client } from './client.object';
+import { ModalAction } from '../modal/moda.interface.component';
 import { ServerHttpService } from '../../service/server.http.service';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-client',
@@ -10,10 +12,20 @@ import { ServerHttpService } from '../../service/server.http.service';
 })
 export class ClientComponent implements OnInit {
 
+  idClient: number;
   client: Client;
   clientList: Client[];
   clientSearchValue = '';
   restRoute = 'clienteRest';
+
+  primaryActionDelete: ModalAction = {
+    action: () => {
+      this.modalClientDelete.hide();
+      this.deleteClient(this.idClient);
+    }
+  };
+
+  @ViewChild('modalClientDelete') modalClientDelete: ModalComponent;
 
   constructor(private serverHttp: ServerHttpService) { }
 
@@ -34,6 +46,11 @@ export class ClientComponent implements OnInit {
         this.resetForm();
       });
     }
+  }
+
+  confirmExclusion(idClient) {
+    this.idClient = idClient;
+    this.modalClientDelete.show();
   }
 
   deleteClient(id: number) {
