@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ServerHttpService } from '../../service/server.http.service';
 
+import { ModalAction } from '../modal/moda.interface.component';
+import { ModalComponent } from '../modal/modal.component';
 import { Product } from './product.object';
 
 @Component({
@@ -12,10 +14,20 @@ import { Product } from './product.object';
 })
 export class ProductComponent implements OnInit {
 
+  idProduct: number;
   product: Product;
   productList: Product[];
   productSearchValue = ' ';
   restRoute = 'produtoRest';
+
+  primaryActionDelete: ModalAction = {
+    action: () => {
+      this.modalProductDelete.hide();
+      this.deleteProduct(this.idProduct);
+    }
+  };
+
+  @ViewChild('modalProductDelete') modalProductDelete: ModalComponent;
 
   constructor( private serverHttp: ServerHttpService ) { }
 
@@ -38,6 +50,11 @@ export class ProductComponent implements OnInit {
         this.resetForm();
       });
     }
+  }
+
+  confirmExclusion(idProduct) {
+    this.idProduct = idProduct;
+    this.modalProductDelete.show();
   }
 
   deleteProduct(id: number) {
