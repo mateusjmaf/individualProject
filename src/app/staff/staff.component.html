@@ -4,8 +4,8 @@
 
 <div class="row forms">
 	<div class="col-xs-12">
-		<form 
-			class="form-horizontal form-group" 
+		<form
+			class="form-horizontal form-group"
 			name="staffForm"
 			#staffForm="ngForm"
 			(ngSubmit)="onSubmit()">
@@ -18,7 +18,7 @@
 							<input
 								#nomeStaff="ngModel"
 								class="form-control inputTriumphi"
-								name="nomeStaff" 
+								name="nomeStaff"
 								placeholder="Inserir nome"
 								type="text"
 								required
@@ -27,7 +27,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
 					<div class="form-group" [class.has-error]="!cellStaff.valid && cellStaff.touched">
@@ -36,8 +36,8 @@
 							<input
 								#cellStaff="ngModel"
 								class="form-control inputTriumphi"
-								name="cellStaff" 
-								placeholder="Inserir n° de celular" 	
+								name="cellStaff"
+								placeholder="Inserir n° de celular"
 								type="text"
 								required
 								[(ngModel)]="staff.cell">
@@ -49,8 +49,8 @@
 					<div class="form-group">
 						<label class="control-label col-xs-12 col-md-4">Telefone:</label>
 						<div class="col-xs-12 col-md-8">
-							<input 
-								class="form-control inputTriumphi"  
+							<input
+								class="form-control inputTriumphi"
 								name="tellStaff"
 								placeholder="Inserir n° de telefone"
 								type="text"
@@ -59,7 +59,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
 					<div class="form-group" [class.has-error]="!cpfStaff.valid && cpfStaff.touched">
@@ -67,8 +67,8 @@
 						<div class="col-xs-12 col-md-8">
 							<input
 								#cpfStaff="ngModel"
-								class="form-control inputTriumphi"  
-								name="cpfStaff" 
+								class="form-control inputTriumphi"
+								name="cpfStaff"
 								placeholder="Inserir CPF"
 								type="number"
 								required
@@ -83,8 +83,8 @@
 						<div class="col-xs-12 col-md-8">
 							<input
 								#rgStaff="ngModel"
-								class="form-control inputTriumphi"  
-								name="rgStaff" 
+								class="form-control inputTriumphi"
+								name="rgStaff"
 								placeholder="Inserir RG"
 								type="number"
 								required
@@ -92,8 +92,8 @@
 						</div>
 					</div>
 				</div>
-			</div>	
-			
+			</div>
+
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
 					<div class="form-group" [class.has-error]="!genreStaff.valid && genreStaff.touched">
@@ -101,7 +101,7 @@
 						<div class="col-xs-12 col-md-8">
 							<select
 								#genreStaff="ngModel"
-								class="form-control inputTriumphi" 
+								class="form-control inputTriumphi"
 								name="sexoStaff"
 								required
 								[(ngModel)]="staff.sexo">
@@ -127,7 +127,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
 					<div class="form-group" [class.has-error]="!officeStaff.valid && officeStaff.touched">
@@ -164,7 +164,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
 					<div class="form-group" [class.has-error]="!districtStaff.valid && districtStaff.touched">
@@ -198,11 +198,11 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="col-xs-12 col-md-8">
 					<div class="form-group" [class.has-error]="!streetStaff.valid && streetStaff.touched">
-						<label class="control-label col-xs-12 col-md-3">Endereço:</label>
+						<label class="control-label col-xs-12 col-md-3">Logradouro:</label>
 						<div class="col-xs-12 col-md-9">
 							<input
 								#streetStaff="ngModel"
@@ -232,16 +232,16 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="row">
-				<div class="footerFormSubmit">		
-					<button 
-						type="button" 
+				<div class="footerFormSubmit">
+					<button
+						type="button"
 						class="btn glyphicon glyphicon-remove btnSecondary"
 						(click)="alert(response)">
 					</button>
-					<button 
-						type="submit" 
+					<button
+						type="submit"
 						class="btn glyphicon glyphicon-ok btnPrimary"
 						[disabled]="staffForm.invalid">
 					</button>
@@ -256,23 +256,23 @@
 <div class="row forms">
 	<div class="col-xs-6 col-xs-offset-3">
 		<div class="input-group inputGroup">
-			<input 
-			class="form-control inputTriumphi" 
-				type="text" 
-				placeholder="Buscar Staff" 
+			<input
+			class="form-control inputTriumphi"
+				type="text"
+				placeholder="Buscar Staff"
 				[(ngModel)]="staffSerachValue">
 			<span class="input-group-btn">
-				<button 
-					class="btn glyphicon glyphicon-search btnSearch" 
-					name="btnBuscar" 
-					type="button" 
-					value="Buscar" 
+				<button
+					class="btn glyphicon glyphicon-search btnSearch"
+					name="btnBuscar"
+					type="button"
+					value="Buscar"
 					(click)="searchStaff()">
 				</button>
 			</span>
 		</div>
 	</div>
-	
+
 	<br>
 
 	<div class="row">
@@ -289,14 +289,14 @@
 				<ng-container
 					*ngIf="staffList; then searchSuccess; else searchFail">
 				</ng-container>
-				
+
 				<ng-template #searchSuccess>
 					<tr *ngFor="let staff of staffList, let i = index">
 						<td>{{ staffList[i].nome }}</td>
 						<td>{{ staffList[i].cell }}</td>
 						<td>{{ staffList[i].cargo }}</td>
 						<td class="tableEditColumn tableEditColumnIcon">
-							<a class="tableEditColumnIcon" (click)="deleteStaff(staffList[i].idStaff)">
+							<a class="tableEditColumnIcon" (click)="confirmExclusion(staffList[i].idStaff)">
 								<span class="glyphicon glyphicon-trash"></span>
 							</a>
 							<a class="tableEditColumnIcon" (click)="editStaff(staffList[i])">
@@ -316,3 +316,19 @@
 		</div>
 	</div>
 </div>
+
+<app-modal-component
+	#modalStaffDelete
+	title="Atenção!"
+  [primary-action]="primaryActionDelete">
+
+	<div class="app-modal-body">
+		<div class="row">
+
+			<div class="col-xs-12 messageConfirmDelete">
+				<span>Você realmente deseja excluir?</span>
+      </div>
+
+		</div>
+  </div>
+</app-modal-component>

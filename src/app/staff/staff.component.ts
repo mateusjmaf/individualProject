@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { ModalAction } from '../modal/moda.interface.component';
+import { ModalComponent } from '../modal/modal.component';
 import { Staff } from './staff.object';
 import { ServerHttpService } from '../../service/server.http.service';
 
@@ -10,10 +12,20 @@ import { ServerHttpService } from '../../service/server.http.service';
 })
 export class StaffComponent implements OnInit {
 
+  idStaff: number;
   staff: Staff;
   staffList: Staff[];
   staffSerachValue = '';
   restRoute = 'staffRest';
+
+  primaryActionDelete: ModalAction = {
+    action: () => {
+      this.modalStaffDelete.hide();
+      this.deleteStaff(this.idStaff);
+    }
+  };
+
+  @ViewChild('modalStaffDelete') modalStaffDelete: ModalComponent;
 
   constructor(private serverHttp: ServerHttpService) {
     this.staff = new Staff();
@@ -37,6 +49,11 @@ export class StaffComponent implements OnInit {
         }
       );
     }
+  }
+
+  confirmExclusion(idStaff) {
+    this.idStaff = idStaff;
+    this.modalStaffDelete.show();
   }
 
   deleteStaff(id: number) {
