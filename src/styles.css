@@ -1,5 +1,5 @@
 @font-face {
-	font-family: Dekar; 
+	font-family: Dekar;
 	src: url('/assets/fonts/Dekar.ttf');
 }
 
@@ -75,7 +75,7 @@ fieldset {
 .btnPrimary:hover {
 	background-color: #ffffff;
 	color: #72b2b8;
-	border-color: #72b2b8	
+	border-color: #72b2b8
 }
 
 .btnSecondary {
@@ -323,4 +323,9 @@ a.itemMenu.active {
 	border-radius: 7px;
 	margin-bottom: 14px;
 	width: 102.5%;
+}
+
+.messageConfirmDelete {
+  font-size: 21px;
+  text-align: center;
 }
