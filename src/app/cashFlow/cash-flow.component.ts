@@ -15,11 +15,10 @@ import { Reserve } from '../reserve/reserve.object';
 })
 export class CashFlowComponent implements OnInit {
 
-  @ViewChild('reservePicked') reservePicked;
-
   @ViewChild('modalExpense') modalExpense: ModalComponent;
-
+  @ViewChild('modalExpenseDelete') modalExpenseDelete: ModalComponent;
   @ViewChild('modalReserve') modalReserve: ModalComponent;
+  @ViewChild('reservePicked') reservePicked;
 
   clientName = ' ';
 
@@ -29,16 +28,21 @@ export class CashFlowComponent implements OnInit {
 
   flow: CashFlow;
   flowList: CashFlow[];
-
   flowSearchValue = ' ';
+
+  idTransaction: number;
 
   reserveList: Reserve[];
   reserveOrder: number;
 
   restRoute = 'fluxoCaixaRest';
 
-  titleExpenses = 'Incluir nova despesa';
-  titleReserves = 'Reservas';
+  primaryActionDelete: ModalAction = {
+    action: () => {
+      this.modalExpenseDelete.hide();
+      this.deleteFlow(this.idTransaction);
+    }
+  };
 
   primaryActionExpense: ModalAction = {
     action: () => {
@@ -89,6 +93,19 @@ export class CashFlowComponent implements OnInit {
     this.flow.tipoMovimento === 2 ? this.flow.reserva = this.reservePicked : null;
   }
 
+  confirmExclusion(idTransaction) {
+    this.idTransaction = idTransaction;
+    this.modalExpenseDelete.show();
+  }
+
+  deleteFlow(idMovimento: number) {
+    return this.serverHttp.delete(idMovimento, this.restRoute + '/deletarFluxo').subscribe(
+      response => {
+        this.searchFlow();
+      }
+    );
+  }
+
   onReserveChange(reserve: Reserve) {
     this.reservePicked = reserve;
     this.clientName = reserve.cliente.nome;
@@ -99,12 +116,8 @@ export class CashFlowComponent implements OnInit {
     this.modalExpense.show();
   }
 
-  deleteFlow(idMovimento: number) {
-    return this.serverHttp.delete(idMovimento, this.restRoute + '/deletarFluxo').subscribe(
-      response => {
-        this.searchFlow();
-      }
-    );
+  openModalExpenseExclusion() {
+    this.modalExpenseDelete.show();
   }
 
   searchExpense() {
